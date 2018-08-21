@@ -10,7 +10,7 @@ namespace DUMPFutsalTournament.Data.Entities
         public int TeamId { get; set; }
         public string Name { get; set; }
         public Group Group { get; set; }
-        public virtual ICollection<Match> HomeMatches { get; set; }
-        public virtual ICollection<Match> AwayMatches { get; set; }
+        public ICollection<Match> HomeMatches { get; set; }
+        public ICollection<Match> AwayMatches { get; set; }
     }
 }

@@ -9,6 +9,11 @@ namespace DUMPFutsalTournament.Data
 {
     public class FutsalContext : DbContext
     {
+        public FutsalContext(DbContextOptions<FutsalContext> futsalContextOptions) : base(futsalContextOptions)
+        {
+
+        }
+
         public DbSet<Group> Groups { get; set; }
         public DbSet<Match> Matches { get; set; }
         public DbSet<MatchEvent> MatchEvents { get; set; }
