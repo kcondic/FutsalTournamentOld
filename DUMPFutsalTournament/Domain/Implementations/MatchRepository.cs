@@ -18,10 +18,12 @@ namespace DUMPFutsalTournament.Domain.Implementations
 
         public List<Match> GetAllMatches()
         {
-            return _context.Matches
+            var allMatches = _context.Matches
                 .Include(match => match.HomeTeam)
                 .Include(match => match.AwayTeam)
                 .ToList();
+
+            return allMatches;
         }
 
         public Match GetActiveMatch()
@@ -30,6 +32,8 @@ namespace DUMPFutsalTournament.Domain.Implementations
                 .Include(match => match.HomeTeam)
                 .Include(match => match.AwayTeam)
                 .Include(match => match.MatchEvents)
+                .ThenInclude(ev => ev.Player)
+                .ThenInclude(player => player.Team)
                 .SingleOrDefault(match => DateTime.Now > match.TimeOfMatch - TimeSpan.FromMinutes(5));
         }
 
@@ -39,6 +43,7 @@ namespace DUMPFutsalTournament.Domain.Implementations
                 .Include(match => match.HomeTeam)
                 .Include(match => match.AwayTeam)
                 .Include(match => match.MatchEvents)
+                .ThenInclude(ev => ev.Player)
                 .SingleOrDefault(match => match.MatchId == matchId);
         }
 

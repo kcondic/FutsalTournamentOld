@@ -1,0 +1,16 @@
+<div class="details" *ngIf="(match$ | async) as match">
+	<div class="match-title">
+		{{match.homeTeam.name}} - {{match.awayTeam.name}}
+	</div>
+	<div class="match-time">
+		{{match.timeOfMatch | date: 'dd.MM.yyyy HH:mm'}}
+	</div>
+	<div class="match-score">
+		{{match.homeGoals}} : {{match.awayGoals}}
+	</div>
+	<div *ngFor="let event of match.matchEvents" [ngClass]="isEventForHomeOrAway(event, match.homeTeam.teamId)">
+		<span [ngClass]="event.eventType"></span>
+		<span class="event-player">{{event.player.lastName}}</span>
+		<span class="event-minute">{{event.eventMinute}}'</span>
+	</div>
+</div>

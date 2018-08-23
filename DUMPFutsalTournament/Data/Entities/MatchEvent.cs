@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using DUMPFutsalTournament.Data.Enums;
+﻿using DUMPFutsalTournament.Data.Enums;
 
 namespace DUMPFutsalTournament.Data.Entities
 {

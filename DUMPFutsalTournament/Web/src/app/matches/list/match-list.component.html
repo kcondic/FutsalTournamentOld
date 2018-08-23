@@ -1,0 +1,15 @@
+<div class="match-list">
+	<div class="match" *ngFor="let match of matches" routerLink="">
+		<a [routerLink]="match.matchId">
+			<span class="match-title">
+				{{match.homeTeam.name}} - {{match.awayTeam.name}}
+			</span>
+			<span class="match-time">
+				{{match.timeOfMatch | date: 'dd.MM.yyyy HH:mm'}}
+			</span>
+			<span *ngIf="match.timeOfMatch > now">
+				{{match.homeGoals}} : {{match.awayGoals}}
+			</span>
+		</a>
+	</div>
+</div>
