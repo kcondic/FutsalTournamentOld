@@ -2,21 +2,7 @@
 	<h1>DUMP malonogometni turnir</h1>
 	<div *ngIf="match;else logo">
 		<h3>U tijeku</h3>
-		<!--Dodaj štopericu-->
-		<div class="match-title">
-			{{match.homeTeam.name}} - {{match.awayTeam.name}}
-		</div>
-		<div class="match-time">
-			{{match.timeOfMatch | date: 'dd.MM.yyyy HH:mm'}}
-		</div>
-		<div class="match-score">
-			{{match.homeGoals}} : {{match.awayGoals}}
-		</div>
-		<div *ngFor="let event of match.matchEvents" class="">
-			<span [className]="event.eventType"></span>
-			<span class="event-player">{{event.player.lastName}}</span>
-			<span class="event-minute">{{event.eventMinute}}'</span>
-		</div>
+		<match-detail [match]="match"></match-detail>
 	</div>
 	<ng-template #logo>
 		<img src="./assets/dump-logo.png" alt="DUMP logo"/>

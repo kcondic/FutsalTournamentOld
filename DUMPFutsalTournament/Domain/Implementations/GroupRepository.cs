@@ -48,22 +48,22 @@ namespace DUMPFutsalTournament.Domain.Implementations
                     if (match.HomeGoals == match.AwayGoals)
                     {
                         points += 1;
-                        goalsScored += match.HomeGoals;
-                        goalsConceded += match.AwayGoals;
+                        goalsScored += match.HomeGoals ?? 0;
+                        goalsConceded += match.AwayGoals ?? 0;
                     }
                     else if (match.HomeTeam.TeamId == team.TeamId)
                     {
                         if (match.HomeGoals > match.AwayGoals)
                             points += 3;
-                        goalsScored += match.HomeGoals;
-                        goalsConceded += match.AwayGoals;
+                        goalsScored += match.HomeGoals ?? 0;
+                        goalsConceded += match.AwayGoals ?? 0;
                     }
                     else
                     {
                         if (match.AwayGoals > match.HomeGoals)
                             points += 3;
-                        goalsScored += match.AwayGoals;
-                        goalsConceded += match.HomeGoals;
+                        goalsScored += match.AwayGoals ?? 0;
+                        goalsConceded += match.HomeGoals ?? 0;
                     }
                 }
 

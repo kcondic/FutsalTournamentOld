@@ -30,7 +30,9 @@ namespace DUMPFutsalTournament.Domain.Implementations
         {
             return _context.Matches
                 .Include(match => match.HomeTeam)
+                .ThenInclude(homeTeam => homeTeam.Players)
                 .Include(match => match.AwayTeam)
+                .ThenInclude(awayTeam => awayTeam.Players)
                 .Include(match => match.MatchEvents)
                 .ThenInclude(ev => ev.Player)
                 .ThenInclude(player => player.Team)
@@ -44,6 +46,7 @@ namespace DUMPFutsalTournament.Domain.Implementations
                 .Include(match => match.AwayTeam)
                 .Include(match => match.MatchEvents)
                 .ThenInclude(ev => ev.Player)
+                .ThenInclude(player => player.Team)
                 .SingleOrDefault(match => match.MatchId == matchId);
         }
 

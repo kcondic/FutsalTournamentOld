@@ -46,6 +46,7 @@
     <None Remove="Web\src\app\infrastructure\classes\matchevent.ts" />
     <None Remove="Web\src\app\infrastructure\classes\player.ts" />
     <None Remove="Web\src\app\infrastructure\classes\team.ts" />
+    <None Remove="Web\src\app\infrastructure\translations\matchtypetranslation.ts" />
     <None Remove="Web\src\app\matches\match-detail.component.ts" />
     <None Remove="Web\src\app\matches\match-list.component.ts" />
     <None Remove="Web\src\app\matches\match.service.ts" />
@@ -66,6 +67,7 @@
     <TypeScriptCompile Include="Web\src\app\infrastructure\classes\matchevent.ts" />
     <TypeScriptCompile Include="Web\src\app\infrastructure\classes\player.ts" />
     <TypeScriptCompile Include="Web\src\app\infrastructure\classes\team.ts" />
+    <TypeScriptCompile Include="Web\src\app\infrastructure\translations\matchtypetranslation.ts" />
     <TypeScriptCompile Include="Web\src\app\matches\match.service.ts" />
     <TypeScriptCompile Include="Web\src\app\matches\matches-routing.module.ts" />
     <TypeScriptCompile Include="Web\src\app\matches\matches.module.ts" />
