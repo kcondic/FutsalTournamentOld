@@ -17,5 +17,6 @@ namespace DUMPFutsalTournament.Data.Entities
         public int AwayGoals { get; set; }
         public MatchType MatchType { get; set; }
         public ICollection<MatchEvent> MatchEvents { get; set; }
+        public bool IsActive { get; set; }
     }
 }

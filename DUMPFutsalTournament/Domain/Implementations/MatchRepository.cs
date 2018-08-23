@@ -34,7 +34,7 @@ namespace DUMPFutsalTournament.Domain.Implementations
                 .Include(match => match.MatchEvents)
                 .ThenInclude(ev => ev.Player)
                 .ThenInclude(player => player.Team)
-                .SingleOrDefault(match => DateTime.Now > match.TimeOfMatch - TimeSpan.FromMinutes(5));
+                .SingleOrDefault(match => match.IsActive);
         }
 
         public Match GetSpecificMatch(int matchId)
