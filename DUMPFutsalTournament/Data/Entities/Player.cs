@@ -12,5 +12,6 @@ namespace DUMPFutsalTournament.Data.Entities
         public string LastName { get; set; }
         public DateTime DateOfBirth { get; set; }
         public Team Team { get; set; }
+        public ICollection<MatchEvent> MatchEvents { get; set; }
     }
 }

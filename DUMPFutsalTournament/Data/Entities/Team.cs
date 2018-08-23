@@ -12,5 +12,6 @@ namespace DUMPFutsalTournament.Data.Entities
         public Group Group { get; set; }
         public ICollection<Match> HomeMatches { get; set; }
         public ICollection<Match> AwayMatches { get; set; }
+        public ICollection<Player> Players { get; set; }
     }
 }

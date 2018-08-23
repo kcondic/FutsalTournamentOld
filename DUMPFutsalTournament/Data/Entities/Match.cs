@@ -16,5 +16,6 @@ namespace DUMPFutsalTournament.Data.Entities
         public int HomeGoals { get; set; }
         public int AwayGoals { get; set; }
         public MatchType MatchType { get; set; }
+        public ICollection<MatchEvent> MatchEvents { get; set; }
     }
 }

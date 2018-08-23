@@ -3,6 +3,10 @@
     public enum MatchType
     {
         Group,
-        Elimination
+        QuarterFinal,
+        SemiFinal,
+        ThirdPlace,
+        Final,
+        Revial
     }
 }

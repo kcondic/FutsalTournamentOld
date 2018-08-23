@@ -1,4 +1,6 @@
 using DUMPFutsalTournament.Data;
+using DUMPFutsalTournament.Domain.Implementations;
+using DUMPFutsalTournament.Domain.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,6 +33,10 @@ namespace DUMPFutsalTournament
             });
 
             services.AddDbContext<FutsalContext>(options => options.UseSqlServer(Configuration.GetConnectionString("FutsalConnection")));
+            services.AddScoped<IMatchRepository, MatchRepository>();
+            services.AddScoped<ITeamRepository, TeamRepository>();
+            services.AddScoped<IPlayerRepository, PlayerRepository>();
+            services.AddScoped<IGroupRepository, GroupRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

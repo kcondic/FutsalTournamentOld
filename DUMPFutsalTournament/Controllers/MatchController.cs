@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using DUMPFutsalTournament.Data.Entities;
+using DUMPFutsalTournament.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DUMPFutsalTournament.Controllers
@@ -10,22 +7,56 @@ namespace DUMPFutsalTournament.Controllers
     [Route("api/matches")]
     public class MatchController : Controller
     {
-        [HttpGet]
-        public List<Match> GetAllMatches()
+        public MatchController(IMatchRepository matchRepository)
         {
-            return null;
+            _matchRepository = matchRepository;
+        }
+        private readonly IMatchRepository _matchRepository;
+
+        [HttpGet]
+        public IActionResult GetAllMatches()
+        {
+            return Ok(_matchRepository.GetAllMatches());
         }
 
         [HttpGet("active")]
-        public Match GetActiveMatch()
+        public IActionResult GetActiveMatch()
         {
-            return null;
+            return Ok(_matchRepository.GetActiveMatch());
         }
 
-        [HttpGet("{id}")]
-        public Match GetSpecificMatch(int id)
+        [HttpGet("{matchId}")]
+        public IActionResult GetSpecificMatch(int matchId)
         {
-            return null;
+            return Ok(_matchRepository.GetSpecificMatch(matchId));
+        }
+
+        [HttpPost("add")]
+        public IActionResult AddMatch(Match match)
+        {
+            _matchRepository.AddMatch(match);
+            return Ok(null);
+        }
+
+        [HttpPost("edit")]
+        public IActionResult EditMatch(Match match)
+        {
+            _matchRepository.EditMatch(match);
+            return Ok(null);
+        }
+
+        [HttpDelete("delete")]
+        public IActionResult DeleteMatch(int matchId)
+        {
+            _matchRepository.DeleteMatch(matchId);
+            return Ok(null);
+        }
+
+        [HttpPost("add-event")]
+        public IActionResult AddMatchEvent(int matchId, MatchEvent matchEvent)
+        {
+            _matchRepository.AddMatchEvent(matchId, matchEvent);
+            return Ok(null);
         }
     }
 }
