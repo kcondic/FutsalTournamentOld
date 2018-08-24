@@ -1,6 +1,9 @@
+using System.Configuration;
+using System.Text;
 using DUMPFutsalTournament.Data;
 using DUMPFutsalTournament.Domain.Implementations;
 using DUMPFutsalTournament.Domain.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -9,6 +12,7 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -33,8 +37,6 @@ namespace DUMPFutsalTournament
                         new CamelCasePropertyNamesContractResolver();
                     options.SerializerSettings.ReferenceLoopHandling = 
                         ReferenceLoopHandling.Ignore;
-                    //options.SerializerSettings.PreserveReferencesHandling =
-                    //    PreserveReferencesHandling.Objects;
                 }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             // In production, the Angular files will be served from this directory
@@ -43,11 +45,26 @@ namespace DUMPFutsalTournament
                 configuration.RootPath = "Web/dist";
             });
 
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                    .AddJwtBearer(cfg =>
+                    {
+                        cfg.TokenValidationParameters = new TokenValidationParameters()
+                        {
+                            ValidateIssuer = true,
+                            ValidIssuer = ConfigurationManager.AppSettings["as:Issuer"],
+                            ValidateAudience = true,
+                            ValidAudience = ConfigurationManager.AppSettings["as:AudienceId"],
+                            ValidateIssuerSigningKey = true,
+                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(ConfigurationManager.AppSettings["as:AudienceSecret"]))
+                        };
+                    });
+
             services.AddDbContext<FutsalContext>(options => options.UseSqlServer(Configuration.GetConnectionString("FutsalConnection")));
             services.AddScoped<IMatchRepository, MatchRepository>();
             services.AddScoped<ITeamRepository, TeamRepository>();
             services.AddScoped<IPlayerRepository, PlayerRepository>();
             services.AddScoped<IGroupRepository, GroupRepository>();
+            services.AddScoped<ILoginRepository, LoginRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

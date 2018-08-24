@@ -13,7 +13,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="jose-jwt" Version="2.4.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.HttpsPolicy" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="2.1.1" />
@@ -27,6 +30,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.1.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.2.4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,9 +40,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20180824111715_AddUserTable.cs" />
+    <Compile Remove="Migrations\20180824111715_AddUserTable.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Web\src\app\admin\admin.module.ts" />
     <None Remove="Web\src\app\app-routing.module.ts" />
+    <None Remove="Web\src\app\auth-guard.service.ts" />
+    <None Remove="Web\src\app\auth.service.ts" />
     <None Remove="Web\src\app\groups\groups.module.ts" />
+    <None Remove="Web\src\app\infrastructure\classes\User.ts" />
     <None Remove="Web\src\app\infrastructure\enums\matcheventtype.ts" />
     <None Remove="Web\src\app\infrastructure\enums\matchtype.ts" />
     <None Remove="Web\src\app\infrastructure\classes\group.ts" />
@@ -47,6 +59,8 @@
     <None Remove="Web\src\app\infrastructure\classes\player.ts" />
     <None Remove="Web\src\app\infrastructure\classes\team.ts" />
     <None Remove="Web\src\app\infrastructure\translations\matchtypetranslation.ts" />
+    <None Remove="Web\src\app\login-routing.module.ts" />
+    <None Remove="Web\src\app\login.component.ts" />
     <None Remove="Web\src\app\matches\match-detail.component.ts" />
     <None Remove="Web\src\app\matches\match-list.component.ts" />
     <None Remove="Web\src\app\matches\match.service.ts" />
@@ -59,7 +73,10 @@
   <ItemGroup>
     <TypeScriptCompile Include="Web\src\app\admin\admin.module.ts" />
     <TypeScriptCompile Include="Web\src\app\app-routing.module.ts" />
+    <TypeScriptCompile Include="Web\src\app\auth-guard.service.ts" />
+    <TypeScriptCompile Include="Web\src\app\auth.service.ts" />
     <TypeScriptCompile Include="Web\src\app\groups\groups.module.ts" />
+    <TypeScriptCompile Include="Web\src\app\infrastructure\classes\user.ts" />
     <TypeScriptCompile Include="Web\src\app\infrastructure\enums\matcheventtype.ts" />
     <TypeScriptCompile Include="Web\src\app\infrastructure\enums\matchtype.ts" />
     <TypeScriptCompile Include="Web\src\app\infrastructure\classes\group.ts" />
@@ -68,6 +85,8 @@
     <TypeScriptCompile Include="Web\src\app\infrastructure\classes\player.ts" />
     <TypeScriptCompile Include="Web\src\app\infrastructure\classes\team.ts" />
     <TypeScriptCompile Include="Web\src\app\infrastructure\translations\matchtypetranslation.ts" />
+    <TypeScriptCompile Include="Web\src\app\login-routing.module.ts" />
+    <TypeScriptCompile Include="Web\src\app\login.component.ts" />
     <TypeScriptCompile Include="Web\src\app\matches\match.service.ts" />
     <TypeScriptCompile Include="Web\src\app\matches\matches-routing.module.ts" />
     <TypeScriptCompile Include="Web\src\app\matches\matches.module.ts" />

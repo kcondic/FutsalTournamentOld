@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using DUMPFutsalTournament.Data.Entities;
+﻿using DUMPFutsalTournament.Data.Entities;
 using DUMPFutsalTournament.Domain.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DUMPFutsalTournament.Controllers
@@ -30,20 +26,23 @@ namespace DUMPFutsalTournament.Controllers
             return Ok(_teamRepository.GetSpecificTeam(teamId));
         }
 
+        [Authorize]
         [HttpPost("add")]
-        public IActionResult AddTeam(Team team)
+        public IActionResult AddTeam([FromBody]Team team)
         {
             _teamRepository.AddTeam(team);
             return Ok(null);
         }
 
+        [Authorize]
         [HttpPost("edit")]
-        public IActionResult EditTeam(Team editedTeam)
+        public IActionResult EditTeam([FromBody]Team editedTeam)
         {
             _teamRepository.EditTeam(editedTeam);
             return Ok(null);
         }
 
+        [Authorize]
         [HttpDelete("delete")]
         public IActionResult DeleteTeam(int teamId)
         {
@@ -51,6 +50,7 @@ namespace DUMPFutsalTournament.Controllers
             return Ok(null);
         }
 
+        [Authorize]
         [HttpGet("random")]
         public IActionResult GetRandomUngroupedTeams(int numberOfTeams)
         {

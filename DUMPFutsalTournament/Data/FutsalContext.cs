@@ -19,6 +19,7 @@ namespace DUMPFutsalTournament.Data
         public DbSet<MatchEvent> MatchEvents { get; set; }
         public DbSet<Player> Players { get; set; }
         public DbSet<Team> Teams { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

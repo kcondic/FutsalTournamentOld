@@ -1,5 +1,6 @@
 using DUMPFutsalTournament.Data.Entities;
 using DUMPFutsalTournament.Domain.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DUMPFutsalTournament.Controllers
@@ -31,20 +32,23 @@ namespace DUMPFutsalTournament.Controllers
             return Ok(_matchRepository.GetSpecificMatch(matchId));
         }
 
+        [Authorize]
         [HttpPost("add")]
-        public IActionResult AddMatch(Match match)
+        public IActionResult AddMatch([FromBody]Match match)
         {
             _matchRepository.AddMatch(match);
             return Ok(null);
         }
 
+        [Authorize]
         [HttpPost("edit")]
-        public IActionResult EditMatch(Match match)
+        public IActionResult EditMatch([FromBody]Match match)
         {
             _matchRepository.EditMatch(match);
             return Ok(null);
         }
 
+        [Authorize]
         [HttpDelete("delete")]
         public IActionResult DeleteMatch(int matchId)
         {
@@ -52,8 +56,9 @@ namespace DUMPFutsalTournament.Controllers
             return Ok(null);
         }
 
+        [Authorize]
         [HttpPost("add-event")]
-        public IActionResult AddMatchEvent(int matchId, MatchEvent matchEvent)
+        public IActionResult AddMatchEvent(int matchId, [FromBody]MatchEvent matchEvent)
         {
             _matchRepository.AddMatchEvent(matchId, matchEvent);
             return Ok(null);

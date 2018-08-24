@@ -4,14 +4,16 @@ using DUMPFutsalTournament.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DUMPFutsalTournament.Migrations
 {
     [DbContext(typeof(FutsalContext))]
-    partial class FutsalContextModelSnapshot : ModelSnapshot
+    [Migration("20180824111806_AddUserTable")]
+    partial class AddUserTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -131,8 +133,6 @@ namespace DUMPFutsalTournament.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Password");
-
-                    b.Property<string>("Username");
 
                     b.HasKey("UserId");
 

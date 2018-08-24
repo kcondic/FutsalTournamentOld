@@ -4,14 +4,16 @@ using DUMPFutsalTournament.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DUMPFutsalTournament.Migrations
 {
     [DbContext(typeof(FutsalContext))]
-    partial class FutsalContextModelSnapshot : ModelSnapshot
+    [Migration("20180824102340_MakePlayerDoBNullable")]
+    partial class MakePlayerDoBNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -122,21 +124,6 @@ namespace DUMPFutsalTournament.Migrations
                     b.HasIndex("GroupId");
 
                     b.ToTable("Teams");
-                });
-
-            modelBuilder.Entity("DUMPFutsalTournament.Data.Entities.User", b =>
-                {
-                    b.Property<int>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Password");
-
-                    b.Property<string>("Username");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("DUMPFutsalTournament.Data.Entities.Match", b =>

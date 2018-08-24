@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DUMPFutsalTournament.Data.Entities;
 using DUMPFutsalTournament.Domain.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DUMPFutsalTournament.Controllers
@@ -29,20 +30,23 @@ namespace DUMPFutsalTournament.Controllers
             return Ok(_groupRepository.GetCalculatedGroupStandings(groupId));
         }
 
+        [Authorize]
         [HttpPost("add")]
-        public IActionResult AddGroup(Group group)
+        public IActionResult AddGroup([FromBody]Group group)
         {
             _groupRepository.AddGroup(group);
             return Ok(null);
         }
 
+        [Authorize]
         [HttpPost("edit")]
-        public IActionResult EditGroup(Group editedGroup)
+        public IActionResult EditGroup([FromBody]Group editedGroup)
         {
             _groupRepository.EditGroup(editedGroup);
             return Ok(null);
         }
 
+        [Authorize]
         [HttpDelete("delete")]
         public IActionResult DeleteGroup(int groupId)
         {
