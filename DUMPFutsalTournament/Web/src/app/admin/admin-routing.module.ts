@@ -6,10 +6,17 @@ import { PlayerAddEditComponent } from './players/manage/player-add-edit.compone
 const adminRoutes: Routes = [
 	 {
 		  path: 'players',
-		  component: PlayerManageComponent,
-		  children: [{ path: 'manage', component: PlayerAddEditComponent, outlet: 'popup' }],
-	 },
-	 { path: '', redirectTo: 'players' }
+		  children: [
+			  {
+					path: 'manage',
+					component: PlayerAddEditComponent,
+					outlet: 'popup'
+			   },
+			  {
+				   path: '',
+				   component: PlayerManageComponent
+			  }]
+	 }
 ];
 
 @NgModule({

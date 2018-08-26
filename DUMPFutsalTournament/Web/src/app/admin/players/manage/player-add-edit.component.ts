@@ -18,14 +18,17 @@ export class PlayerAddEditComponent implements OnInit {
 		 private closePopup: ClosePopupService) { }
 
 	 ngOnInit() {
-		this.playerId = this.route.queryParams['id'];
+		this.route.queryParams.subscribe(params => this.playerId = params['id']);
 		  if (this.playerId) {
 			  this.service.getPlayer(this.playerId)
-				.subscribe(playerData => this.player = playerData);
+				  .subscribe(playerData => this.player = playerData);
 			  this.isEdit = true;
 		  }
 		  else
-			   this.player = new Player();
+		  {
+			  this.player = new Player();
+			  this.player.team = null;
+		  }
 		 this.service.getAllTeams().subscribe(teamData => this.teams = teamData);
 	 }
 
@@ -35,9 +38,8 @@ export class PlayerAddEditComponent implements OnInit {
 
 	 save() {
 		 if (this.isEdit)
-			 this.service.editPlayer(this.player);
+		  this.service.editPlayer(this.player).subscribe(() => this.close());
 		 else
-			 this.service.addPlayer(this.player);
-		 this.close();
+		  this.service.addPlayer(this.player).subscribe(() => this.close());
 	 }
 }

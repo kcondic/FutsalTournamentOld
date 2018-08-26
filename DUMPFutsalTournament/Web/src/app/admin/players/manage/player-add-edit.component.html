@@ -1,10 +1,13 @@
-<form (ngSubmit)="save()" class="add-edit">
-	<span class="player-first-name">Ime: <input type="text" [(ngModel)]="player.firstName" name="player.firstName" /></span>
-	<span class="player-last-name">Prezime: <input type="text" [(ngModel)]="player.lastName" name="player.lastName" /></span>
-	<span class="player-dob">Datum rođenja: <input type="text" [(ngModel)]="player.dateOfBirth" name="player.dateOfBirth" /></span>
-	<select class="player-team" id="team-select">
-		<option *ngFor="let team of teams" [value]="team">{{team.name}}</option>
-	</select>
-	<button class="close-button" (click)="close()">Zatvori</button>
-	<button type="submit">Spremi</button>
-</form>
+<div *ngIf="player">
+	<form (ngSubmit)="save()" class="add-edit">
+		<span class="player-first-name">Ime: <input type="text" [(ngModel)]="player.firstName" name="firstName"/></span>
+		<span class="player-last-name">Prezime: <input type="text" [(ngModel)]="player.lastName" name="lastName"/></span>
+		<span class="player-dob">Datum rođenja: <input type="date" [ngModel]="player.dateOfBirth | date:'yyyy-MM-dd'" (ngModelChange)="player.dateOfBirth=$event" name="dateOfBirth"/></span>
+		<select class="player-team" name="team-select" [(ngModel)]="player.team">
+			<option [ngValue]="null">-</option>
+			<option *ngFor="let team of teams" [ngValue]="team" name="team-select-option">{{team.name}}</option>
+		</select>
+		<button class="close-button" (click)="close()">Zatvori</button>
+		<button type="submit">Spremi</button>
+	</form>
+</div>

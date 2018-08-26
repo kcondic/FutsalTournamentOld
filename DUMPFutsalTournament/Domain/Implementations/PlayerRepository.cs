@@ -31,7 +31,10 @@ namespace DUMPFutsalTournament.Domain.Implementations
 
         public void AddPlayer(Player player)
         {
-            _context.Teams.Attach(player.Team);
+            if (player.FirstName == null || player.LastName == null)
+                return;
+            if (player.Team != null)
+                _context.Teams.Attach(player.Team);
             _context.Players.Add(player);
             _context.SaveChanges();
         }
@@ -39,13 +42,14 @@ namespace DUMPFutsalTournament.Domain.Implementations
         public void EditPlayer(Player editedPlayer)
         {
             var playerToEdit = _context.Players.Find(editedPlayer.PlayerId);
-            if (playerToEdit == null)
+            if (playerToEdit == null || editedPlayer.FirstName == null || editedPlayer.LastName == null)
                 return;
             _context.Teams.Attach(editedPlayer.Team);
             playerToEdit.FirstName = editedPlayer.FirstName;
             playerToEdit.LastName = editedPlayer.LastName;
             playerToEdit.DateOfBirth = editedPlayer.DateOfBirth;
             playerToEdit.Team = editedPlayer.Team;
+            _context.SaveChanges();
         }
 
         public void DeletePlayer(int playerId)

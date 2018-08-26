@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { AdminService } from '../admin.service';
 import { Player } from '../../infrastructure/classes/player';
 
@@ -9,15 +9,29 @@ import { Player } from '../../infrastructure/classes/player';
 export class PlayerManageComponent implements OnInit {
 	players: Player[];
 
-	constructor(private route: ActivatedRoute, private service: AdminService) { }
+	constructor(private router: Router, private service: AdminService) {
+		router.events.subscribe((val) => {
+			if (val instanceof NavigationEnd)
+				this.getPlayers();
+		});
+	}
 
-	ngOnInit() {
-		this.service.getAllPlayers()
-			.subscribe(playerData => this.players = playerData);
+	 ngOnInit() {
+		this.getPlayers();
+	 }
+
+	 getPlayers() {
+		 console.log("pozvalo");
+		 this.service.getAllPlayers()
+			 .subscribe(playerData => this.players = playerData);
 	 }
 
 	 delete(id: number) {
 		 if (confirm("Jeste li sigurni da želite izbrisati tog igrača?"))
-			 this.service.deletePlayer(id);
+			 this.service.deletePlayer(id).subscribe(() => {
+				  const removeIndex = this.players.findIndex(player => player.playerId === id);
+			       if(removeIndex !== -1)
+					this.players.splice(removeIndex, 1);
+			 });
 	 }
 }

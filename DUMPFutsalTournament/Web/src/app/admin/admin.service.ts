@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Player } from '../infrastructure/classes/player';
 import { Match } from '../infrastructure/classes/match';
 import { Group } from '../infrastructure/classes/group';
@@ -22,7 +22,9 @@ export class AdminService {
 
 	 getPlayer(id: number): Observable<Player> { return this.http.get<Player>(`${this.playersUrl}/${id}`); }
 
-	 addPlayer(player: Player): Observable<{}> { return this.http.post(`${this.playersUrl}/add`, player); }
+	 addPlayer(player: Player): Observable<{}> {
+		  return this.http.post(`${this.playersUrl}/add`, player);
+	 }
 
 	 editPlayer(player: Player): Observable<{}> { return this.http.post(`${this.playersUrl}/edit`, player); }
 

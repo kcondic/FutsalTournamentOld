@@ -16,7 +16,7 @@ import { MatchRoutingModule } from './matches-routing.module';
      MatchDetailComponent,
      MatchActiveComponent
   ],
-  providers: [MatchService],
+  providers: [ MatchService ],
   exports: [ MatchDetailComponent ]
 })
 export class MatchesModule { }

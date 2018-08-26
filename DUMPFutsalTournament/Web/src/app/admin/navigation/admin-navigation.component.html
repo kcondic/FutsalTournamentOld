@@ -1,5 +1,9 @@
-<a routerLink="./active" routerLinkActive="active">Početna</a>
-<a routerLink="./groups" routerLinkActive="active">Utakmice</a>
-<a routerLink="./matches" routerLinkActive="active">Grupe</a>
-<a routerLink="./players" routerLinkActive="active">Ekipe</a>
-<a (click)="logout()">Logout</a>
+<div>
+	<span class="admin-nav-title">ADMIN PANEL</span>
+	<a routerLink="/admin/active" routerLinkActive="active">Aktivna utakmica</a>
+	<a routerLink="/admin/matches" routerLinkActive="active">Utakmice</a>
+	<a routerLink="/admin/groups" routerLinkActive="active">Skupine</a>
+	<a routerLink="/admin/teams" routerLinkActive="active">Ekipe</a>
+	<a routerLink="/admin/players" routerLinkActive="active">Igrači</a>
+	<a (click)="logout()">Logout</a>
+</div>
