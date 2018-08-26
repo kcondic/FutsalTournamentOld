@@ -17,17 +17,7 @@ namespace DUMPFutsalTournament.Domain.Implementations
 
         public List<Player> GetAllPlayers()
         {
-            return _context.Players
-                .Include(player => player.Team)
-                .ToList();
-        }
-
-        public Player GetSpecificPlayer(int playerId)
-        {
-            return _context.Players
-                .Include(player => player.Team)
-                .Include(player => player.MatchEvents)
-                .SingleOrDefault(player => player.PlayerId == playerId);
+            return _context.Players.ToList();
         }
 
         public void AddPlayer(Player player)

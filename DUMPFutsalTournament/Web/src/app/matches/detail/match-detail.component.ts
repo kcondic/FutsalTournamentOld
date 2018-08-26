@@ -1,7 +1,5 @@
-import { switchMap } from 'rxjs/operators'
-import { Observable } from 'rxjs';
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { MatchService } from '../match.service';
 import { Match } from '../../infrastructure/classes/match';
 import { MatchEvent } from '../../infrastructure/classes/matchevent';
@@ -14,7 +12,7 @@ import { MatchTypeTranslation } from '../../infrastructure/translations/matchtyp
 })
 export class MatchDetailComponent implements OnInit {
 	@Input() match: Match;
-	match$: Observable<Match>;
+	localMatch: Match;
 	matchTypeTranslator: MatchTypeTranslation;
 
 	constructor(private route: ActivatedRoute, private service: MatchService)
@@ -23,12 +21,9 @@ export class MatchDetailComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		if(!this.match)
-			this.match$ = this.route.paramMap.pipe(
-				 switchMap((params: ParamMap) => {
-					return this.service.getMatch(+params.get('id'));
-				})			
-		     );
+		if (!this.match)
+			this.service.getMatch(this.route.snapshot.params['id'])
+				.subscribe(matchData => this.localMatch = matchData);
 	}
 
 	isEventForHomeOrAway(event: MatchEvent, homeTeamId: number): string {

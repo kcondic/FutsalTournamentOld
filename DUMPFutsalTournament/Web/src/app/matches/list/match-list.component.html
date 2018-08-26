@@ -1,6 +1,6 @@
 <div class="match-list">
-	<div class="match" *ngFor="let match of matches" routerLink="">
-		<a [routerLink]="match.matchId">
+	<div class="match" *ngFor="let match of matches">
+		<a [routerLink]="[{ outlets: { popup: [match.matchId] } }]">
 			<span class="match-title">
 				{{match.homeTeam.name}} - {{match.awayTeam.name}}
 			</span>

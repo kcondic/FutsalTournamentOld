@@ -7,12 +7,11 @@ import { Match } from '../../infrastructure/classes/match';
 })
 export class MatchListComponent implements OnInit {
 	matches: Match[];
-	now: Date;
-	constructor(private service: MatchService) {
-	}
+
+	constructor(private service: MatchService) { }
 
 	ngOnInit() {
-		this.service.getAllMatches().subscribe(allMatches => this.matches = allMatches);
-		this.now = new Date();
+		 this.service.getAllMatches()
+			 .subscribe(allMatches => this.matches = allMatches);
 	}
 }

@@ -1,6 +1,5 @@
 ﻿using DUMPFutsalTournament.Data.Entities;
-using DUMPFutsalTournament.Domain.Auth;
-using DUMPFutsalTournament.Domain.HelperClasses;
+using DUMPFutsalTournament.Domain.HelperClasses.Auth;
 using DUMPFutsalTournament.Domain.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

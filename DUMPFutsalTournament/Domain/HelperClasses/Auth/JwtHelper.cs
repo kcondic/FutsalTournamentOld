@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
-using System.IdentityModel.Tokens;
 using System.Text;
 using DUMPFutsalTournament.Data.Entities;
 using Jose;
 
-namespace DUMPFutsalTournament.Domain.Auth
+namespace DUMPFutsalTournament.Domain.HelperClasses.Auth
 {
     public static class JwtHelper
     {

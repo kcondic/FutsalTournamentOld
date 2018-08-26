@@ -10,6 +10,5 @@ namespace DUMPFutsalTournament.Domain.Interfaces
         void AddTeam(Team team);
         void EditTeam(Team editedTeam);
         void DeleteTeam(int teamId);
-        List<Team> GetRandomUngroupedTeams(int numberOfTeams);
     }
 }

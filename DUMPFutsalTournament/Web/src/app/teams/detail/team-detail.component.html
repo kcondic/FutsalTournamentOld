@@ -1,0 +1,26 @@
+<div class="details" *ngIf="team; else noteam">
+	<div class="team-name">
+		{{team.name}}
+	</div>
+	<div class="players" *ngFor="let player of team.players">
+		<span class="player-name">
+			{{player.firstName}} {{player.lastName}}
+		</span>
+		<span class="player-age">
+			Dob: {{getPlayerAge(player.dateOfBirth)}}
+		</span>
+		<span *ngFor="let event of getTotalMatchEvents(player.matchEvents)">
+			<span *ngIf="event.number">
+				<span [ngClass]="event.nameOfClass">{{event.number}}</span>
+			</span>
+		</span>
+	</div>
+	<div class="matches" *ngFor="let match of teamMatches">
+		<match-detail [match]="match"></match-detail>
+	</div>
+</div>
+<ng-template #noteam>
+	<span>
+		Ekipa ne postoji.
+	</span>
+</ng-template>

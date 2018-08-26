@@ -32,6 +32,12 @@ namespace DUMPFutsalTournament.Controllers
             return Ok(_matchRepository.GetSpecificMatch(matchId));
         }
 
+        [HttpGet("team/{teamId}")]
+        public IActionResult GetMatchesForTeam(int teamId)
+        {
+            return Ok(_matchRepository.GetMatchesForTeam(teamId));
+        }
+
         [Authorize]
         [HttpPost("add")]
         public IActionResult AddMatch([FromBody]Match match)

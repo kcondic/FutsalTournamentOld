@@ -66,7 +66,10 @@
     <None Remove="Web\src\app\matches\match.service.ts" />
     <None Remove="Web\src\app\matches\matches-routing.module.ts" />
     <None Remove="Web\src\app\matches\matches.module.ts" />
-    <None Remove="Web\src\app\players\players.module.ts" />
+    <None Remove="Web\src\app\teams\detail\team-detail.component.ts" />
+    <None Remove="Web\src\app\teams\list\team-list.component.ts" />
+    <None Remove="Web\src\app\teams\team.service.ts" />
+    <None Remove="Web\src\app\teams\teams-routing.module.ts" />
     <None Remove="Web\src\app\teams\teams.module.ts" />
   </ItemGroup>
 
@@ -93,7 +96,10 @@
     <TypeScriptCompile Include="Web\src\app\matches\active\match-active.component.ts" />
     <TypeScriptCompile Include="Web\src\app\matches\detail\match-detail.component.ts" />
     <TypeScriptCompile Include="Web\src\app\matches\list\match-list.component.ts" />
-    <TypeScriptCompile Include="Web\src\app\players\players.module.ts" />
+    <TypeScriptCompile Include="Web\src\app\teams\detail\team-detail.component.ts" />
+    <TypeScriptCompile Include="Web\src\app\teams\list\team-list.component.ts" />
+    <TypeScriptCompile Include="Web\src\app\teams\teams-routing.module.ts" />
+    <TypeScriptCompile Include="Web\src\app\teams\team.service.ts" />
     <TypeScriptCompile Include="Web\src\app\teams\teams.module.ts" />
   </ItemGroup>
 

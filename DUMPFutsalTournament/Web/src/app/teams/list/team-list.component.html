@@ -1,0 +1,9 @@
+<div class="team-list">
+	<div class="team" *ngFor="let team of teams">
+		<a [routerLink]="[{ outlets: { popup: [team.teamId] } }]">
+			<span class="team-name">
+				{{team.name}}
+			</span>
+		</a>
+	</div>
+</div>

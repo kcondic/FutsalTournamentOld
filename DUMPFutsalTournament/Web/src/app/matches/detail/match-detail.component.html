@@ -1,11 +1,13 @@
-<div class="details" *ngIf="(match || (match$ | async)) as match">
+<div class="details" *ngIf="(match || localMatch) as match; else nomatch">
 	<div class="match-title">
 		{{match.homeTeam.name}} - {{match.awayTeam.name}}
 	</div>
 	<div class="match-time">
 		{{match.timeOfMatch | date: 'dd.MM.yyyy HH:mm'}}
 	</div>
-	<div class="match-phase">{{getMatchTypeTranslation(match.matchType)}}</div>
+	<div class="match-phase">
+		{{getMatchTypeTranslation(match.matchType)}}
+	</div>
 	<div class="match-score">
 		{{match.homeGoals}} : {{match.awayGoals}}
 	</div>
@@ -15,3 +17,8 @@
 		<span class="event-minute">{{event.eventMinute}}'</span>
 	</div>
 </div>
+<ng-template #nomatch>
+	<span>
+		Utakmica ne postoji.
+	</span>
+</ng-template>

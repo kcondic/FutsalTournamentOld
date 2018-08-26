@@ -16,8 +16,7 @@ export class LoginComponent {
 	username: string;
 	password: string;
 
-	constructor(public authService: AuthService, public router: Router)
-	 { }
+	constructor(public authService: AuthService, public router: Router) { }
 
 	login() {
 	 this.authService.login(new User(this.username, this.password))

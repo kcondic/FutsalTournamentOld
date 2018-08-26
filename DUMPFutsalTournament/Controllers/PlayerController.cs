@@ -14,16 +14,11 @@ namespace DUMPFutsalTournament.Controllers
         }
         private readonly IPlayerRepository _playerRepository;
 
+        [Authorize]
         [HttpGet]
         public IActionResult GetAllPlayers()
         {
             return Ok(_playerRepository.GetAllPlayers());
-        }
-
-        [HttpGet("{playerId}")]
-        public IActionResult GetSpecificPlayer(int playerId)
-        {
-            return Ok(_playerRepository.GetSpecificPlayer(playerId));
         }
 
         [Authorize]

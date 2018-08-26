@@ -17,10 +17,6 @@ const appRoutes: Routes = [
 		loadChildren: './teams/teams.module#TeamsModule'
 	},
 	{
-		path: 'players',
-		loadChildren: './players/players.module#PlayersModule'
-	},
-	{
 		path: 'admin',
 		loadChildren: './admin/admin.module#AdminModule',
 		canLoad: [AuthGuard]

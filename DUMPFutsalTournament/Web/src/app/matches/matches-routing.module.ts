@@ -6,7 +6,7 @@ import { MatchListComponent } from './list/match-list.component';
 
 const matchesRoutes: Routes = [
   { path: 'active', component: MatchActiveComponent },
-  { path: ':id', component: MatchDetailComponent },
+  { path: ':id', component: MatchDetailComponent, outlet: 'popup'},
   { path: '', component: MatchListComponent }
 ];
 

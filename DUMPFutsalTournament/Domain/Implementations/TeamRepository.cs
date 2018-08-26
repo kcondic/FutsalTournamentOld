@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using DUMPFutsalTournament.Data;
 using DUMPFutsalTournament.Data.Entities;
@@ -25,6 +24,7 @@ namespace DUMPFutsalTournament.Domain.Implementations
         {
             return _context.Teams
                 .Include(team => team.Players)
+                .ThenInclude(player => player.MatchEvents)
                 .SingleOrDefault(team => team.TeamId == teamId);
         }
 
@@ -56,18 +56,6 @@ namespace DUMPFutsalTournament.Domain.Implementations
             var teamToDelete = _context.Teams.Find(teamId);
             _context.Remove(teamToDelete);
             _context.SaveChanges();
-        }
-
-        public List<Team> GetRandomUngroupedTeams(int numberOfTeams)
-        {
-            var ungroupedTeams = _context.Teams
-                .Include(team => team.Group)
-                .Where(team => team.Group == null);
-
-            return ungroupedTeams
-                .OrderBy(team => Guid.NewGuid())
-                .Take(numberOfTeams)
-                .ToList();
         }
     }
 }

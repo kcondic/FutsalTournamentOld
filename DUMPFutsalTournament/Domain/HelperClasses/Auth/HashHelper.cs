@@ -1,7 +1,7 @@
 using System;
 using System.Security.Cryptography;
 
-namespace DUMPFutsalTournament.Domain.HelperClasses
+namespace DUMPFutsalTournament.Domain.HelperClasses.Auth
 {
     public class HashHelper
     {

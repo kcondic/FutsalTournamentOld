@@ -49,12 +49,5 @@ namespace DUMPFutsalTournament.Controllers
             _teamRepository.DeleteTeam(teamId);
             return Ok(null);
         }
-
-        [Authorize]
-        [HttpGet("random")]
-        public IActionResult GetRandomUngroupedTeams(int numberOfTeams)
-        {
-            return Ok(_teamRepository.GetRandomUngroupedTeams(numberOfTeams));
-        }
     }
 }

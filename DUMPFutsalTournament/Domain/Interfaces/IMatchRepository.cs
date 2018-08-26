@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using DUMPFutsalTournament.Data.Entities;
 
 namespace DUMPFutsalTournament.Domain.Interfaces
@@ -11,6 +8,7 @@ namespace DUMPFutsalTournament.Domain.Interfaces
         List<Match> GetAllMatches();
         Match GetActiveMatch();
         Match GetSpecificMatch(int matchId);
+        List<Match> GetMatchesForTeam(int teamId);
         void AddMatch(Match match);
         void EditMatch(Match editedMatch);
         void DeleteMatch(int matchId);
