@@ -70,6 +70,21 @@ namespace DUMPFutsalTournament.Domain.Implementations
             _context.SaveChanges();
         }
 
+        public void SetActiveMatch(int matchId)
+        {
+            var currentlyActiveMatch = _context.Matches.SingleOrDefault(match => match.IsActive);
+            var matchToActivate = _context.Matches.Find(matchId);
+
+            if (matchToActivate == null)
+                return;
+
+            if (currentlyActiveMatch != null)
+                currentlyActiveMatch.IsActive = false;
+
+            matchToActivate.IsActive = true;
+            _context.SaveChanges();
+        }
+
         public void EditMatch(Match editedMatch)
         {
             var matchToEdit = _context.Matches.Find(editedMatch.MatchId);
@@ -77,7 +92,6 @@ namespace DUMPFutsalTournament.Domain.Implementations
                 return;
             _context.Teams.Attach(matchToEdit.HomeTeam);
             _context.Teams.Attach(matchToEdit.AwayTeam);
-            matchToEdit.IsActive = editedMatch.IsActive;
             matchToEdit.TimeOfMatch = editedMatch.TimeOfMatch;
             matchToEdit.HomeGoals = editedMatch.HomeGoals;
             matchToEdit.AwayGoals = editedMatch.AwayGoals;

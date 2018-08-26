@@ -45,10 +45,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Web\src\app\admin\admin-navigation.component.ts" />
+    <None Remove="Web\src\app\admin\admin-routing.module.ts" />
     <None Remove="Web\src\app\admin\admin.module.ts" />
+    <None Remove="Web\src\app\admin\admin.service.ts" />
+    <None Remove="Web\src\app\admin\players\manage\player-add-edit.component.ts" />
+    <None Remove="Web\src\app\admin\players\player-manage.component.ts" />
     <None Remove="Web\src\app\app-routing.module.ts" />
     <None Remove="Web\src\app\auth-guard.service.ts" />
     <None Remove="Web\src\app\auth.service.ts" />
+    <None Remove="Web\src\app\close-popup.service.ts" />
     <None Remove="Web\src\app\groups\groups.module.ts" />
     <None Remove="Web\src\app\infrastructure\classes\User.ts" />
     <None Remove="Web\src\app\infrastructure\enums\matcheventtype.ts" />
@@ -74,10 +80,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="Web\src\app\admin\navigation\admin-navigation.component.ts" />
+    <TypeScriptCompile Include="Web\src\app\admin\admin-routing.module.ts" />
     <TypeScriptCompile Include="Web\src\app\admin\admin.module.ts" />
+    <TypeScriptCompile Include="Web\src\app\admin\admin.service.ts" />
+    <TypeScriptCompile Include="Web\src\app\admin\players\manage\player-add-edit.component.ts" />
+    <TypeScriptCompile Include="Web\src\app\admin\players\player-manage.component.ts" />
     <TypeScriptCompile Include="Web\src\app\app-routing.module.ts" />
-    <TypeScriptCompile Include="Web\src\app\auth-guard.service.ts" />
-    <TypeScriptCompile Include="Web\src\app\auth.service.ts" />
+    <TypeScriptCompile Include="Web\src\app\common\auth-guard.service.ts" />
+    <TypeScriptCompile Include="Web\src\app\common\auth.service.ts" />
+    <TypeScriptCompile Include="Web\src\app\common\close-popup.service.ts" />
     <TypeScriptCompile Include="Web\src\app\groups\groups.module.ts" />
     <TypeScriptCompile Include="Web\src\app\infrastructure\classes\user.ts" />
     <TypeScriptCompile Include="Web\src\app\infrastructure\enums\matcheventtype.ts" />
@@ -88,8 +100,8 @@
     <TypeScriptCompile Include="Web\src\app\infrastructure\classes\player.ts" />
     <TypeScriptCompile Include="Web\src\app\infrastructure\classes\team.ts" />
     <TypeScriptCompile Include="Web\src\app\infrastructure\translations\matchtypetranslation.ts" />
-    <TypeScriptCompile Include="Web\src\app\login-routing.module.ts" />
-    <TypeScriptCompile Include="Web\src\app\login.component.ts" />
+    <TypeScriptCompile Include="Web\src\app\common\login-routing.module.ts" />
+    <TypeScriptCompile Include="Web\src\app\common\login.component.ts" />
     <TypeScriptCompile Include="Web\src\app\matches\match.service.ts" />
     <TypeScriptCompile Include="Web\src\app\matches\matches-routing.module.ts" />
     <TypeScriptCompile Include="Web\src\app\matches\matches.module.ts" />
@@ -101,6 +113,13 @@
     <TypeScriptCompile Include="Web\src\app\teams\teams-routing.module.ts" />
     <TypeScriptCompile Include="Web\src\app\teams\team.service.ts" />
     <TypeScriptCompile Include="Web\src\app\teams\teams.module.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Web\src\app\admin\matches\" />
+    <Folder Include="Web\src\app\admin\groups\" />
+    <Folder Include="Web\src\app\admin\active-match\" />
+    <Folder Include="Web\src\app\admin\teams\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

@@ -3,10 +3,12 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import { PageNotFoundComponent } from './not-found.component'
+import { PageNotFoundComponent } from './common/not-found.component'
 import { AppRoutingModule } from './app-routing.module';
-import { LoginRoutingModule } from './login-routing.module';
-import { LoginComponent } from './login.component';
+import { LoginRoutingModule } from './common/login-routing.module';
+import { LoginComponent } from './common/login.component';
+import { ClosePopupService } from './common/close-popup.service';
+import { JwtModule } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -19,9 +21,16 @@ import { LoginComponent } from './login.component';
 	FormsModule,
 	HttpClientModule,
 	LoginRoutingModule,
-     AppRoutingModule
+	AppRoutingModule,
+	JwtModule.forRoot({
+		 config: {
+			  tokenGetter: () => {
+				  return localStorage.getItem('token');
+			  }
+		 }
+	})
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [ ClosePopupService ],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

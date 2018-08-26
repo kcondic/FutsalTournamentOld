@@ -1,10 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatchService } from '../match.service';
 import { Match } from '../../infrastructure/classes/match';
 import { MatchEvent } from '../../infrastructure/classes/matchevent';
 import { MatchEventType } from '../../infrastructure/enums/matcheventtype';
 import { MatchTypeTranslation } from '../../infrastructure/translations/matchtypetranslation';
+import { ClosePopupService } from '../../common/close-popup.service';
 
 @Component({
 	selector: 'match-detail',
@@ -15,15 +16,16 @@ export class MatchDetailComponent implements OnInit {
 	localMatch: Match;
 	matchTypeTranslator: MatchTypeTranslation;
 
-	constructor(private route: ActivatedRoute, private service: MatchService)
+	 constructor(private route: ActivatedRoute,
+		 private service: MatchService, private closePopup: ClosePopupService)
 	{
 		this.matchTypeTranslator = new MatchTypeTranslation();
 	}
 
 	ngOnInit() {
-		if (!this.match)
-			this.service.getMatch(this.route.snapshot.params['id'])
-				.subscribe(matchData => this.localMatch = matchData);
+		 if (!this.match)
+			 this.service.getMatch(this.route.snapshot.params['id'])
+				   .subscribe(matchData => this.localMatch = matchData);
 	}
 
 	isEventForHomeOrAway(event: MatchEvent, homeTeamId: number): string {
@@ -38,5 +40,9 @@ export class MatchDetailComponent implements OnInit {
 
 	getMatchTypeTranslation(matchTypeEnumValue): string {
 		return this.matchTypeTranslator.GetMatchTypeTranslation(matchTypeEnumValue);
+	}
+
+	 close() {
+		this.closePopup.close(this.route.parent);
 	}
 }

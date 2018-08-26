@@ -17,7 +17,16 @@ namespace DUMPFutsalTournament.Domain.Implementations
 
         public List<Player> GetAllPlayers()
         {
-            return _context.Players.ToList();
+            return _context.Players
+                .Include(player => player.Team)
+                .ToList();
+        }
+
+        public Player GetSpecificPlayer(int playerId)
+        {
+            return _context.Players
+                .Include(player => player.Team)
+                .SingleOrDefault(player => player.PlayerId == playerId);
         }
 
         public void AddPlayer(Player player)
@@ -36,6 +45,7 @@ namespace DUMPFutsalTournament.Domain.Implementations
             playerToEdit.FirstName = editedPlayer.FirstName;
             playerToEdit.LastName = editedPlayer.LastName;
             playerToEdit.DateOfBirth = editedPlayer.DateOfBirth;
+            playerToEdit.Team = editedPlayer.Team;
         }
 
         public void DeletePlayer(int playerId)

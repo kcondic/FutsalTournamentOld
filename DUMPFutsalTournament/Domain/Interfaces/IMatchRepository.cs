@@ -10,6 +10,7 @@ namespace DUMPFutsalTournament.Domain.Interfaces
         Match GetSpecificMatch(int matchId);
         List<Match> GetMatchesForTeam(int teamId);
         void AddMatch(Match match);
+        void SetActiveMatch(int matchId);
         void EditMatch(Match editedMatch);
         void DeleteMatch(int matchId);
         void AddMatchEvent(int matchId, MatchEvent matchEvent);

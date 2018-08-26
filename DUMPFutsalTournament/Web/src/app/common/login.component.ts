@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from './infrastructure/classes/user';
+import { User } from '../infrastructure/classes/user';
 import { AuthService } from './auth.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { AuthService } from './auth.service';
     <h2>LOGIN</h2>
     <form (ngSubmit)="login()">
 	    <input type="text" [(ngModel)]="username" name="username" />
-	    <input type="password"[(ngModel)]="password" name="password" />
+	    <input type="password" [(ngModel)]="password" name="password" />
 	    <button type="submit">Login</button>
     </form>`
 })
@@ -28,9 +28,5 @@ export class LoginComponent {
 		error => {
 		  alert(`Neuspješna prijava! ${error.message}`);
 		});
-	}
-
-	logout() {
-		localStorage.removeItem('token');
 	}
 }

@@ -47,6 +47,14 @@ namespace DUMPFutsalTournament.Controllers
         }
 
         [Authorize]
+        [HttpPost("activate/{matchId}")]
+        public IActionResult SetActiveMatch(int matchId)
+        {
+            _matchRepository.SetActiveMatch(matchId);
+            return Ok(null);
+        }
+
+        [Authorize]
         [HttpPost("edit")]
         public IActionResult EditMatch([FromBody]Match match)
         {

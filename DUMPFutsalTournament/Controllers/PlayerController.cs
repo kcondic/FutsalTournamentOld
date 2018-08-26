@@ -22,6 +22,13 @@ namespace DUMPFutsalTournament.Controllers
         }
 
         [Authorize]
+        [HttpGet("{playerId}")]
+        public IActionResult GetSpecificPlayer(int playerId)
+        {
+            return Ok(_playerRepository.GetSpecificPlayer(playerId));
+        }
+
+        [Authorize]
         [HttpPost("add")]
         public IActionResult AddPlayer([FromBody]Player player)
         {
@@ -38,7 +45,7 @@ namespace DUMPFutsalTournament.Controllers
         }
 
         [Authorize]
-        [HttpDelete("delete")]
+        [HttpDelete("delete/{playerId}")]
         public IActionResult DeletePlayer(int playerId)
         {
             _playerRepository.DeletePlayer(playerId);

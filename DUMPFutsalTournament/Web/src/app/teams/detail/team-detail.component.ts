@@ -5,6 +5,7 @@ import { Team } from '../../infrastructure/classes/team';
 import { Match } from '../../infrastructure/classes/match';
 import { MatchEvent } from '../../infrastructure/classes/matchevent';
 import { MatchEventType } from '../../infrastructure/enums/matcheventtype';
+import { ClosePopupService } from '../../common/close-popup.service';
 
 @Component({
 	templateUrl: './team-detail.component.html'
@@ -14,7 +15,8 @@ export class TeamDetailComponent implements OnInit {
 	team: Team;
      teamMatches: Match[];
 
-	constructor(private route: ActivatedRoute, private service: TeamService) { }
+	 constructor(private route: ActivatedRoute,
+		 private service: TeamService, private closePopup: ClosePopupService) { }
 
 	 ngOnInit() {
 		this.teamId = this.route.snapshot.params['id'];
@@ -39,5 +41,9 @@ export class TeamDetailComponent implements OnInit {
 			{ number: playerEvents.filter(ev => ev.eventType === MatchEventType.YellowCard).length, nameOfClass: MatchEventType[MatchEventType.YellowCard] },
 			{ number: playerEvents.filter(ev => ev.eventType === MatchEventType.RedCard).length, nameOfClass: MatchEventType[MatchEventType.RedCard] }
 		];
+	}
+
+	close() {
+		this.closePopup.close(this.route.parent);
 	}
 }

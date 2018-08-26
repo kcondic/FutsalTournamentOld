@@ -69,6 +69,7 @@ namespace DUMPFutsalTournament.Domain.Implementations
 
                 calculatedGroupStandings.Add(new GroupStanding
                 {
+                    Team = team,
                     NumberOfGames = teamGroupMatches.Count(),
                     Points = points,
                     GoalsScored = goalsScored,
@@ -76,7 +77,12 @@ namespace DUMPFutsalTournament.Domain.Implementations
                 });
             }
 
-            return calculatedGroupStandings;
+            return calculatedGroupStandings
+                .OrderByDescending(standing => standing.Points)
+                .ThenByDescending(standing => standing.GoalsScored - standing.GoalsConceded)
+                .ThenByDescending(standing => standing.GoalsScored)
+                .ThenBy(standing => standing.Team.Name)
+                .ToList();
         }
 
         public void AddGroup(Group group)

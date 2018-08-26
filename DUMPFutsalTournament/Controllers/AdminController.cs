@@ -23,7 +23,7 @@ namespace DUMPFutsalTournament.Controllers
             var areCredentialsValid = HashHelper.ValidatePassword(userCredentials.Password, user.Password);
             if (!areCredentialsValid) return Unauthorized();
 
-            return Ok(JwtHelper.GetJwtToken(userCredentials));
+            return Ok(JwtHelper.GetJwtToken(user));
         }
 
         [Authorize]
