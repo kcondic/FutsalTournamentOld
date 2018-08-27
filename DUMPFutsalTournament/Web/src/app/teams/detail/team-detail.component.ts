@@ -6,6 +6,7 @@ import { Match } from '../../infrastructure/classes/match';
 import { MatchEvent } from '../../infrastructure/classes/matchevent';
 import { MatchEventType } from '../../infrastructure/enums/matcheventtype';
 import { ClosePopupService } from '../../common/close-popup.service';
+import { MatchTypeTranslation } from '../../infrastructure/translations/matchtypetranslation';
 
 @Component({
 	templateUrl: './team-detail.component.html'
@@ -13,24 +14,28 @@ import { ClosePopupService } from '../../common/close-popup.service';
 export class TeamDetailComponent implements OnInit {
 	teamId: number;
 	team: Team;
-     teamMatches: Match[];
+	teamMatches: Match[];
+	matchTypeTranslator: MatchTypeTranslation;
 
-	 constructor(private route: ActivatedRoute,
-		 private service: TeamService, private closePopup: ClosePopupService) { }
+	constructor(private route: ActivatedRoute, private service: TeamService,
+		  private closePopup: ClosePopupService)
+	{
+		this.matchTypeTranslator = new MatchTypeTranslation();
+	}
 
-	 ngOnInit() {
+	ngOnInit() {
 		this.teamId = this.route.snapshot.params['id'];
 		this.service.getTeam(this.teamId)
 			 .subscribe(teamData => this.team = teamData);
 		 this.service.getTeamMatches(this.teamId)
 			 .subscribe(matchData => this.teamMatches = matchData);
-	 }
+	}
 
 	getPlayerAge(dateOfBirth: Date): any {
 		if (!dateOfBirth)
 			return 'nepoznato';
-		let dateDifference = Date.now() - new Date(dateOfBirth).getTime();
-		let dateDifferenceDate = new Date(dateDifference);
+		const dateDifference = Date.now() - new Date(dateOfBirth).getTime();
+		const dateDifferenceDate = new Date(dateDifference);
 		return Math.abs(dateDifferenceDate.getUTCFullYear() - 1970);
 	}
 
@@ -41,6 +46,14 @@ export class TeamDetailComponent implements OnInit {
 			{ number: playerEvents.filter(ev => ev.eventType === MatchEventType.YellowCard).length, nameOfClass: MatchEventType[MatchEventType.YellowCard] },
 			{ number: playerEvents.filter(ev => ev.eventType === MatchEventType.RedCard).length, nameOfClass: MatchEventType[MatchEventType.RedCard] }
 		];
+	}
+
+	 getLastMatchTypeTranslation(): string {
+		//TODO: Popravi
+		//const lastMatch = this.teamMatches.reduce((prev, curr) => (prev.TimeOfMatch > curr.TimeOfMatch) ? prev : curr, null);
+		//if(lastMatch)
+		//	  return this.matchTypeTranslator.GetMatchTypeTranslation(lastMatch.MatchType);
+		return '';
 	}
 
 	close() {

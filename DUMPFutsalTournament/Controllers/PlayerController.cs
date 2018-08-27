@@ -2,7 +2,6 @@
 using DUMPFutsalTournament.Domain.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
 
 namespace DUMPFutsalTournament.Controllers
 {
@@ -33,7 +32,11 @@ namespace DUMPFutsalTournament.Controllers
         [HttpPost("add")]
         public IActionResult AddPlayer([FromBody]Player player)
         {
-            _playerRepository.AddPlayer(player);
+            var wasAdded = _playerRepository.AddPlayer(player);
+
+            if (!wasAdded)
+                return Forbid();
+
             return Ok(null);
         }
 
@@ -41,7 +44,11 @@ namespace DUMPFutsalTournament.Controllers
         [HttpPost("edit")]
         public IActionResult EditPlayer([FromBody]Player editedPlayer)
         {
-            _playerRepository.EditPlayer(editedPlayer);
+            var wasUpdated = _playerRepository.EditPlayer(editedPlayer);
+
+            if (!wasUpdated)
+                return Forbid();
+
             return Ok(null);
         }
 

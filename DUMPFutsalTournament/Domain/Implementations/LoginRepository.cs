@@ -18,6 +18,17 @@ namespace DUMPFutsalTournament.Domain.Implementations
             return _context.Users.SingleOrDefault(user => user.Username == username);
         }
 
+        public User GetById(int id)
+        {
+            return _context.Users.SingleOrDefault(user => user.UserId == id);
+        }
+
+        public void ChangePassword(User userToChangeFor, string password)
+        {
+            userToChangeFor.Password = password;
+            _context.SaveChanges();
+        }
+
         public bool AddUser(User userToAdd)
         {
             if (GetByUsername(userToAdd.Username) != null)

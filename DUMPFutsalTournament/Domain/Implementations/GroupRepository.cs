@@ -24,6 +24,13 @@ namespace DUMPFutsalTournament.Domain.Implementations
                 .ToList();
         }
 
+        public Group GetSpecificGroup(int groupId)
+        {
+            return _context.Groups
+                .Include(group => group.Teams)
+                .SingleOrDefault(group => group.GroupId == groupId);
+        }
+
         public List<GroupStanding> GetCalculatedGroupStandings(int groupId)
         {
             var calculatedGroupStandings = new List<GroupStanding>();
@@ -87,22 +94,27 @@ namespace DUMPFutsalTournament.Domain.Implementations
 
         public void AddGroup(Group group)
         {
-            foreach (var team in group.Teams)
-                _context.Teams.Attach(team);
+            if (group.Size != group.Teams.Count)
+                return;
+            if (group.Teams.Any(team => GetAllGroups().SelectMany(gr => gr.Teams).Any(t => team.TeamId == t.TeamId)))
+                return;
+            _context.Teams.AttachRange(group.Teams);
             _context.Groups.Add(group);
             _context.SaveChanges();
         }
 
         public void EditGroup(Group editedGroup)
         {
+            if (editedGroup.Size != editedGroup.Teams.Count)
+                return;
+            _context.Teams.AttachRange(editedGroup.Teams);
             var groupToEdit = _context.Groups
-                .Include(group => group.Teams)
-                .FirstOrDefault(group => group.GroupId == editedGroup.GroupId);
+                .SingleOrDefault(group => group.GroupId == editedGroup.GroupId);
             if (groupToEdit == null)
                 return;
-            foreach (var player in editedGroup.Teams)
-                _context.Attach(player);
+            _context.Entry(groupToEdit).Collection(group => group.Teams).Load();
             groupToEdit.Name = editedGroup.Name;
+            groupToEdit.Size = editedGroup.Size;
             groupToEdit.Teams = editedGroup.Teams;
             _context.SaveChanges();
         }
@@ -112,6 +124,9 @@ namespace DUMPFutsalTournament.Domain.Implementations
             var groupToDelete = _context.Groups.Find(groupId);
             if (groupToDelete == null)
                 return;
+            _context.Entry(groupToDelete).Collection(group => group.Teams).Load();
+            foreach (var team in groupToDelete.Teams)
+                team.Group = null;
             _context.Groups.Remove(groupToDelete);
             _context.SaveChanges();
         }

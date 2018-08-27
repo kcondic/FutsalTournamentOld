@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using DUMPFutsalTournament.Data.Entities;
+﻿using DUMPFutsalTournament.Data.Entities;
 using DUMPFutsalTournament.Domain.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +18,13 @@ namespace DUMPFutsalTournament.Controllers
         public IActionResult GetAllGroups()
         {
             return Ok(_groupRepository.GetAllGroups());
+        }
+
+        [Authorize]
+        [HttpGet("{groupId}")]
+        public IActionResult GetGroup(int groupId)
+        {
+            return Ok(_groupRepository.GetSpecificGroup(groupId));
         }
 
         [HttpGet("standings/{groupId}")]
@@ -47,7 +50,7 @@ namespace DUMPFutsalTournament.Controllers
         }
 
         [Authorize]
-        [HttpDelete("delete")]
+        [HttpDelete("delete/{groupId}")]
         public IActionResult DeleteGroup(int groupId)
         {
             _groupRepository.DeleteGroup(groupId);

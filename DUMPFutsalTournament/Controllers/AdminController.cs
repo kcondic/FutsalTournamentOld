@@ -3,6 +3,7 @@ using DUMPFutsalTournament.Domain.HelperClasses.Auth;
 using DUMPFutsalTournament.Domain.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 
 namespace DUMPFutsalTournament.Controllers
 {
@@ -30,13 +31,33 @@ namespace DUMPFutsalTournament.Controllers
         [HttpPost("api/add-user")]
         public IActionResult AddUser([FromBody]User userToAdd)
         {
-            userToAdd.Password = HashHelper.Hash(userToAdd.Password);
             var wasUserAdded = _loginRepository.AddUser(userToAdd);
 
             if (!wasUserAdded)
                 return Forbid();
 
-            return Ok();
+            return Ok(null);
+        }
+
+        [Authorize]
+        [HttpPost("api/change-password")]
+        public IActionResult ChangePassword([FromBody]JObject dataToChange)
+        {
+            var oldPassword = dataToChange["oldPassword"].ToObject<string>();
+            var newPassword = dataToChange["newPassword"].ToObject<string>();
+            var userId = dataToChange["userId"].ToObject<int>();
+
+            var user = _loginRepository.GetById(userId);
+
+            if (user == null)
+                return NotFound();
+
+            if(HashHelper.ValidatePassword(oldPassword, user.Password))
+                _loginRepository.ChangePassword(user, newPassword);
+            else
+                return Forbid();
+
+            return Ok(null);
         }
     }
 }

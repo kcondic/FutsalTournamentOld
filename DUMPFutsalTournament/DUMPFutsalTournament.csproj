@@ -49,8 +49,12 @@
     <None Remove="Web\src\app\admin\admin-routing.module.ts" />
     <None Remove="Web\src\app\admin\admin.module.ts" />
     <None Remove="Web\src\app\admin\admin.service.ts" />
+    <None Remove="Web\src\app\admin\groups\group-manage.component.ts" />
+    <None Remove="Web\src\app\admin\groups\manage\group-add-edit.component.ts" />
     <None Remove="Web\src\app\admin\players\manage\player-add-edit.component.ts" />
     <None Remove="Web\src\app\admin\players\player-manage.component.ts" />
+    <None Remove="Web\src\app\admin\teams\manage\team-add-edit.component.ts" />
+    <None Remove="Web\src\app\admin\teams\team-manage.component.ts" />
     <None Remove="Web\src\app\app-routing.module.ts" />
     <None Remove="Web\src\app\auth-guard.service.ts" />
     <None Remove="Web\src\app\auth.service.ts" />
@@ -80,12 +84,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="Web\src\app\admin\groups\group-manage.component.ts" />
+    <TypeScriptCompile Include="Web\src\app\admin\groups\manage\group-add-edit.component.ts" />
     <TypeScriptCompile Include="Web\src\app\admin\navigation\admin-navigation.component.ts" />
     <TypeScriptCompile Include="Web\src\app\admin\admin-routing.module.ts" />
     <TypeScriptCompile Include="Web\src\app\admin\admin.module.ts" />
     <TypeScriptCompile Include="Web\src\app\admin\admin.service.ts" />
     <TypeScriptCompile Include="Web\src\app\admin\players\manage\player-add-edit.component.ts" />
     <TypeScriptCompile Include="Web\src\app\admin\players\player-manage.component.ts" />
+    <TypeScriptCompile Include="Web\src\app\admin\teams\manage\team-add-edit.component.ts" />
+    <TypeScriptCompile Include="Web\src\app\admin\teams\team-manage.component.ts" />
     <TypeScriptCompile Include="Web\src\app\app-routing.module.ts" />
     <TypeScriptCompile Include="Web\src\app\common\auth-guard.service.ts" />
     <TypeScriptCompile Include="Web\src\app\common\auth.service.ts" />
@@ -116,10 +124,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Web\src\app\admin\matches\" />
-    <Folder Include="Web\src\app\admin\groups\" />
     <Folder Include="Web\src\app\admin\active-match\" />
-    <Folder Include="Web\src\app\admin\teams\" />
+    <Folder Include="Web\src\app\admin\matches\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

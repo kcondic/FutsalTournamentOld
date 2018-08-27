@@ -21,7 +21,6 @@ export class PlayerManageComponent implements OnInit {
 	 }
 
 	 getPlayers() {
-		 console.log("pozvalo");
 		 this.service.getAllPlayers()
 			 .subscribe(playerData => this.players = playerData);
 	 }

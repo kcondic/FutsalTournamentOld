@@ -1,0 +1,19 @@
+<div *ngIf="team">
+	<form (ngSubmit)="save()" class="add-edit">
+		<span class="team-name">Ime: <input type="text" [(ngModel)]="team.name" name="team-name" /></span>
+		<div class="team-players">
+			<div *ngIf="team.players.length">
+				Igrači:
+				<div class="player" *ngFor="let player of team.players" (click)="removePlayer(player.playerId)">
+					{{player.firstName}} {{player.lastName}}
+				</div>
+			</div>
+			Ostali igrači:
+			<div class="player" *ngFor="let player of players" (click)="addPlayer(player.playerId)">
+				{{player.firstName}} {{player.lastName}}
+			</div>
+		</div>
+		<button class="close-button" (click)="close()">Zatvori</button>
+		<button type="submit">Spremi</button>
+	</form>
+</div>

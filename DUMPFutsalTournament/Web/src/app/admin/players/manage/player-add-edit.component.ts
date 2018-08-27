@@ -36,10 +36,14 @@ export class PlayerAddEditComponent implements OnInit {
 		 this.closePopup.close(this.route.parent);
 	 }
 
+	 showError() {
+		 alert('Igrač nije dodan. Moguće greške: prazno prezime, tim već ima maksimalan broj igrača, nije pronađen igrač za edit.');
+	 }
+
 	 save() {
 		 if (this.isEdit)
-		  this.service.editPlayer(this.player).subscribe(() => this.close());
+		  this.service.editPlayer(this.player).subscribe(() => this.close(), () => this.showError());
 		 else
-		  this.service.addPlayer(this.player).subscribe(() => this.close());
+		  this.service.addPlayer(this.player).subscribe(() => this.close(), () => this.showError());
 	 }
 }

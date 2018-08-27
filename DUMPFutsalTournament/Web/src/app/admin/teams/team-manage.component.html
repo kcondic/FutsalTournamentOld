@@ -1,0 +1,9 @@
+<admin-navigation></admin-navigation>
+<div class="team-manage">
+	<a [routerLink]="[{ outlets: { popup: ['manage'] } }]">Dodaj novu ekipu</a>
+	<div class="group" *ngFor="let team of teams">
+		{{team.name}}
+		<a [routerLink]="[{ outlets: { popup: ['manage'] } }]" [queryParams]="{ id: [team.teamId] }">Uredi</a>
+		<a (click)="delete(team.teamId)">Izbriši</a>
+	</div>
+</div>

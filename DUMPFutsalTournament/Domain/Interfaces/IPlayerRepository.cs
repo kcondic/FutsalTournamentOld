@@ -7,8 +7,8 @@ namespace DUMPFutsalTournament.Domain.Interfaces
     {
         List<Player> GetAllPlayers();
         Player GetSpecificPlayer(int playerId);
-        void AddPlayer(Player player);
-        void EditPlayer(Player editedPlayer);
+        bool AddPlayer(Player player);
+        bool EditPlayer(Player editedPlayer);
         void DeletePlayer(int playerId);
     }
 }

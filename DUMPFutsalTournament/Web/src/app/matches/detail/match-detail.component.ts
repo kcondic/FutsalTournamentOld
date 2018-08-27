@@ -38,7 +38,7 @@ export class MatchDetailComponent implements OnInit {
 		return MatchEventType[matchEventType];
 	}
 
-	getMatchTypeTranslation(matchTypeEnumValue): string {
+	getMatchTypeTranslation(matchTypeEnumValue: MatchEventType): string {
 		return this.matchTypeTranslator.GetMatchTypeTranslation(matchTypeEnumValue);
 	}
 

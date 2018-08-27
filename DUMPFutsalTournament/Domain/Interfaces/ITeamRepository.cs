@@ -6,6 +6,7 @@ namespace DUMPFutsalTournament.Domain.Interfaces
     public interface ITeamRepository
     {
         List<Team> GetAllTeams();
+        List<Team> GetAllGrouplessTeams();
         Team GetSpecificTeam(int teamId);
         void AddTeam(Team team);
         void EditTeam(Team editedTeam);

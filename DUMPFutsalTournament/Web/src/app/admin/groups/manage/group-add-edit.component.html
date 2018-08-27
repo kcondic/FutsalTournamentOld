@@ -1,0 +1,18 @@
+<div *ngIf="group">
+	<form (ngSubmit)="save()" class="add-edit">
+		<span class="group-name">Ime: <input type="text" [(ngModel)]="group.name" name="group-name"/></span>
+		<span class="group-size">Veličina: <input type="number" [(ngModel)]="group.size" name="group-size"/></span>
+		<div class="group-teams">
+			Timovi:
+			<div class="team" *ngFor="let team of group.teams" (click)="removeTeam(team.teamId)">
+				{{team.name}}
+			</div>
+			Ostali timovi:
+			<div class="team" *ngFor="let team of teams" (click)="addTeam(team.teamId)">
+				{{team.name}}
+			</div>
+		</div>
+		<button class="close-button" (click)="close()">Zatvori</button>
+		<button type="submit">Spremi</button>
+	</form>
+</div>

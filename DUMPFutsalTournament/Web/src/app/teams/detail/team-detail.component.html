@@ -2,6 +2,9 @@
 	<div class="team-name">
 		{{team.name}}
 	</div>
+	<div class="team-phase" *ngIf="lastMatch">
+		Faza: {{getLastMatchTypeTranslation()}}
+	</div>
 	<div class="players" *ngFor="let player of team.players">
 		<span class="player-name">
 			{{player.firstName}} {{player.lastName}}

@@ -29,27 +29,34 @@ namespace DUMPFutsalTournament.Domain.Implementations
                 .SingleOrDefault(player => player.PlayerId == playerId);
         }
 
-        public void AddPlayer(Player player)
+        public bool AddPlayer(Player player)
         {
-            if (player.FirstName == null || player.LastName == null)
-                return;
+            if (player.LastName == null)
+                return false;   
+            if (player.Team != null && GetTeamPlayerCount(player.Team.TeamId) >= 12)
+                return false;
             if (player.Team != null)
                 _context.Teams.Attach(player.Team);
             _context.Players.Add(player);
             _context.SaveChanges();
+            return true;
         }
 
-        public void EditPlayer(Player editedPlayer)
+        public bool EditPlayer(Player editedPlayer)
         {
             var playerToEdit = _context.Players.Find(editedPlayer.PlayerId);
-            if (playerToEdit == null || editedPlayer.FirstName == null || editedPlayer.LastName == null)
-                return;
-            _context.Teams.Attach(editedPlayer.Team);
+            if (playerToEdit == null || editedPlayer.LastName == null)
+                return false;
+            if (editedPlayer.Team != null && GetTeamPlayerCount(editedPlayer.Team.TeamId) >= 12)
+                return false;
+            if (editedPlayer.Team != null)
+                _context.Teams.Attach(editedPlayer.Team);
             playerToEdit.FirstName = editedPlayer.FirstName;
             playerToEdit.LastName = editedPlayer.LastName;
             playerToEdit.DateOfBirth = editedPlayer.DateOfBirth;
             playerToEdit.Team = editedPlayer.Team;
             _context.SaveChanges();
+            return true;
         }
 
         public void DeletePlayer(int playerId)
@@ -59,6 +66,12 @@ namespace DUMPFutsalTournament.Domain.Implementations
                 return;
             _context.Remove(playerToDelete);
             _context.SaveChanges();
+        }
+
+        private int GetTeamPlayerCount(int teamId)
+        {
+            var team = _context.Teams.AsNoTracking().Include(t => t.Players).Single(t => t.TeamId == teamId);     
+            return team.Players.Count;
         }
     }
 }

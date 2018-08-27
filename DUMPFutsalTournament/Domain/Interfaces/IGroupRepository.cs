@@ -7,6 +7,7 @@ namespace DUMPFutsalTournament.Domain.Interfaces
     public interface IGroupRepository
     {
         List<Group> GetAllGroups();
+        Group GetSpecificGroup(int groupId);
         List<GroupStanding> GetCalculatedGroupStandings(int groupId);
         void AddGroup(Group group);
         void EditGroup(Group editedGroup);

@@ -20,6 +20,12 @@ namespace DUMPFutsalTournament.Controllers
             return Ok(_teamRepository.GetAllTeams());
         }
 
+        [HttpGet("groupless")]
+        public IActionResult GetAllGrouplessTeams()
+        {
+            return Ok(_teamRepository.GetAllGrouplessTeams());
+        }
+
         [HttpGet("{teamId}")]
         public IActionResult GetSpecificTeam(int teamId)
         {
@@ -43,7 +49,7 @@ namespace DUMPFutsalTournament.Controllers
         }
 
         [Authorize]
-        [HttpDelete("delete")]
+        [HttpDelete("delete/{teamId}")]
         public IActionResult DeleteTeam(int teamId)
         {
             _teamRepository.DeleteTeam(teamId);

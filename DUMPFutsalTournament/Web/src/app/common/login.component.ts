@@ -23,7 +23,7 @@ export class LoginComponent {
 		  .subscribe(
 		  token => {
 		     localStorage.setItem('token', token);
-			this.router.navigateByUrl('/admin');
+			this.router.navigateByUrl('/admin/teams');
 		},
 		error => {
 		  alert(`Neuspješna prijava! ${error.message}`);

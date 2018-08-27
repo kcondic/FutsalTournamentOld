@@ -20,6 +20,14 @@ namespace DUMPFutsalTournament.Domain.Implementations
             return _context.Teams.ToList();
         }
 
+        public List<Team> GetAllGrouplessTeams()
+        {
+            return _context.Teams
+                .Include(team => team.Group)
+                .Where(team => team.Group == null)
+                .ToList();
+        }
+
         public Team GetSpecificTeam(int teamId)
         {
             return _context.Teams
@@ -30,30 +38,34 @@ namespace DUMPFutsalTournament.Domain.Implementations
 
         public void AddTeam(Team team)
         {
-            foreach (var player in team.Players)
-                _context.Players.Attach(player);
+            if (team.Name == null)
+                return;
+            _context.AttachRange(team.Players);
             _context.Teams.Add(team);
             _context.SaveChanges();
         }
 
         public void EditTeam(Team editedTeam)
         {
+            if (editedTeam.Name == null)
+                return;
+            _context.AttachRange(editedTeam.Players);
             var teamToEdit = _context.Teams
-                .Include(team => team.Players)
-                .FirstOrDefault(team => team.TeamId == editedTeam.TeamId);
+                .SingleOrDefault(team => team.TeamId == editedTeam.TeamId);
             if (teamToEdit == null)
                 return;
-            foreach (var player in editedTeam.Players)
-                _context.Attach(player);
+            _context.Entry(teamToEdit).Collection(team => team.Players).Load();
             teamToEdit.Name = editedTeam.Name;
             teamToEdit.Players = editedTeam.Players;
-            teamToEdit.Group = editedTeam.Group;
             _context.SaveChanges();
         }
 
         public void DeleteTeam(int teamId)
         {
             var teamToDelete = _context.Teams.Find(teamId);
+            _context.Entry(teamToDelete).Collection(team => team.Players).Load();
+            foreach (var player in teamToDelete.Players)
+                player.Team = null;
             _context.Remove(teamToDelete);
             _context.SaveChanges();
         }
