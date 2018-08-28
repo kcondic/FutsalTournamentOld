@@ -47,10 +47,18 @@ namespace DUMPFutsalTournament.Controllers
         }
 
         [Authorize]
-        [HttpPost("activate/{matchId}")]
-        public IActionResult SetActiveMatch(int matchId)
+        [HttpPost("activate")]
+        public IActionResult SetActiveMatch([FromBody]int matchId)
         {
             _matchRepository.SetActiveMatch(matchId);
+            return Ok(null);
+        }
+
+        [Authorize]
+        [HttpPost("deactivate")]
+        public IActionResult DeactivateMatch()
+        {
+            _matchRepository.DeactivateMatch();
             return Ok(null);
         }
 
@@ -63,7 +71,7 @@ namespace DUMPFutsalTournament.Controllers
         }
 
         [Authorize]
-        [HttpDelete("delete")]
+        [HttpDelete("delete/{matchId}")]
         public IActionResult DeleteMatch(int matchId)
         {
             _matchRepository.DeleteMatch(matchId);
@@ -72,9 +80,17 @@ namespace DUMPFutsalTournament.Controllers
 
         [Authorize]
         [HttpPost("add-event")]
-        public IActionResult AddMatchEvent(int matchId, [FromBody]MatchEvent matchEvent)
+        public IActionResult AddMatchEvent([FromBody]MatchEvent matchEvent)
         {
-            _matchRepository.AddMatchEvent(matchId, matchEvent);
+            _matchRepository.AddMatchEvent(matchEvent);
+            return Ok(null);
+        }
+
+        [Authorize]
+        [HttpPost("delete-event/{matchEventId}")]
+        public IActionResult DeleteMatchEvent([FromBody]int matchEventId)
+        {
+            _matchRepository.DeleteMatchEvent(matchEventId);
             return Ok(null);
         }
     }

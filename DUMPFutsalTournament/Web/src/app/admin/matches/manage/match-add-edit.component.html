@@ -1,0 +1,30 @@
+<div *ngIf="match">
+	<form (ngSubmit)="save()" class="add-edit">
+		<span class="match-home-team">
+			Domaća ekipa:
+			<select [disabled]="isEdit" class="match-home-team" name="home-team-select" [(ngModel)]="match.homeTeam">
+				<option *ngFor="let team of homeTeams" [ngValue]="team" name="home-team-select-option" (click)="updateAwayTeams()">{{team.name}}</option>
+			</select>
+		</span>
+		<span class="match-away-team">
+			Gostujuća ekipa:
+			<select [disabled]="isEdit" class="match-away-team" name="away-team-select" [(ngModel)]="match.awayTeam">
+				<option *ngFor="let team of awayTeams" [ngValue]="team" name="away-team-select-option" (click)="updateHomeTeams()">{{team.name}}</option>
+			</select>
+		</span>
+		<span class="match-type">
+			Tip utakmice:
+			<select [disabled]="isEdit" class="match-type" name="match-type-select" [(ngModel)]="match.matchType">
+				<option *ngFor="let type of matchTypeKeys" [value]="type" name="match-type-select-option">{{getMatchTypeTranslation(+type)}}</option>
+			</select>
+		</span>
+		<span class="match-time">
+			Vrijeme: 
+			<input type="date" [ngModel]="match.timeOfMatch | date:'yyyy-MM-dd'" (ngModelChange)="match.timeOfMatch=$event" name="time-of-match"/>
+			<input type="number" max="23" name="time-of-match-hour" [(ngModel)]="hour"/>
+			<input type="number" max="59" name="time-of-match-minute" [(ngModel)]="minute"/>
+		</span>
+		<button class="close-button" (click)="close()">Zatvori</button>
+		<button type="submit">Spremi</button>
+	</form>
+</div>

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DUMPFutsalTournament.Data;
 using DUMPFutsalTournament.Data.Entities;
@@ -63,8 +64,12 @@ namespace DUMPFutsalTournament.Domain.Implementations
 
         public void AddMatch(Match match)
         {
+            if (match.HomeTeam == null || match.AwayTeam == null || match.TimeOfMatch == null || 
+                match.HomeGoals != null || match.AwayGoals != null || match.HomeTeam.TeamId == match.AwayTeam.TeamId)
+                return;
             _context.Teams.Attach(match.HomeTeam);
             _context.Teams.Attach(match.AwayTeam);
+            match.TimeOfMatch = match.TimeOfMatch.ToLocalTime();
             _context.Matches.Add(match);
             _context.SaveChanges();
         }
@@ -74,7 +79,8 @@ namespace DUMPFutsalTournament.Domain.Implementations
             var currentlyActiveMatch = _context.Matches.SingleOrDefault(match => match.IsActive);
             var matchToActivate = _context.Matches.Find(matchId);
 
-            if (matchToActivate == null)
+            if (matchToActivate == null || matchToActivate.HomeGoals != null || 
+                matchToActivate.AwayGoals != null || matchToActivate.TimeOfMatch < DateTime.Now - TimeSpan.FromMinutes(60))
                 return;
 
             if (currentlyActiveMatch != null)
@@ -84,16 +90,23 @@ namespace DUMPFutsalTournament.Domain.Implementations
             _context.SaveChanges();
         }
 
+        public void DeactivateMatch()
+        {
+            var matchToDeactivate = _context.Matches.SingleOrDefault(match => match.IsActive);
+
+            if (matchToDeactivate == null)
+                return;
+
+            matchToDeactivate.IsActive = false;
+            _context.SaveChanges();
+        }
+
         public void EditMatch(Match editedMatch)
         {
             var matchToEdit = _context.Matches.Find(editedMatch.MatchId);
             if (matchToEdit == null)
                 return;
-            _context.Teams.Attach(matchToEdit.HomeTeam);
-            _context.Teams.Attach(matchToEdit.AwayTeam);
-            matchToEdit.TimeOfMatch = editedMatch.TimeOfMatch;
-            matchToEdit.HomeGoals = editedMatch.HomeGoals;
-            matchToEdit.AwayGoals = editedMatch.AwayGoals;
+            matchToEdit.TimeOfMatch = editedMatch.TimeOfMatch.ToLocalTime();
             _context.SaveChanges();
         }
 
@@ -109,14 +122,20 @@ namespace DUMPFutsalTournament.Domain.Implementations
             _context.SaveChanges();
         }
 
-        public void AddMatchEvent(int matchId, MatchEvent matchEvent)
+        public void AddMatchEvent(MatchEvent matchEvent)
         {
-            var matchToAddTo = _context.Matches
-                .Include(match => match.MatchEvents)
-                .SingleOrDefault(match => match.MatchId == matchId);
-            if (matchToAddTo == null)
+            _context.Matches.Attach(matchEvent.Match);
+            _context.Players.Attach(matchEvent.Player);
+            _context.MatchEvents.Add(matchEvent);
+            _context.SaveChanges();
+        }
+
+        public void DeleteMatchEvent(int matchEventId)
+        {
+            var matchEventToDelete = _context.MatchEvents.Find(matchEventId);
+            if (matchEventToDelete == null)
                 return;
-            matchToAddTo.MatchEvents.Add(matchEvent);
+            _context.MatchEvents.Remove(matchEventToDelete);
             _context.SaveChanges();
         }
     }

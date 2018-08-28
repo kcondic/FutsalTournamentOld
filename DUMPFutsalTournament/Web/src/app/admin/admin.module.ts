@@ -7,6 +7,8 @@ import { TeamManageComponent } from './teams/team-manage.component';
 import { TeamAddEditComponent } from './teams/manage/team-add-edit.component';
 import { GroupManageComponent } from './groups/group-manage.component';
 import { GroupAddEditComponent } from './groups/manage/group-add-edit.component';
+import { MatchManageComponent } from './matches/match-manage.component';
+import { MatchAddEditComponent } from './matches/manage/match-add-edit.component';
 import { AdminService } from './admin.service';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminNavigationComponent } from './navigation/admin-navigation.component';
@@ -24,7 +26,9 @@ import { AdminNavigationComponent } from './navigation/admin-navigation.componen
 		TeamManageComponent,
 		TeamAddEditComponent,
 		GroupManageComponent,
-		GroupAddEditComponent
+		GroupAddEditComponent,
+		MatchManageComponent,
+		MatchAddEditComponent
 	],
 	providers: [ AdminService ]
 })

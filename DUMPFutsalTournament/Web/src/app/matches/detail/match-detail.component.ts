@@ -1,11 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { MatchService } from '../match.service';
 import { Match } from '../../infrastructure/classes/match';
 import { MatchEvent } from '../../infrastructure/classes/matchevent';
+import { MatchType } from '../../infrastructure/enums/matchtype';
 import { MatchEventType } from '../../infrastructure/enums/matcheventtype';
-import { MatchTypeTranslation } from '../../infrastructure/translations/matchtypetranslation';
 import { ClosePopupService } from '../../common/close-popup.service';
+import { MatchTypeTranslationService } from '../../common/match-type-translation.service';
 
 @Component({
 	selector: 'match-detail',
@@ -14,13 +15,10 @@ import { ClosePopupService } from '../../common/close-popup.service';
 export class MatchDetailComponent implements OnInit {
 	@Input() match: Match;
 	localMatch: Match;
-	matchTypeTranslator: MatchTypeTranslation;
 
 	 constructor(private route: ActivatedRoute,
-		 private service: MatchService, private closePopup: ClosePopupService)
-	{
-		this.matchTypeTranslator = new MatchTypeTranslation();
-	}
+		  private service: MatchService, private closePopup: ClosePopupService,
+			private matchTypeTranslation: MatchTypeTranslationService) { }
 
 	ngOnInit() {
 		 if (!this.match)
@@ -38,11 +36,11 @@ export class MatchDetailComponent implements OnInit {
 		return MatchEventType[matchEventType];
 	}
 
-	getMatchTypeTranslation(matchTypeEnumValue: MatchEventType): string {
-		return this.matchTypeTranslator.GetMatchTypeTranslation(matchTypeEnumValue);
+	getMatchTypeTranslation(matchTypeEnumValue: MatchType): string {
+		return this.matchTypeTranslation.getMatchTypeTranslation(matchTypeEnumValue);
 	}
 
-	 close() {
+	close() {
 		this.closePopup.close(this.route.parent);
 	}
 }

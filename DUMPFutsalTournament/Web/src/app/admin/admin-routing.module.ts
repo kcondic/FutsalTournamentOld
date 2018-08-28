@@ -6,48 +6,66 @@ import { TeamManageComponent } from './teams/team-manage.component';
 import { TeamAddEditComponent } from './teams/manage/team-add-edit.component';
 import { GroupManageComponent } from './groups/group-manage.component';
 import { GroupAddEditComponent } from './groups/manage/group-add-edit.component';
+import { MatchManageComponent } from './matches/match-manage.component';
+import { MatchAddEditComponent } from './matches/manage/match-add-edit.component';
 
 const adminRoutes: Routes = [
 	 {
-			path: 'players',
-			children: [
-			{
-				path: 'manage',
-				component: PlayerAddEditComponent,
-				outlet: 'popup'
-			},
-			{
-			   path: '',
-			   component: PlayerManageComponent
-			}]
+		path: 'players',
+		children: [
+		{
+			path: 'manage',
+			component: PlayerAddEditComponent,
+			outlet: 'popup'
+		},
+		{
+		   path: '',
+		   component: PlayerManageComponent
+		}]
 	 },
 	 {
-			path: 'teams',
-			children: [
-			{
-				path: 'manage',
-				component: TeamAddEditComponent,
-				outlet: 'popup'
-			},
-			{
-				path: '',
-				component: TeamManageComponent
-			}]
+		path: 'teams',
+		children: [
+		{
+			path: 'manage',
+			component: TeamAddEditComponent,
+			outlet: 'popup'
+		},
+		{
+			path: '',
+			component: TeamManageComponent
+		}]
 	 },
 	 {
-			path: 'groups',
-			children: [
-			{
-				path: 'manage',
-				component: GroupAddEditComponent,
-				outlet: 'popup'
-			},
-			{
-				path: '',
-				component: GroupManageComponent
-			}]
+		path: 'groups',
+		children: [
+		{
+			path: 'manage',
+			component: GroupAddEditComponent,
+			outlet: 'popup'
+		},
+		{
+			path: '',
+			component: GroupManageComponent
+		}]
 	 },
-	 { path: '', redirectTo: 'groups' }
+	 {
+		path: 'matches',
+		children: [
+		{
+			path: 'manage',
+			component: MatchAddEditComponent,
+			outlet: 'popup'
+		},
+		{
+			path: '',
+			component: MatchManageComponent
+		}]
+	 },
+	 {
+		path: '',
+		redirectTo: 'matches'
+	 }
 ];
 
 @NgModule({

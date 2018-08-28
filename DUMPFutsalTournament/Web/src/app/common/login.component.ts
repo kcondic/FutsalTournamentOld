@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../infrastructure/classes/user';
 import { AuthService } from './auth.service';
@@ -18,12 +18,17 @@ export class LoginComponent {
 
 	constructor(public authService: AuthService, public router: Router) { }
 
+	ngOnInit() {
+		 if (this.authService.isAuthenticated())
+			 this.router.navigateByUrl('/admin/matches');
+	}
+
 	login() {
 	 this.authService.login(new User(this.username, this.password))
 		  .subscribe(
 		  token => {
 		     localStorage.setItem('token', token);
-			this.router.navigateByUrl('/admin/teams');
+			this.router.navigateByUrl('/admin/matches');
 		},
 		error => {
 		  alert(`Neuspješna prijava! ${error.message}`);

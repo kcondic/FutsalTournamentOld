@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { LoginRoutingModule } from './common/login-routing.module';
 import { LoginComponent } from './common/login.component';
 import { ClosePopupService } from './common/close-popup.service';
+import { MatchTypeTranslationService } from './common/match-type-translation.service';
 import { JwtModule } from '@auth0/angular-jwt';
 
 @NgModule({
@@ -30,7 +31,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 		 }
 	})
   ],
-  providers: [ ClosePopupService ],
+  providers: [ ClosePopupService, MatchTypeTranslationService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

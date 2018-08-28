@@ -2,16 +2,17 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Player } from '../infrastructure/classes/player';
-import { Match } from '../infrastructure/classes/match';
-import { Group } from '../infrastructure/classes/group';
 import { Team } from '../infrastructure/classes/team';
+import { Group } from '../infrastructure/classes/group';
+import { Match } from '../infrastructure/classes/match';
+import { MatchEvent } from '../infrastructure/classes/matchevent';
 
 @Injectable()
 export class AdminService {
 	private playersUrl = 'api/players';
-	private matchesUrl = 'api/matches';
-	private groupsUrl = 'api/groups';
 	private teamsUrl = 'api/teams';
+	private groupsUrl = 'api/groups';
+	private matchesUrl = 'api/matches';
 
 	constructor(private http: HttpClient) { }
 
@@ -49,4 +50,24 @@ export class AdminService {
 	 editGroup(group: Group): Observable<{}> { return this.http.post(`${this.groupsUrl}/edit`, group); }
 
 	 deleteGroup(id: number): Observable<{}> { return this.http.delete(`${this.groupsUrl}/delete/${id}`); }
+
+	// Matches
+	 getAllMatches(): Observable<Match[]> { return this.http.get<Match[]>(this.matchesUrl); }
+
+	 getMatch(id: number): Observable<Match> { return this.http.get<Match>(`${this.matchesUrl}/${id}`); }
+
+	 activateMatch(id: number): Observable<{}> { return this.http.post(`${this.matchesUrl}/activate`, id); }
+
+	 deactivateMatch(): Observable<{}> { return this.http.post(`${this.matchesUrl}/deactivate`, null);  }
+
+	 addMatch(match: Match): Observable<{}> { return this.http.post(`${this.matchesUrl}/add`, match); }
+
+	 editMatch(match: Match): Observable<{}> { return this.http.post(`${this.matchesUrl}/edit`, match); }
+
+	 deleteMatch(id: number): Observable<{}> { return this.http.delete(`${this.matchesUrl}/delete/${id}`); }
+
+	// MatchEvents
+	 addMatchEvent(matchEvent: MatchEvent): Observable<{}> { return this.http.post(`${this.matchesUrl}/add-event`, matchEvent); }
+
+	 deleteMatchEvent(id: number): Observable<{}> { return this.http.delete(`${this.matchesUrl}/delete/${id}`); }
 }

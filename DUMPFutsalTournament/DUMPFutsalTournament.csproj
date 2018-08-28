@@ -51,6 +51,8 @@
     <None Remove="Web\src\app\admin\admin.service.ts" />
     <None Remove="Web\src\app\admin\groups\group-manage.component.ts" />
     <None Remove="Web\src\app\admin\groups\manage\group-add-edit.component.ts" />
+    <None Remove="Web\src\app\admin\matches\manage\match-add-edit.component.ts" />
+    <None Remove="Web\src\app\admin\matches\match-manage.component.ts" />
     <None Remove="Web\src\app\admin\players\manage\player-add-edit.component.ts" />
     <None Remove="Web\src\app\admin\players\player-manage.component.ts" />
     <None Remove="Web\src\app\admin\teams\manage\team-add-edit.component.ts" />
@@ -59,6 +61,7 @@
     <None Remove="Web\src\app\auth-guard.service.ts" />
     <None Remove="Web\src\app\auth.service.ts" />
     <None Remove="Web\src\app\close-popup.service.ts" />
+    <None Remove="Web\src\app\common\match-type-translation.service.ts" />
     <None Remove="Web\src\app\groups\groups.module.ts" />
     <None Remove="Web\src\app\infrastructure\classes\User.ts" />
     <None Remove="Web\src\app\infrastructure\enums\matcheventtype.ts" />
@@ -68,7 +71,6 @@
     <None Remove="Web\src\app\infrastructure\classes\matchevent.ts" />
     <None Remove="Web\src\app\infrastructure\classes\player.ts" />
     <None Remove="Web\src\app\infrastructure\classes\team.ts" />
-    <None Remove="Web\src\app\infrastructure\translations\matchtypetranslation.ts" />
     <None Remove="Web\src\app\login-routing.module.ts" />
     <None Remove="Web\src\app\login.component.ts" />
     <None Remove="Web\src\app\matches\match-detail.component.ts" />
@@ -86,6 +88,8 @@
   <ItemGroup>
     <TypeScriptCompile Include="Web\src\app\admin\groups\group-manage.component.ts" />
     <TypeScriptCompile Include="Web\src\app\admin\groups\manage\group-add-edit.component.ts" />
+    <TypeScriptCompile Include="Web\src\app\admin\matches\manage\match-add-edit.component.ts" />
+    <TypeScriptCompile Include="Web\src\app\admin\matches\match-manage.component.ts" />
     <TypeScriptCompile Include="Web\src\app\admin\navigation\admin-navigation.component.ts" />
     <TypeScriptCompile Include="Web\src\app\admin\admin-routing.module.ts" />
     <TypeScriptCompile Include="Web\src\app\admin\admin.module.ts" />
@@ -98,6 +102,7 @@
     <TypeScriptCompile Include="Web\src\app\common\auth-guard.service.ts" />
     <TypeScriptCompile Include="Web\src\app\common\auth.service.ts" />
     <TypeScriptCompile Include="Web\src\app\common\close-popup.service.ts" />
+    <TypeScriptCompile Include="Web\src\app\common\match-type-translation.service.ts" />
     <TypeScriptCompile Include="Web\src\app\groups\groups.module.ts" />
     <TypeScriptCompile Include="Web\src\app\infrastructure\classes\user.ts" />
     <TypeScriptCompile Include="Web\src\app\infrastructure\enums\matcheventtype.ts" />
@@ -107,7 +112,6 @@
     <TypeScriptCompile Include="Web\src\app\infrastructure\classes\matchevent.ts" />
     <TypeScriptCompile Include="Web\src\app\infrastructure\classes\player.ts" />
     <TypeScriptCompile Include="Web\src\app\infrastructure\classes\team.ts" />
-    <TypeScriptCompile Include="Web\src\app\infrastructure\translations\matchtypetranslation.ts" />
     <TypeScriptCompile Include="Web\src\app\common\login-routing.module.ts" />
     <TypeScriptCompile Include="Web\src\app\common\login.component.ts" />
     <TypeScriptCompile Include="Web\src\app\matches\match.service.ts" />
@@ -125,7 +129,6 @@
 
   <ItemGroup>
     <Folder Include="Web\src\app\admin\active-match\" />
-    <Folder Include="Web\src\app\admin\matches\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

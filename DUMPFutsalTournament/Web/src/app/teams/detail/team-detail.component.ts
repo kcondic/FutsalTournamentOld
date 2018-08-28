@@ -6,7 +6,7 @@ import { Match } from '../../infrastructure/classes/match';
 import { MatchEvent } from '../../infrastructure/classes/matchevent';
 import { MatchEventType } from '../../infrastructure/enums/matcheventtype';
 import { ClosePopupService } from '../../common/close-popup.service';
-import { MatchTypeTranslation } from '../../infrastructure/translations/matchtypetranslation';
+import { MatchTypeTranslationService } from '../../common/match-type-translation.service';
 
 @Component({
 	templateUrl: './team-detail.component.html'
@@ -15,13 +15,9 @@ export class TeamDetailComponent implements OnInit {
 	teamId: number;
 	team: Team;
 	teamMatches: Match[];
-	matchTypeTranslator: MatchTypeTranslation;
 
-	constructor(private route: ActivatedRoute, private service: TeamService,
-		  private closePopup: ClosePopupService)
-	{
-		this.matchTypeTranslator = new MatchTypeTranslation();
-	}
+	 constructor(private route: ActivatedRoute, private service: TeamService, private closePopup: ClosePopupService,
+		 private matchTypeTranslation: MatchTypeTranslationService) { }
 
 	ngOnInit() {
 		this.teamId = this.route.snapshot.params['id'];
@@ -48,11 +44,10 @@ export class TeamDetailComponent implements OnInit {
 		];
 	}
 
-	 getLastMatchTypeTranslation(): string {
-		//TODO: Popravi
-		//const lastMatch = this.teamMatches.reduce((prev, curr) => (prev.TimeOfMatch > curr.TimeOfMatch) ? prev : curr, null);
-		//if(lastMatch)
-		//	  return this.matchTypeTranslator.GetMatchTypeTranslation(lastMatch.MatchType);
+	getLastMatchTypeTranslation(): string {
+		const lastMatch = this.teamMatches.reduce((prev, curr) => (prev.timeOfMatch > curr.timeOfMatch) ? prev : curr, null);
+		if(lastMatch)
+			  return this.matchTypeTranslation.getMatchTypeTranslation(lastMatch.matchType);
 		return '';
 	}
 
