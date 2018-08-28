@@ -87,10 +87,18 @@ namespace DUMPFutsalTournament.Controllers
         }
 
         [Authorize]
-        [HttpPost("delete-event/{matchEventId}")]
-        public IActionResult DeleteMatchEvent([FromBody]int matchEventId)
+        [HttpDelete("delete-event/{matchEventId}")]
+        public IActionResult DeleteMatchEvent(int matchEventId)
         {
             _matchRepository.DeleteMatchEvent(matchEventId);
+            return Ok(null);
+        }
+
+        [Authorize]
+        [HttpPost("update-match-goals")]
+        public IActionResult UpdateMatchGoals([FromBody]Match updatedMatch)
+        {
+            _matchRepository.UpdateMatchGoals(updatedMatch);
             return Ok(null);
         }
     }

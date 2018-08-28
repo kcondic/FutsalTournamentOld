@@ -9,6 +9,7 @@ import { GroupManageComponent } from './groups/group-manage.component';
 import { GroupAddEditComponent } from './groups/manage/group-add-edit.component';
 import { MatchManageComponent } from './matches/match-manage.component';
 import { MatchAddEditComponent } from './matches/manage/match-add-edit.component';
+import { ActiveMatchManageComponent } from './active-match/active-match-manage.component';
 import { AdminService } from './admin.service';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminNavigationComponent } from './navigation/admin-navigation.component';
@@ -28,7 +29,8 @@ import { AdminNavigationComponent } from './navigation/admin-navigation.componen
 		GroupManageComponent,
 		GroupAddEditComponent,
 		MatchManageComponent,
-		MatchAddEditComponent
+		MatchAddEditComponent,
+		ActiveMatchManageComponent
 	],
 	providers: [ AdminService ]
 })

@@ -56,6 +56,8 @@ export class AdminService {
 
 	 getMatch(id: number): Observable<Match> { return this.http.get<Match>(`${this.matchesUrl}/${id}`); }
 
+	 getActiveMatch(): Observable<Match> { return this.http.get<Match>(`${this.matchesUrl}/active`); }
+
 	 activateMatch(id: number): Observable<{}> { return this.http.post(`${this.matchesUrl}/activate`, id); }
 
 	 deactivateMatch(): Observable<{}> { return this.http.post(`${this.matchesUrl}/deactivate`, null);  }
@@ -66,8 +68,10 @@ export class AdminService {
 
 	 deleteMatch(id: number): Observable<{}> { return this.http.delete(`${this.matchesUrl}/delete/${id}`); }
 
+	 updateMatchGoals(match: Match): Observable<{}> { return this.http.post(`${this.matchesUrl}/update-match-goals`, match); }
+
 	// MatchEvents
 	 addMatchEvent(matchEvent: MatchEvent): Observable<{}> { return this.http.post(`${this.matchesUrl}/add-event`, matchEvent); }
 
-	 deleteMatchEvent(id: number): Observable<{}> { return this.http.delete(`${this.matchesUrl}/delete/${id}`); }
+	 deleteMatchEvent(id: number): Observable<{}> { return this.http.delete(`${this.matchesUrl}/delete-event/${id}`); }
 }

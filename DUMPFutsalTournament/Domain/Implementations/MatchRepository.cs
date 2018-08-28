@@ -33,8 +33,6 @@ namespace DUMPFutsalTournament.Domain.Implementations
                 .Include(match => match.AwayTeam)
                 .ThenInclude(awayTeam => awayTeam.Players)
                 .Include(match => match.MatchEvents)
-                .ThenInclude(ev => ev.Player)
-                .ThenInclude(player => player.Team)
                 .SingleOrDefault(match => match.IsActive);
         }
 
@@ -87,6 +85,8 @@ namespace DUMPFutsalTournament.Domain.Implementations
                 currentlyActiveMatch.IsActive = false;
 
             matchToActivate.IsActive = true;
+            matchToActivate.HomeGoals = 0;
+            matchToActivate.AwayGoals = 0;
             _context.SaveChanges();
         }
 
@@ -124,8 +124,9 @@ namespace DUMPFutsalTournament.Domain.Implementations
 
         public void AddMatchEvent(MatchEvent matchEvent)
         {
+            if(matchEvent.Player != null)
+                _context.Players.Attach(matchEvent.Player);
             _context.Matches.Attach(matchEvent.Match);
-            _context.Players.Attach(matchEvent.Player);
             _context.MatchEvents.Add(matchEvent);
             _context.SaveChanges();
         }
@@ -136,6 +137,18 @@ namespace DUMPFutsalTournament.Domain.Implementations
             if (matchEventToDelete == null)
                 return;
             _context.MatchEvents.Remove(matchEventToDelete);
+            _context.SaveChanges();
+        }
+
+        public void UpdateMatchGoals(Match updatedMatch)
+        {
+            var matchToUpdate = _context.Matches.Find(updatedMatch.MatchId);
+
+            if (matchToUpdate == null)
+                return;
+
+            matchToUpdate.HomeGoals = updatedMatch.HomeGoals;
+            matchToUpdate.AwayGoals = updatedMatch.AwayGoals;
             _context.SaveChanges();
         }
     }

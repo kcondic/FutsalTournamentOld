@@ -1,10 +1,12 @@
 <admin-navigation></admin-navigation>
 <div class="match-manage">
-	<a [routerLink]="[{ outlets: { popup: ['manage'] } }]">Dodaj novu utakmicu</a>
+	<a class="icon add" [routerLink]="[{ outlets: { popup: ['manage'] } }]"></a>
 	<div class="match" *ngFor="let match of matches">
 		{{match.homeTeam.name}} - {{match.awayTeam.name}}
-		<a [routerLink]="[{ outlets: { popup: ['manage'] } }]" [queryParams]="{ id: [match.matchId] }">Uredi</a>
-		<a (click)="delete(match.matchId)">Izbriši</a>
-		<span *ngIf="!match.isActive"><span (click)="activate(match.matchId)">Aktiviraj</span></span>
+		<a class="icon edit" [routerLink]="[{ outlets: { popup: ['manage'] } }]" [queryParams]="{ id: [match.matchId] }"></a>
+		<a class="icon trash" (click)="delete(match.matchId)"></a>
+		<span *ngIf="!match.isActive && match.homeGoals === null && match.awayGoals === null">
+			<span (click)="activate(match.matchId)">Aktiviraj</span>
+		</span>
 	</div>
 </div>

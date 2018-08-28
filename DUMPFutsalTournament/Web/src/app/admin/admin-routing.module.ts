@@ -8,6 +8,7 @@ import { GroupManageComponent } from './groups/group-manage.component';
 import { GroupAddEditComponent } from './groups/manage/group-add-edit.component';
 import { MatchManageComponent } from './matches/match-manage.component';
 import { MatchAddEditComponent } from './matches/manage/match-add-edit.component';
+import { ActiveMatchManageComponent } from './active-match/active-match-manage.component';
 
 const adminRoutes: Routes = [
 	 {
@@ -62,6 +63,10 @@ const adminRoutes: Routes = [
 			component: MatchManageComponent
 		}]
 	 },
+	 {
+		  path: 'active',
+		  component: ActiveMatchManageComponent
+ 	 },
 	 {
 		path: '',
 		redirectTo: 'matches'

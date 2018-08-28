@@ -2,7 +2,7 @@
 	<div class="team-name">
 		{{team.name}}
 	</div>
-	<div class="team-phase" *ngIf="lastMatch">
+	<div class="team-phase" *ngIf="teamMatches">
 		Status: {{getLastMatchTypeTranslation()}}
 	</div>
 	<div class="players" *ngFor="let player of team.players">
@@ -14,7 +14,7 @@
 		</span>
 		<span *ngFor="let event of getTotalMatchEvents(player.matchEvents)">
 			<span *ngIf="event.number">
-				<span [ngClass]="event.nameOfClass">{{event.number}}</span>
+				<span [ngClass]="[event.nameOfClass | lowercase, 'icon']">{{event.number}}</span>
 			</span>
 		</span>
 	</div>

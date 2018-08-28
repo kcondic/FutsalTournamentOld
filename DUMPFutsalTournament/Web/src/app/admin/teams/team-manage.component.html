@@ -1,9 +1,9 @@
 <admin-navigation></admin-navigation>
 <div class="team-manage">
-	<a [routerLink]="[{ outlets: { popup: ['manage'] } }]">Dodaj novu ekipu</a>
+	<a class="icon add" [routerLink]="[{ outlets: { popup: ['manage'] } }]"></a>
 	<div class="group" *ngFor="let team of teams">
 		{{team.name}}
-		<a [routerLink]="[{ outlets: { popup: ['manage'] } }]" [queryParams]="{ id: [team.teamId] }">Uredi</a>
-		<a (click)="delete(team.teamId)">Izbriši</a>
+		<a class="icon edit" [routerLink]="[{ outlets: { popup: ['manage'] } }]" [queryParams]="{ id: [team.teamId] }"></a>
+		<a class="icon trash" (click)="delete(team.teamId)"></a>
 	</div>
 </div>

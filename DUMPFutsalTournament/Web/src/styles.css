@@ -1,1 +1,65 @@
 /* You can add global styles to this file, and also import other style files */
+.icon {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background-size: cover;
+	background-repeat: no-repeat;
+	cursor: pointer;
+}
+
+.flex {
+	display: flex;
+}
+
+.column {
+	flex-direction: column;
+}
+
+.goal {
+	background-image: url('./assets/goal.png');
+}
+
+.owngoal {
+	background-image: url('./assets/owngoal.png');
+}
+
+.yellowcard {
+	background-image: url('./assets/yellow.png');
+}
+
+.redcard {
+	background-image: url('./assets/red.png');
+}
+
+.penaltygoal {
+	background-image: url('./assets/penalty.png');
+}
+
+.shootoutgoal {
+	background-image: url('./assets/shootout.png');
+}
+
+.penaltymiss {
+	background-image: url('./assets/penaltymiss.png');
+}
+
+.shootoutmiss {
+	background-image: url('./assets/shootoutmiss.png');
+}
+
+.injury {
+	background-image: url('./assets/injury.png');
+}
+
+.add {
+	background-image: url('./assets/add.png');
+}
+
+.edit {
+	background-image: url('./assets/edit.png');
+}
+
+.trash {
+	background-image: url('./assets/trash.png');
+}

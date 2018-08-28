@@ -16,5 +16,6 @@ namespace DUMPFutsalTournament.Domain.Interfaces
         void DeleteMatch(int matchId);
         void AddMatchEvent(MatchEvent matchEvent);
         void DeleteMatchEvent(int matchEventId);
+        void UpdateMatchGoals(Match updatedMatch);
     }
 }

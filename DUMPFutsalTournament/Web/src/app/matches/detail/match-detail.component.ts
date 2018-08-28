@@ -26,18 +26,31 @@ export class MatchDetailComponent implements OnInit {
 				   .subscribe(matchData => this.localMatch = matchData);
 	}
 
-	isEventForHomeOrAway(event: MatchEvent, homeTeamId: number): string {
-		if (event.player.team.teamId === homeTeamId)
-			return 'home-event';
-		return 'away-event';
-	}
-
 	getEventTypeClass(matchEventType: number): string {
 		return MatchEventType[matchEventType];
 	}
 
 	getMatchTypeTranslation(matchTypeEnumValue: MatchType): string {
 		return this.matchTypeTranslation.getMatchTypeTranslation(matchTypeEnumValue);
+	}
+
+	getPenaltiesString(): string {
+		if (this.match.matchType === MatchType.Group || this.match.homeGoals !== this.match.awayGoals)
+			 return '';
+		const homePenaltiesCount = this.match.matchEvents
+			  .filter(matchEvent => matchEvent.eventType === MatchEventType.ShootoutGoal && matchEvent.isForHomeTeam).length;
+		const awayPenaltiesCount = this.match.matchEvents
+			  .filter(matchEvent => matchEvent.eventType === MatchEventType.ShootoutGoal && !matchEvent.isForHomeTeam).length;
+		return `${homePenaltiesCount}:${awayPenaltiesCount}`;
+	}
+
+	getMatchEventTypeClass(type: MatchEventType) {
+		return MatchEventType[type];
+	}
+
+	getSortedMatchEvents(): MatchEvent[] {
+		return this.match.matchEvents.sort((eventOne, eventTwo) =>
+			eventOne.eventMinute > eventTwo.eventMinute ? 1 : -1);
 	}
 
 	close() {

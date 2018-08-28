@@ -45,7 +45,7 @@ export class TeamDetailComponent implements OnInit {
 	}
 
 	getLastMatchTypeTranslation(): string {
-		const lastMatch = this.teamMatches.reduce((prev, curr) => (prev.timeOfMatch > curr.timeOfMatch) ? prev : curr, null);
+		const lastMatch = this.teamMatches.reduce((prev, curr) => (prev.timeOfMatch > curr.timeOfMatch) ? prev : curr);
 		if(lastMatch)
 			  return this.matchTypeTranslation.getMatchTypeTranslation(lastMatch.matchType);
 		return '';

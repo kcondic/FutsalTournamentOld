@@ -1,0 +1,54 @@
+<admin-navigation></admin-navigation>
+<div *ngIf="activeMatch;else noactivematch">
+	<span class="timer">
+		<input type="number" [(ngModel)]="minutes" />:
+		<input type="number" [(ngModel)]="seconds" />
+	</span>
+	<div class="match-title">
+		{{activeMatch.homeTeam.name}} - {{activeMatch.awayTeam.name}}
+	</div>
+	<div class="match-time">
+		{{activeMatch.timeOfMatch | date: 'dd.MM.yyyy HH:mm'}}
+	</div>
+	<div class="match-phase">
+		{{getMatchTypeTranslation(activeMatch.matchType)}}
+	</div>
+	<div class="match-score">
+		{{activeMatch.homeGoals}}:{{activeMatch.awayGoals}}
+	</div>
+	<div *ngFor="let event of activeMatch.matchEvents" [ngClass]="event.isForHomeTeam ? 'home-event' : 'away-event'">
+		<span [ngClass]="[getMatchEventTypeClass(event.eventType) | lowercase, 'icon']"></span>
+		<span *ngIf="event.player" class="event-player">{{event.player.lastName}}</span>
+		<span class="event-minute">{{event.eventMinute}}'</span>
+		<span class="icon trash" (click)="removeMatchEvent(event.matchEventId)"></span>
+	</div>
+	<span [ngClass]="[getMatchEventTypeClass(type) | lowercase, 'icon']" *ngFor="let type of matchEventTypeKeys" (click)="showAddMatchEventPopup(type)"></span>
+	<a (click)="deactivate()">Deaktiviraj utakmicu</a>
+	<div [hidden]="!isAddEvent">
+		Tko je subjekt događaja?
+		<div class="flex">
+			<div class="home-players flex column">
+				Domaći igrači
+				<div *ngFor="let player of activeMatch.homeTeam.players" (click)="addMatchEvent(player, true)">
+					{{player.firstName}} {{player.lastName}}
+				</div>
+				<div (click)="addMatchEvent(null, true)">
+					nepoznat netko
+				</div>
+			</div>
+			<div class="away-players flex column">
+				Gostujući igrači
+				<span *ngFor="let player of activeMatch.awayTeam.players" (click)="addMatchEvent(player, false)">
+					{{player.firstName}} {{player.lastName}}
+				</span>
+				<div (click)="addMatchEvent(null, false)">
+					nepoznat netko
+				</div>
+			</div>
+		</div>
+		<a class="close-button" (click)="cancelEventAdd()">Odustani</a>
+	</div>
+</div>
+<ng-template #noactivematch>
+	Trenutno nema aktivne utakmice.
+</ng-template>

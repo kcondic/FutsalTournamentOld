@@ -7,9 +7,10 @@
 			<span class="match-time">
 				{{match.timeOfMatch | date: 'dd.MM.yyyy HH:mm'}}
 			</span>
-			<span *ngIf="match.timeOfMatch > now">
+			<span *ngIf="match.timeOfMatch < now">
 				{{match.homeGoals}} : {{match.awayGoals}}
 			</span>
+			<span *ngIf="match.isActive">U tijeku</span>
 		</a>
 	</div>
 </div>

@@ -9,5 +9,6 @@ namespace DUMPFutsalTournament.Data.Entities
         public Match Match { get; set; }
         public Player Player { get; set; }
         public MatchEventType EventType { get; set; }
+        public bool IsForHomeTeam { get; set; }
     }
 }

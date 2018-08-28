@@ -45,6 +45,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Web\src\app\admin\active-match\active-match-manage.component.ts" />
     <None Remove="Web\src\app\admin\admin-navigation.component.ts" />
     <None Remove="Web\src\app\admin\admin-routing.module.ts" />
     <None Remove="Web\src\app\admin\admin.module.ts" />
@@ -86,6 +87,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="Web\src\app\admin\active-match\active-match-manage.component.ts" />
     <TypeScriptCompile Include="Web\src\app\admin\groups\group-manage.component.ts" />
     <TypeScriptCompile Include="Web\src\app\admin\groups\manage\group-add-edit.component.ts" />
     <TypeScriptCompile Include="Web\src\app\admin\matches\manage\match-add-edit.component.ts" />
@@ -125,10 +127,6 @@
     <TypeScriptCompile Include="Web\src\app\teams\teams-routing.module.ts" />
     <TypeScriptCompile Include="Web\src\app\teams\team.service.ts" />
     <TypeScriptCompile Include="Web\src\app\teams\teams.module.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Web\src\app\admin\active-match\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

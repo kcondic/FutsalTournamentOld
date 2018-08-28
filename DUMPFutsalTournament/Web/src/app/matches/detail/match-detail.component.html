@@ -8,12 +8,13 @@
 	<div class="match-phase">
 		{{getMatchTypeTranslation(match.matchType)}}
 	</div>
-	<div class="match-score">
+	<div class="match-score" *ngIf="match.homeGoals && match.awayGoals">
 		{{match.homeGoals}} : {{match.awayGoals}}
 	</div>
-	<div *ngFor="let event of match.matchEvents" [ngClass]="isEventForHomeOrAway(event, match.homeTeam.teamId)">
-		<span [ngClass]="getEventTypeClass(event.eventType)"></span>
-		<span class="event-player">{{event.player.lastName}}</span>
+	<div class="match-penalties" *ngIf="!match.isActive">(p{{getPenaltiesString()}})</div>
+	<div *ngFor="let event of getSortedMatchEvents()" [ngClass]="event.isForHomeTeam ? 'home-event' : 'away-event'">
+		<span [ngClass]="[getMatchEventTypeClass(event.eventType) | lowercase, 'icon']"></span>
+		<span *ngIf="event.player" class="event-player">{{event.player.lastName}}</span>
 		<span class="event-minute">{{event.eventMinute}}'</span>
 	</div>
 </div>

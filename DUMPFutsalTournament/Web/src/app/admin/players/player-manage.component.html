@@ -1,12 +1,12 @@
 <admin-navigation></admin-navigation>
 <div class="player-manage">
-	<a [routerLink]="[{ outlets: { popup: ['manage'] } }]">Dodaj novog igrača</a>
+	<a class="icon add" [routerLink]="[{ outlets: { popup: ['manage'] } }]"></a>
 	<div class="player" *ngFor="let player of players">
 		{{player.firstName}} {{player.lastName}} {{player.dateOfBirth | date: 'dd.MM.yyyy'}} 
 		<span *ngIf="player.team">
 			{{player.team.name}}
 		</span>
-		<a [routerLink]="[{ outlets: { popup: ['manage'] } }]" [queryParams]="{ id: [player.playerId] }">Uredi</a>
-		<a (click)="delete(player.playerId)">Izbriši</a>
+		<a class="icon edit" [routerLink]="[{ outlets: { popup: ['manage'] } }]" [queryParams]="{ id: [player.playerId] }"></a>
+		<a class="icon trash" (click)="delete(player.playerId)"></a>
 	</div>
 </div>

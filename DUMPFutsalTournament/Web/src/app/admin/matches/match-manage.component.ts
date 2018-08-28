@@ -25,11 +25,13 @@ export class MatchManageComponent implements OnInit {
 			.subscribe(matchData => this.matches = matchData);
 	}
 
-	activate(id: number) {
-		 this.service.activateMatch(id).subscribe(() => {
-			this.matches[this.matches.findIndex(match => match.isActive === true)].isActive = false;
-			this.matches[this.matches.findIndex(match => match.matchId === id)].isActive = true;
-		});
+	 activate(id: number) {
+		 if(confirm('Jeste li sigurni da želite aktivirati tu utakmicu? Utakmica može biti aktivirana samo ' +
+					'jednom, a aktivacijom će se deaktivirati utakmica koja je već aktivna.'))
+			 this.service.activateMatch(id).subscribe(() => {
+				this.matches[this.matches.findIndex(match => match.isActive === true)].isActive = false;
+				this.matches[this.matches.findIndex(match => match.matchId === id)].isActive = true;
+			 });
 	}
 
 	delete(id: number) {
