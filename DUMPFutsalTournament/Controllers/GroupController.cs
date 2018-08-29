@@ -56,5 +56,12 @@ namespace DUMPFutsalTournament.Controllers
             _groupRepository.DeleteGroup(groupId);
             return Ok(null);
         }
+
+        [HttpGet]
+        [HttpGet("standings")]
+        public IActionResult GetAllGroupStandings()
+        {
+            return Ok(_groupRepository.GetExtendedGroups());
+        }
     }
 }

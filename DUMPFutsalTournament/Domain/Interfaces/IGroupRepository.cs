@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using DUMPFutsalTournament.Data.Entities;
 using DUMPFutsalTournament.Domain.HelperClasses;
+using DUMPFutsalTournament.Domain.Implementations;
 
 namespace DUMPFutsalTournament.Domain.Interfaces
 {
@@ -12,5 +13,6 @@ namespace DUMPFutsalTournament.Domain.Interfaces
         void AddGroup(Group group);
         void EditGroup(Group editedGroup);
         void DeleteGroup(int groupId);
+        List<ExtendedGroup> GetExtendedGroups();
     }
 }
