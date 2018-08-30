@@ -1,0 +1,45 @@
+<div class="groups-and-elimination" *ngIf="hasLoaded">
+	<div class="group-tables">
+		<div>
+			<div *ngFor="let groupWithStanding of groupsWithStandings">
+				<button (click)="selectGroup(groupWithStanding.group.groupId)">{{groupWithStanding.group.name}}</button>
+			</div>
+		</div>	
+		<table>
+			<tr>
+				<th>Pozicija</th>
+				<th>Ime ekipe</th>
+				<th>Broj utakmica</th> 
+				<th>G+</th>
+				<th>G-</th>
+				<th>GR</th>
+				<th>Bodovi</th>
+			</tr>
+			<tr *ngFor="let groupStanding of currentGroup.groupStandings; let i = index">
+				<td>{{i + 1}}.</td>
+				<td><strong>{{groupStanding.team.name}}</strong></td>
+				<td>{{groupStanding.matchesPlayed}}</td> 
+				<td>{{groupStanding.goalsScored}}</td> 
+				<td>{{groupStanding.goalsConceded}}</td> 
+				<td>{{groupStanding.goalsScored - groupStanding.goalsConceded}}</td> 
+				<td><strong>{{groupStanding.points}}</strong></td> 
+			</tr>
+   		</table>
+	</div>
+	<div class="elimination-brackets">
+		<div *ngFor="let type of matchTypeKeys">
+			{{getMatchTypeTranslation(+type)}}
+			<div *ngFor="let match of getPhaseMatches(type)">
+				<a [routerLink]="[{ outlets: { popup: ['matches', match.matchId] } }]">
+					<span [style.bold]="match.homeGoals > match.awayGoals">
+						{{match.homeName}} {{match.homeGoals}}
+					</span>
+					-
+					<span [style.bold]="match.homeGoals < match.awayGoals">
+						{{match.awayName}} {{match.awayGoals}}
+					</span>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>

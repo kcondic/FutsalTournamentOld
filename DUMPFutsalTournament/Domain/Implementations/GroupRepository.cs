@@ -24,7 +24,7 @@ namespace DUMPFutsalTournament.Domain.Implementations
                 .ToList();
         }
 
-        public List<ExtendedGroup> GetCalculatedGroupStandings()
+        public List<GroupWithStandings> GetCalculatedGroupStandings()
         {
             return _context.Groups
                 .Include(group => group.Teams)
@@ -34,20 +34,17 @@ namespace DUMPFutsalTournament.Domain.Implementations
                 .ToList()
                 .Select(group =>
                 {
-                    var extendedGroup = new ExtendedGroup
+                    var extendedGroup = new GroupWithStandings()
                     {
-                        Name = group.Name,
-                        GroupId = group.GroupId,
-                        Size = group.Size,
-                        Teams = group.Teams.Select(t =>
+                        Group = group,
+                        GroupStandings = group.Teams.Select(t =>
                         {
-                            return new GroupTeam()
+                            return new GroupStanding()
                             {
-                                TeamId = t.TeamId,
-                                TeamName = t.Name,
+                                Team = t,
                                 GoalsScored =
                                     t.HomeMatches.Sum(m => m.HomeGoals ?? 0) + t.AwayMatches.Sum(m => m.AwayGoals ?? 0),
-                                GoalsTaken =
+                                GoalsConceded =
                                     t.HomeMatches.Sum(m => m.AwayGoals ?? 0) + t.AwayMatches.Sum(m => m.HomeGoals ?? 0),
                                 MatchesPlayed =
                                     t.HomeMatches.Count(m => m.AwayGoals.HasValue && m.HomeGoals.HasValue) +
@@ -57,9 +54,9 @@ namespace DUMPFutsalTournament.Domain.Implementations
                             };
                         })
                         .OrderByDescending(t => t.Points)
-                        .ThenByDescending(t => t.GoalsScored - t.GoalsTaken)
+                        .ThenByDescending(t => t.GoalsScored - t.GoalsConceded)
                         .ThenByDescending(t => t.GoalsScored)
-                        .ThenBy(t => t.TeamName)
+                        .ThenBy(t => t.Team.Name)
                         .ToList()
                     };
                     return extendedGroup;

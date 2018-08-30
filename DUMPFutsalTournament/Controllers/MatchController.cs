@@ -20,10 +20,10 @@ namespace DUMPFutsalTournament.Controllers
             return Ok(_matchRepository.GetAllMatches());
         }
 
-        [HttpGet("brackets")]
-        public IActionResult GetBracketMatches()
+        [HttpGet("elimination")]
+        public IActionResult GetEliminationMatches()
         {
-            return Ok(_matchRepository.GetMatchesForBrackets());
+            return Ok(_matchRepository.GetEliminationMatches());
         }
 
         [HttpGet("active")]

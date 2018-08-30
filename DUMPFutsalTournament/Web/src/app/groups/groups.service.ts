@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { GroupExtended } from '../infrastructure/classes/group_extended';
-import { MatchExtended } from '../infrastructure/classes/match_extended';
+import { GroupWithStandings } from '../infrastructure/classes/groupwithstandings';
+import { Match } from '../infrastructure/classes/match';
 
 @Injectable()
 export class GroupsService {
 	private groupsUrl = 'api/groups';
-	private matchesUrl = 'api/matches/brackets'
+	private matchesUrl = 'api/matches';
 	constructor(private http: HttpClient) { }
 
-	getAllGroupsWithStandings(): Observable<GroupExtended[]> { return this.http.get<GroupExtended[]>(this.groupsUrl + '/standings'); }
+	getAllGroupsWithStandings(): Observable<GroupWithStandings[]> { return this.http.get<GroupWithStandings[]>(`${this.groupsUrl}/standings`); }
 
-	getAllBracketMatches(): Observable<MatchExtended[]> { return this.http.get<MatchExtended[]>(this.matchesUrl); }
+	getEliminationMatches(): Observable<Match[]> { return this.http.get<Match[]>(`${this.matchesUrl}/elimination`); }
 }
