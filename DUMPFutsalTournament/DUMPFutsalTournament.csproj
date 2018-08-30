@@ -10,7 +10,6 @@
 
     <!-- Set this to true if you enable server-side prerendering -->
     <BuildServerSideRenderer>false</BuildServerSideRenderer>
-    <UserSecretsId>72e37773-8f55-47d5-81e8-e9cac409c1cb</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -47,6 +46,91 @@
     <Compile Remove="Migrations\20180829141143_SeedingGroupData.Designer.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Web\src\app\admin\active-match\active-match-manage.component.ts" />
+    <None Remove="Web\src\app\admin\admin-navigation.component.ts" />
+    <None Remove="Web\src\app\admin\admin-routing.module.ts" />
+    <None Remove="Web\src\app\admin\admin.module.ts" />
+    <None Remove="Web\src\app\admin\admin.service.ts" />
+    <None Remove="Web\src\app\admin\groups\group-manage.component.ts" />
+    <None Remove="Web\src\app\admin\groups\manage\group-add-edit.component.ts" />
+    <None Remove="Web\src\app\admin\matches\manage\match-add-edit.component.ts" />
+    <None Remove="Web\src\app\admin\matches\match-manage.component.ts" />
+    <None Remove="Web\src\app\admin\players\manage\player-add-edit.component.ts" />
+    <None Remove="Web\src\app\admin\players\player-manage.component.ts" />
+    <None Remove="Web\src\app\admin\teams\manage\team-add-edit.component.ts" />
+    <None Remove="Web\src\app\admin\teams\team-manage.component.ts" />
+    <None Remove="Web\src\app\app-routing.module.ts" />
+    <None Remove="Web\src\app\auth-guard.service.ts" />
+    <None Remove="Web\src\app\auth.service.ts" />
+    <None Remove="Web\src\app\close-popup.service.ts" />
+    <None Remove="Web\src\app\common\match-type-translation.service.ts" />
+    <None Remove="Web\src\app\groups\groups.module.ts" />
+    <None Remove="Web\src\app\infrastructure\classes\User.ts" />
+    <None Remove="Web\src\app\infrastructure\enums\matcheventtype.ts" />
+    <None Remove="Web\src\app\infrastructure\enums\matchtype.ts" />
+    <None Remove="Web\src\app\infrastructure\classes\group.ts" />
+    <None Remove="Web\src\app\infrastructure\classes\match.ts" />
+    <None Remove="Web\src\app\infrastructure\classes\matchevent.ts" />
+    <None Remove="Web\src\app\infrastructure\classes\player.ts" />
+    <None Remove="Web\src\app\infrastructure\classes\team.ts" />
+    <None Remove="Web\src\app\login-routing.module.ts" />
+    <None Remove="Web\src\app\login.component.ts" />
+    <None Remove="Web\src\app\matches\match-detail.component.ts" />
+    <None Remove="Web\src\app\matches\match-list.component.ts" />
+    <None Remove="Web\src\app\matches\match.service.ts" />
+    <None Remove="Web\src\app\matches\matches-routing.module.ts" />
+    <None Remove="Web\src\app\matches\matches.module.ts" />
+    <None Remove="Web\src\app\teams\detail\team-detail.component.ts" />
+    <None Remove="Web\src\app\teams\list\team-list.component.ts" />
+    <None Remove="Web\src\app\teams\team.service.ts" />
+    <None Remove="Web\src\app\teams\teams-routing.module.ts" />
+    <None Remove="Web\src\app\teams\teams.module.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="Web\src\app\admin\active-match\active-match-manage.component.ts" />
+    <TypeScriptCompile Include="Web\src\app\admin\groups\group-manage.component.ts" />
+    <TypeScriptCompile Include="Web\src\app\admin\groups\manage\group-add-edit.component.ts" />
+    <TypeScriptCompile Include="Web\src\app\admin\matches\manage\match-add-edit.component.ts" />
+    <TypeScriptCompile Include="Web\src\app\admin\matches\match-manage.component.ts" />
+    <TypeScriptCompile Include="Web\src\app\admin\navigation\admin-navigation.component.ts" />
+    <TypeScriptCompile Include="Web\src\app\admin\admin-routing.module.ts" />
+    <TypeScriptCompile Include="Web\src\app\admin\admin.module.ts" />
+    <TypeScriptCompile Include="Web\src\app\admin\admin.service.ts" />
+    <TypeScriptCompile Include="Web\src\app\admin\players\manage\player-add-edit.component.ts" />
+    <TypeScriptCompile Include="Web\src\app\admin\players\player-manage.component.ts" />
+    <TypeScriptCompile Include="Web\src\app\admin\teams\manage\team-add-edit.component.ts" />
+    <TypeScriptCompile Include="Web\src\app\admin\teams\team-manage.component.ts" />
+    <TypeScriptCompile Include="Web\src\app\app-routing.module.ts" />
+    <TypeScriptCompile Include="Web\src\app\common\auth-guard.service.ts" />
+    <TypeScriptCompile Include="Web\src\app\common\auth.service.ts" />
+    <TypeScriptCompile Include="Web\src\app\common\close-popup.service.ts" />
+    <TypeScriptCompile Include="Web\src\app\common\match-type-translation.service.ts" />
+    <TypeScriptCompile Include="Web\src\app\groups\groups.module.ts" />
+    <TypeScriptCompile Include="Web\src\app\infrastructure\classes\user.ts" />
+    <TypeScriptCompile Include="Web\src\app\infrastructure\enums\matcheventtype.ts" />
+    <TypeScriptCompile Include="Web\src\app\infrastructure\enums\matchtype.ts" />
+    <TypeScriptCompile Include="Web\src\app\infrastructure\classes\group.ts" />
+    <TypeScriptCompile Include="Web\src\app\infrastructure\classes\match.ts" />
+    <TypeScriptCompile Include="Web\src\app\infrastructure\classes\matchevent.ts" />
+    <TypeScriptCompile Include="Web\src\app\infrastructure\classes\player.ts" />
+    <TypeScriptCompile Include="Web\src\app\infrastructure\classes\team.ts" />
+    <TypeScriptCompile Include="Web\src\app\common\login-routing.module.ts" />
+    <TypeScriptCompile Include="Web\src\app\common\login.component.ts" />
+    <TypeScriptCompile Include="Web\src\app\matches\match.service.ts" />
+    <TypeScriptCompile Include="Web\src\app\matches\matches-routing.module.ts" />
+    <TypeScriptCompile Include="Web\src\app\matches\matches.module.ts" />
+    <TypeScriptCompile Include="Web\src\app\matches\active\match-active.component.ts" />
+    <TypeScriptCompile Include="Web\src\app\matches\detail\match-detail.component.ts" />
+    <TypeScriptCompile Include="Web\src\app\matches\list\match-list.component.ts" />
+    <TypeScriptCompile Include="Web\src\app\teams\detail\team-detail.component.ts" />
+    <TypeScriptCompile Include="Web\src\app\teams\list\team-list.component.ts" />
+    <TypeScriptCompile Include="Web\src\app\teams\teams-routing.module.ts" />
+    <TypeScriptCompile Include="Web\src\app\teams\team.service.ts" />
+    <TypeScriptCompile Include="Web\src\app\teams\teams.module.ts" />
+  </ItemGroup>
+
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->
     <Exec Command="node --version" ContinueOnError="true">
@@ -73,21 +157,5 @@
       </ResolvedFileToPublish>
     </ItemGroup>
   </Target>
-
-  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
-    <TypeScriptTarget>ES5</TypeScriptTarget>
-    <TypeScriptJSXEmit>Preserve</TypeScriptJSXEmit>
-    <TypeScriptModuleKind />
-    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
-    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
-    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
-    <TypeScriptOutFile />
-    <TypeScriptOutDir />
-    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
-    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
-    <TypeScriptSourceMap>True</TypeScriptSourceMap>
-    <TypeScriptMapRoot />
-    <TypeScriptSourceRoot />
-  </PropertyGroup>
 
 </Project>
