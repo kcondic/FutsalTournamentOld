@@ -47,27 +47,6 @@
     <Compile Remove="Migrations\20180829141143_SeedingGroupData.Designer.cs" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="wwwroot\dist\Web\admin-admin-module.js" />
-    <None Include="wwwroot\dist\Web\admin-admin-module.js.map" />
-    <None Include="wwwroot\dist\Web\groups-groups-module.js" />
-    <None Include="wwwroot\dist\Web\groups-groups-module.js.map" />
-    <None Include="wwwroot\dist\Web\main.js" />
-    <None Include="wwwroot\dist\Web\main.js.map" />
-    <None Include="wwwroot\dist\Web\matches-matches-module~teams-teams-module.js" />
-    <None Include="wwwroot\dist\Web\matches-matches-module~teams-teams-module.js.map" />
-    <None Include="wwwroot\dist\Web\polyfills.js" />
-    <None Include="wwwroot\dist\Web\polyfills.js.map" />
-    <None Include="wwwroot\dist\Web\runtime.js" />
-    <None Include="wwwroot\dist\Web\runtime.js.map" />
-    <None Include="wwwroot\dist\Web\styles.js" />
-    <None Include="wwwroot\dist\Web\styles.js.map" />
-    <None Include="wwwroot\dist\Web\teams-teams-module.js" />
-    <None Include="wwwroot\dist\Web\teams-teams-module.js.map" />
-    <None Include="wwwroot\dist\Web\vendor.js" />
-    <None Include="wwwroot\dist\Web\vendor.js.map" />
-  </ItemGroup>
-
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->
     <Exec Command="node --version" ContinueOnError="true">
