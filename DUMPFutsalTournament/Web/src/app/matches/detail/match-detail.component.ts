@@ -14,16 +14,19 @@ import { MatchTypeTranslationService } from '../../common/match-type-translation
 })
 export class MatchDetailComponent implements OnInit {
 	@Input() match: Match;
-	localMatch: Match;
+	isLocal: boolean = false;
 
-	 constructor(private route: ActivatedRoute,
+	constructor(private route: ActivatedRoute,
 		  private service: MatchService, private closePopup: ClosePopupService,
 			private matchTypeTranslation: MatchTypeTranslationService) { }
 
 	ngOnInit() {
 		 if (!this.match)
 			 this.service.getMatch(this.route.snapshot.params['id'])
-				   .subscribe(matchData => this.localMatch = matchData);
+				  .subscribe(matchData => {
+					 this.match = matchData;
+					 this.isLocal = true;
+				 });
 	}
 
 	getEventTypeClass(matchEventType: number): string {

@@ -24,73 +24,53 @@ namespace DUMPFutsalTournament.Domain.Implementations
                 .ToList();
         }
 
+        public List<GroupWithStandings> GetCalculatedGroupStandings()
+        {
+            return _context.Groups
+                .Include(group => group.Teams)
+                    .ThenInclude(team => team.AwayMatches)
+                .Include(group => group.Teams)
+                    .ThenInclude(team => team.HomeMatches)
+                .ToList()
+                .Select(group =>
+                {
+                    var extendedGroup = new GroupWithStandings()
+                    {
+                        Group = group,
+                        GroupStandings = group.Teams.Select(t =>
+                        {
+                            return new GroupStanding()
+                            {
+                                Team = t,
+                                GoalsScored =
+                                    t.HomeMatches.Sum(m => m.HomeGoals ?? 0) + t.AwayMatches.Sum(m => m.AwayGoals ?? 0),
+                                GoalsConceded =
+                                    t.HomeMatches.Sum(m => m.AwayGoals ?? 0) + t.AwayMatches.Sum(m => m.HomeGoals ?? 0),
+                                MatchesPlayed =
+                                    t.HomeMatches.Count(m => m.AwayGoals.HasValue && m.HomeGoals.HasValue) +
+                                    t.AwayMatches.Count(m => m.AwayGoals.HasValue && m.HomeGoals.HasValue),
+                                Points = t.HomeMatches.Where(m => m.AwayGoals.HasValue && m.HomeGoals.HasValue).Sum(m => m.AwayGoals == m.HomeGoals ? (int)MatchPoints.Draw : m.AwayGoals > m.HomeGoals ? (int)MatchPoints.Lose : (int)MatchPoints.Win) 
+                                + t.AwayMatches.Where(m => m.AwayGoals.HasValue && m.HomeGoals.HasValue).Sum(m => m.AwayGoals == m.HomeGoals ? (int)MatchPoints.Draw : m.AwayGoals > m.HomeGoals ? (int)MatchPoints.Win : (int)MatchPoints.Lose)
+                            };
+                        })
+                        .OrderByDescending(t => t.Points)
+                        .ThenByDescending(t => t.GoalsScored - t.GoalsConceded)
+                        .ThenByDescending(t => t.GoalsScored)
+                        .ThenBy(t => t.Team.Name)
+                        .ToList()
+                    };
+                    return extendedGroup;
+                })
+                .ToList();
+        }
+
         public Group GetSpecificGroup(int groupId)
         {
             return _context.Groups
                 .Include(group => group.Teams)
                 .SingleOrDefault(group => group.GroupId == groupId);
         }
-
-        public List<GroupStanding> GetCalculatedGroupStandings(int groupId)
-        {
-            var calculatedGroupStandings = new List<GroupStanding>();
-            var groupTeams = _context.Teams
-                .Include(team => team.Group)
-                .Where(team => team.Group.GroupId == groupId);
-
-            foreach (var team in groupTeams)
-            {
-                var points = 0;
-                var goalsScored = 0;
-                var goalsConceded = 0;
-                var teamGroupMatches = _context.Matches
-                    .Include(match => match.HomeTeam)
-                    .Include(match => match.AwayTeam)
-                    .Where(match =>
-                            match.MatchType == MatchType.Group &&
-                            (match.HomeTeam.TeamId == team.TeamId || match.AwayTeam.TeamId == team.TeamId));
-
-                foreach (var match in teamGroupMatches)
-                {
-                    if (match.HomeGoals == match.AwayGoals)
-                    {
-                        points += 1;
-                        goalsScored += match.HomeGoals ?? 0;
-                        goalsConceded += match.AwayGoals ?? 0;
-                    }
-                    else if (match.HomeTeam.TeamId == team.TeamId)
-                    {
-                        if (match.HomeGoals > match.AwayGoals)
-                            points += 3;
-                        goalsScored += match.HomeGoals ?? 0;
-                        goalsConceded += match.AwayGoals ?? 0;
-                    }
-                    else
-                    {
-                        if (match.AwayGoals > match.HomeGoals)
-                            points += 3;
-                        goalsScored += match.AwayGoals ?? 0;
-                        goalsConceded += match.HomeGoals ?? 0;
-                    }
-                }
-
-                calculatedGroupStandings.Add(new GroupStanding
-                {
-                    Team = team,
-                    NumberOfGames = teamGroupMatches.Count(),
-                    Points = points,
-                    GoalsScored = goalsScored,
-                    GoalsConceded = goalsConceded
-                });
-            }
-
-            return calculatedGroupStandings
-                .OrderByDescending(standing => standing.Points)
-                .ThenByDescending(standing => standing.GoalsScored - standing.GoalsConceded)
-                .ThenByDescending(standing => standing.GoalsScored)
-                .ThenBy(standing => standing.Team.Name)
-                .ToList();
-        }
+       
 
         public void AddGroup(Group group)
         {

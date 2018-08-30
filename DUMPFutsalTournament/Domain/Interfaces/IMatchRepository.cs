@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using DUMPFutsalTournament.Data.Entities;
+using DUMPFutsalTournament.Domain.HelperClasses;
+using DUMPFutsalTournament.Domain.Implementations;
 
 namespace DUMPFutsalTournament.Domain.Interfaces
 {
@@ -17,5 +19,6 @@ namespace DUMPFutsalTournament.Domain.Interfaces
         void AddMatchEvent(MatchEvent matchEvent);
         void DeleteMatchEvent(int matchEventId);
         void UpdateMatchGoals(Match updatedMatch);
+        List<Match> GetEliminationMatches();
     }
 }

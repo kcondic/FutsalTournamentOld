@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Remove="Migrations\20180824111715_AddUserTable.cs" />
     <Compile Remove="Migrations\20180824111715_AddUserTable.Designer.cs" />
+    <Compile Remove="Migrations\20180829141143_SeedingGroupData.cs" />
+    <Compile Remove="Migrations\20180829141143_SeedingGroupData.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

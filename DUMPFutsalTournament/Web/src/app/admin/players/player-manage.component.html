@@ -2,10 +2,14 @@
 <div class="player-manage">
 	<a class="icon add" [routerLink]="[{ outlets: { popup: ['manage'] } }]"></a>
 	<div class="player" *ngFor="let player of players">
-		{{player.firstName}} {{player.lastName}} {{player.dateOfBirth | date: 'dd.MM.yyyy'}} 
-		<span *ngIf="player.team">
+		{{player.firstName}} {{player.lastName}} <span *ngIf="player.dateOfBirth;else unknowndate">{{player.dateOfBirth | date: 'dd.MM.yyyy'}}</span>
+		<ng-template #unknowndate>nepoznato</ng-template>
+		<span *ngIf="player.team; else noteam">
 			{{player.team.name}}
 		</span>
+		<ng-template #noteam>
+			nema
+		</ng-template>
 		<a class="icon edit" [routerLink]="[{ outlets: { popup: ['manage'] } }]" [queryParams]="{ id: [player.playerId] }"></a>
 		<a class="icon trash" (click)="delete(player.playerId)"></a>
 	</div>

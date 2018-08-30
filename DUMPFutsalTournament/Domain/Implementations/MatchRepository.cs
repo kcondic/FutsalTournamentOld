@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using DUMPFutsalTournament.Data;
 using DUMPFutsalTournament.Data.Entities;
+using DUMPFutsalTournament.Data.Enums;
+using DUMPFutsalTournament.Domain.HelperClasses;
 using DUMPFutsalTournament.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -150,6 +152,15 @@ namespace DUMPFutsalTournament.Domain.Implementations
             matchToUpdate.HomeGoals = updatedMatch.HomeGoals;
             matchToUpdate.AwayGoals = updatedMatch.AwayGoals;
             _context.SaveChanges();
+        }
+
+        public List<Match> GetEliminationMatches()
+        {
+            return _context.Matches
+                .Include(match => match.AwayTeam)
+                .Include(match => match.HomeTeam)
+                .Where(match => match.MatchType != MatchType.Group)
+                .ToList();
         }
     }
 }
