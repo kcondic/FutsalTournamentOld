@@ -2,7 +2,7 @@
 <div class="match-manage">
 	<a class="icon add" [routerLink]="[{ outlets: { popup: ['manage'] } }]"></a>
 	<div class="match" *ngFor="let match of matches">
-		{{match.homeTeam.name}} - {{match.awayTeam.name}}
+		{{match.homeTeam.name}} - {{match.awayTeam.name}} {{match.timeOfMatch | date:'dd.MM.yyyy HH:mm'}}
 		<a class="icon edit" [routerLink]="[{ outlets: { popup: ['manage'] } }]" [queryParams]="{ id: [match.matchId] }"></a>
 		<a class="icon trash" (click)="delete(match.matchId)"></a>
 		<span *ngIf="!match.isActive && match.homeGoals === null && match.awayGoals === null">

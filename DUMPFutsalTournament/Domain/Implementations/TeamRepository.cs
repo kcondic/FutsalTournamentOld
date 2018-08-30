@@ -62,7 +62,13 @@ namespace DUMPFutsalTournament.Domain.Implementations
 
         public void DeleteTeam(int teamId)
         {
-            var teamToDelete = _context.Teams.Find(teamId);
+            var teamToDelete = _context.Teams
+                .Include(team => team.HomeMatches)
+                .Include(team => team.AwayMatches)
+                .FirstOrDefault(team => team.TeamId == teamId);
+
+            if (teamToDelete == null || teamToDelete.HomeMatches.Any() || teamToDelete.AwayMatches.Any())
+                return;
             _context.Entry(teamToDelete).Collection(team => team.Players).Load();
             foreach (var player in teamToDelete.Players)
                 player.Team = null;

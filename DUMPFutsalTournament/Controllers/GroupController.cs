@@ -27,12 +27,6 @@ namespace DUMPFutsalTournament.Controllers
             return Ok(_groupRepository.GetSpecificGroup(groupId));
         }
 
-        [HttpGet("standings/{groupId}")]
-        public IActionResult GetCalculatedGroupStandings(int groupId)
-        {
-            return Ok(_groupRepository.GetCalculatedGroupStandings(groupId));
-        }
-
         [Authorize]
         [HttpPost("add")]
         public IActionResult AddGroup([FromBody]Group group)
@@ -55,6 +49,12 @@ namespace DUMPFutsalTournament.Controllers
         {
             _groupRepository.DeleteGroup(groupId);
             return Ok(null);
+        }
+
+        [HttpGet("standings")]
+        public IActionResult GetAllGroupStandings()
+        {
+            return Ok(_groupRepository.GetCalculatedGroupStandings());
         }
     }
 }

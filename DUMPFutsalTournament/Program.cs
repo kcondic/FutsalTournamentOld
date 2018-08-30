@@ -1,5 +1,12 @@
+﻿using System;
+using System.Collections.Generic;
+using DUMPFutsalTournament.Data;
+using DUMPFutsalTournament.Data.Entities;
+using DUMPFutsalTournament.Data.Enums;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace DUMPFutsalTournament
 {
