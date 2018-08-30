@@ -2,6 +2,7 @@
 	<h1>DUMP malonogometni turnir</h1>
 	<div *ngIf="match;else logo">
 		<h3>U tijeku</h3>
+		<div class="timer">{{minute | number:'2.0-0'}}:{{second | number:'2.0-0'}}</div>
 		<match-detail [match]="match"></match-detail>
 	</div>
 	<ng-template #logo>

@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+a {
+	text-decoration: none;
+}
+
 .icon {
 	display: inline-block;
 	width: 20px;
@@ -6,6 +10,10 @@
 	background-size: cover;
 	background-repeat: no-repeat;
 	cursor: pointer;
+}
+
+.icon.no-pointer {
+	cursor: auto;
 }
 
 .flex {
@@ -62,4 +70,14 @@
 
 .trash {
 	background-image: url('./assets/trash.png');
+}
+/* TODO: Ulipšaj prikaz broja na ikoni */
+.player-event {
+	text-align: center;
+}
+
+.player-event-number {
+	background-color: white;
+	padding: 0 2px;
+	border-radius: 50px;
 }

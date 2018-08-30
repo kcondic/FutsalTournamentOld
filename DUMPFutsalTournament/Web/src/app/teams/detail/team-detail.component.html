@@ -13,8 +13,10 @@
 			Dob: {{getPlayerAge(player.dateOfBirth)}}
 		</span>
 		<span *ngFor="let event of getTotalMatchEvents(player.matchEvents)">
-			<span *ngIf="event.number">
-				<span [ngClass]="[event.nameOfClass | lowercase, 'icon']">{{event.number}}</span>
+			<span [ngClass]="[event.nameOfClass | lowercase, 'icon no-pointer player-event']" *ngIf="event.number">
+				<span class="player-event-number">
+					{{event.number}}
+				</span>
 			</span>
 		</span>
 	</div>

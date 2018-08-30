@@ -79,10 +79,10 @@ namespace DUMPFutsalTournament
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
-
+            app.UseWebSockets();
             app.UseAuthentication();
 
             app.UseMvc(routes =>
