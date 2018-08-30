@@ -1,9 +1,12 @@
-<div>
-	<span class="admin-nav-title">ADMIN PANEL</span>
-	<a routerLink="/admin/active" routerLinkActive="active">Aktivna utakmica</a>
-	<a routerLink="/admin/matches" routerLinkActive="active">Utakmice</a>
-	<a routerLink="/admin/groups" routerLinkActive="active">Skupine</a>
-	<a routerLink="/admin/teams" routerLinkActive="active">Ekipe</a>
-	<a routerLink="/admin/players" routerLinkActive="active">Igrači</a>
-	<a (click)="logout()">Logout</a>
+<div class="nav admin-nav flex center">
+	<a routerLink="/admin/active" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Aktivna utakmica</a>
+	<div class="separator admin-separator">|</div>
+	<a routerLink="/admin/matches" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Utakmice</a>
+	<div class="separator admin-separator">|</div>
+	<a routerLink="/admin/groups" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Skupine</a>
+	<div class="separator admin-separator">|</div>
+	<a routerLink="/admin/teams" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Ekipe</a>
+	<div class="separator admin-separator">|</div>
+	<a routerLink="/admin/players" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Igrači</a>
+	<a class="logout" (click)="logout()">Logout</a>
 </div>

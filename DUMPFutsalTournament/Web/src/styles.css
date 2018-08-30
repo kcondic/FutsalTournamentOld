@@ -1,4 +1,70 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+	font-family: 'Open Sans', "Segoe UI Semibold", "Segoe UI", Arial, Tahoma, sans-serif;
+}
+
+html {
+	height: 100%;
+}
+
+body {
+	height: 100%;
+	margin: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+
+a {
+	cursor: pointer;
+}
+
+.nav a {
+	color: white;
+	text-decoration: none;
+	text-transform: uppercase;
+	opacity: 0.8;
+	padding-bottom: 10px;
+	border-bottom: 3px solid transparent;
+}
+
+.nav a:hover, .nav a.active {
+	opacity: 1;
+	border-bottom: 3px solid white;
+}
+
+.nav {
+	position: fixed;
+	padding-top: 10px;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background-color: #111111;
+	box-sizing: border-box;
+}
+
+.admin-nav {
+	position: fixed;
+	top: 45px;
+	opacity: 0.8;
+}
+
+.margin-top {
+	margin-top: 10px;
+}
+
+.separator {
+	color: white;
+	margin: 0 5%;
+	font-size: 12px;
+	padding-bottom: 10px;
+}
+
+.admin-separator {
+	margin: 0 2%;
+}
+
 .icon {
 	display: inline-block;
 	width: 20px;
@@ -8,12 +74,21 @@
 	cursor: pointer;
 }
 
+.icon.no-pointer {
+	cursor: auto;
+}
+
 .flex {
 	display: flex;
 }
 
 .column {
 	flex-direction: column;
+}
+
+.center {
+	align-items: center;
+	justify-content: center;
 }
 
 .goal {
@@ -62,4 +137,28 @@
 
 .trash {
 	background-image: url('./assets/trash.png');
+}
+
+/* TODO: Ulipšaj prikaz broja na ikoni */
+.player-event {
+	text-align: center;
+}
+
+.player-event-number {
+	background-color: white;
+	padding: 0 2px;
+	border-radius: 50px;
+}
+
+.form input {
+	margin-bottom: 5px;
+}
+
+.match-active h1 {
+	font-weight: bold;
+}
+
+.admin-nav .logout {
+	position: absolute;
+	right: 20px;
 }

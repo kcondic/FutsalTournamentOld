@@ -1,6 +1,11 @@
-<a routerLink="/matches/active" routerLinkActive="active">Početna</a>
-<a routerLink="/matches" routerLinkActive="active">Utakmice</a>
-<a routerLink="/groups" routerLinkActive="active">Skupine</a>
-<a routerLink="/teams" routerLinkActive="active">Ekipe</a>
+<div class="nav flex center">
+	<a routerLink="/matches/active" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Početna</a>
+	<div class="separator">|</div>
+	<a routerLink="/matches" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Utakmice</a>
+	<div class="separator">|</div>
+	<a routerLink="/groups" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Skupine</a>
+	<div class="separator">|</div>
+	<a routerLink="/teams" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Ekipe</a>
+</div>
 <router-outlet></router-outlet>
 <router-outlet name="popup"></router-outlet>

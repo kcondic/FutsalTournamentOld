@@ -22,6 +22,7 @@
     <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.WebSockets" Version="2.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="2.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.2">
@@ -65,6 +66,7 @@
     <None Remove="Web\src\app\auth.service.ts" />
     <None Remove="Web\src\app\close-popup.service.ts" />
     <None Remove="Web\src\app\common\match-type-translation.service.ts" />
+    <None Remove="Web\src\app\common\socket.service.ts" />
     <None Remove="Web\src\app\groups\groups.module.ts" />
     <None Remove="Web\src\app\infrastructure\classes\User.ts" />
     <None Remove="Web\src\app\infrastructure\enums\matcheventtype.ts" />
@@ -107,6 +109,7 @@
     <TypeScriptCompile Include="Web\src\app\common\auth.service.ts" />
     <TypeScriptCompile Include="Web\src\app\common\close-popup.service.ts" />
     <TypeScriptCompile Include="Web\src\app\common\match-type-translation.service.ts" />
+    <TypeScriptCompile Include="Web\src\app\common\socket.service.ts" />
     <TypeScriptCompile Include="Web\src\app\groups\groups.module.ts" />
     <TypeScriptCompile Include="Web\src\app\infrastructure\classes\user.ts" />
     <TypeScriptCompile Include="Web\src\app\infrastructure\enums\matcheventtype.ts" />
