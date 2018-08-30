@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
@@ -10,6 +10,7 @@
 
     <!-- Set this to true if you enable server-side prerendering -->
     <BuildServerSideRenderer>false</BuildServerSideRenderer>
+    <UserSecretsId>72e37773-8f55-47d5-81e8-e9cac409c1cb</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,7 +23,6 @@
     <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.WebSockets" Version="2.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="2.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.2">
@@ -43,93 +43,29 @@
   <ItemGroup>
     <Compile Remove="Migrations\20180824111715_AddUserTable.cs" />
     <Compile Remove="Migrations\20180824111715_AddUserTable.Designer.cs" />
+    <Compile Remove="Migrations\20180829141143_SeedingGroupData.cs" />
+    <Compile Remove="Migrations\20180829141143_SeedingGroupData.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Web\src\app\admin\active-match\active-match-manage.component.ts" />
-    <None Remove="Web\src\app\admin\admin-navigation.component.ts" />
-    <None Remove="Web\src\app\admin\admin-routing.module.ts" />
-    <None Remove="Web\src\app\admin\admin.module.ts" />
-    <None Remove="Web\src\app\admin\admin.service.ts" />
-    <None Remove="Web\src\app\admin\groups\group-manage.component.ts" />
-    <None Remove="Web\src\app\admin\groups\manage\group-add-edit.component.ts" />
-    <None Remove="Web\src\app\admin\matches\manage\match-add-edit.component.ts" />
-    <None Remove="Web\src\app\admin\matches\match-manage.component.ts" />
-    <None Remove="Web\src\app\admin\players\manage\player-add-edit.component.ts" />
-    <None Remove="Web\src\app\admin\players\player-manage.component.ts" />
-    <None Remove="Web\src\app\admin\teams\manage\team-add-edit.component.ts" />
-    <None Remove="Web\src\app\admin\teams\team-manage.component.ts" />
-    <None Remove="Web\src\app\app-routing.module.ts" />
-    <None Remove="Web\src\app\auth-guard.service.ts" />
-    <None Remove="Web\src\app\auth.service.ts" />
-    <None Remove="Web\src\app\close-popup.service.ts" />
-    <None Remove="Web\src\app\common\match-type-translation.service.ts" />
-    <None Remove="Web\src\app\common\socket.service.ts" />
-    <None Remove="Web\src\app\groups\groups.module.ts" />
-    <None Remove="Web\src\app\infrastructure\classes\User.ts" />
-    <None Remove="Web\src\app\infrastructure\enums\matcheventtype.ts" />
-    <None Remove="Web\src\app\infrastructure\enums\matchtype.ts" />
-    <None Remove="Web\src\app\infrastructure\classes\group.ts" />
-    <None Remove="Web\src\app\infrastructure\classes\match.ts" />
-    <None Remove="Web\src\app\infrastructure\classes\matchevent.ts" />
-    <None Remove="Web\src\app\infrastructure\classes\player.ts" />
-    <None Remove="Web\src\app\infrastructure\classes\team.ts" />
-    <None Remove="Web\src\app\login-routing.module.ts" />
-    <None Remove="Web\src\app\login.component.ts" />
-    <None Remove="Web\src\app\matches\match-detail.component.ts" />
-    <None Remove="Web\src\app\matches\match-list.component.ts" />
-    <None Remove="Web\src\app\matches\match.service.ts" />
-    <None Remove="Web\src\app\matches\matches-routing.module.ts" />
-    <None Remove="Web\src\app\matches\matches.module.ts" />
-    <None Remove="Web\src\app\teams\detail\team-detail.component.ts" />
-    <None Remove="Web\src\app\teams\list\team-list.component.ts" />
-    <None Remove="Web\src\app\teams\team.service.ts" />
-    <None Remove="Web\src\app\teams\teams-routing.module.ts" />
-    <None Remove="Web\src\app\teams\teams.module.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <TypeScriptCompile Include="Web\src\app\admin\active-match\active-match-manage.component.ts" />
-    <TypeScriptCompile Include="Web\src\app\admin\groups\group-manage.component.ts" />
-    <TypeScriptCompile Include="Web\src\app\admin\groups\manage\group-add-edit.component.ts" />
-    <TypeScriptCompile Include="Web\src\app\admin\matches\manage\match-add-edit.component.ts" />
-    <TypeScriptCompile Include="Web\src\app\admin\matches\match-manage.component.ts" />
-    <TypeScriptCompile Include="Web\src\app\admin\navigation\admin-navigation.component.ts" />
-    <TypeScriptCompile Include="Web\src\app\admin\admin-routing.module.ts" />
-    <TypeScriptCompile Include="Web\src\app\admin\admin.module.ts" />
-    <TypeScriptCompile Include="Web\src\app\admin\admin.service.ts" />
-    <TypeScriptCompile Include="Web\src\app\admin\players\manage\player-add-edit.component.ts" />
-    <TypeScriptCompile Include="Web\src\app\admin\players\player-manage.component.ts" />
-    <TypeScriptCompile Include="Web\src\app\admin\teams\manage\team-add-edit.component.ts" />
-    <TypeScriptCompile Include="Web\src\app\admin\teams\team-manage.component.ts" />
-    <TypeScriptCompile Include="Web\src\app\app-routing.module.ts" />
-    <TypeScriptCompile Include="Web\src\app\common\auth-guard.service.ts" />
-    <TypeScriptCompile Include="Web\src\app\common\auth.service.ts" />
-    <TypeScriptCompile Include="Web\src\app\common\close-popup.service.ts" />
-    <TypeScriptCompile Include="Web\src\app\common\match-type-translation.service.ts" />
-    <TypeScriptCompile Include="Web\src\app\common\socket.service.ts" />
-    <TypeScriptCompile Include="Web\src\app\groups\groups.module.ts" />
-    <TypeScriptCompile Include="Web\src\app\infrastructure\classes\user.ts" />
-    <TypeScriptCompile Include="Web\src\app\infrastructure\enums\matcheventtype.ts" />
-    <TypeScriptCompile Include="Web\src\app\infrastructure\enums\matchtype.ts" />
-    <TypeScriptCompile Include="Web\src\app\infrastructure\classes\group.ts" />
-    <TypeScriptCompile Include="Web\src\app\infrastructure\classes\match.ts" />
-    <TypeScriptCompile Include="Web\src\app\infrastructure\classes\matchevent.ts" />
-    <TypeScriptCompile Include="Web\src\app\infrastructure\classes\player.ts" />
-    <TypeScriptCompile Include="Web\src\app\infrastructure\classes\team.ts" />
-    <TypeScriptCompile Include="Web\src\app\common\login-routing.module.ts" />
-    <TypeScriptCompile Include="Web\src\app\common\login.component.ts" />
-    <TypeScriptCompile Include="Web\src\app\matches\match.service.ts" />
-    <TypeScriptCompile Include="Web\src\app\matches\matches-routing.module.ts" />
-    <TypeScriptCompile Include="Web\src\app\matches\matches.module.ts" />
-    <TypeScriptCompile Include="Web\src\app\matches\active\match-active.component.ts" />
-    <TypeScriptCompile Include="Web\src\app\matches\detail\match-detail.component.ts" />
-    <TypeScriptCompile Include="Web\src\app\matches\list\match-list.component.ts" />
-    <TypeScriptCompile Include="Web\src\app\teams\detail\team-detail.component.ts" />
-    <TypeScriptCompile Include="Web\src\app\teams\list\team-list.component.ts" />
-    <TypeScriptCompile Include="Web\src\app\teams\teams-routing.module.ts" />
-    <TypeScriptCompile Include="Web\src\app\teams\team.service.ts" />
-    <TypeScriptCompile Include="Web\src\app\teams\teams.module.ts" />
+    <None Include="wwwroot\dist\Web\admin-admin-module.js" />
+    <None Include="wwwroot\dist\Web\admin-admin-module.js.map" />
+    <None Include="wwwroot\dist\Web\groups-groups-module.js" />
+    <None Include="wwwroot\dist\Web\groups-groups-module.js.map" />
+    <None Include="wwwroot\dist\Web\main.js" />
+    <None Include="wwwroot\dist\Web\main.js.map" />
+    <None Include="wwwroot\dist\Web\matches-matches-module~teams-teams-module.js" />
+    <None Include="wwwroot\dist\Web\matches-matches-module~teams-teams-module.js.map" />
+    <None Include="wwwroot\dist\Web\polyfills.js" />
+    <None Include="wwwroot\dist\Web\polyfills.js.map" />
+    <None Include="wwwroot\dist\Web\runtime.js" />
+    <None Include="wwwroot\dist\Web\runtime.js.map" />
+    <None Include="wwwroot\dist\Web\styles.js" />
+    <None Include="wwwroot\dist\Web\styles.js.map" />
+    <None Include="wwwroot\dist\Web\teams-teams-module.js" />
+    <None Include="wwwroot\dist\Web\teams-teams-module.js.map" />
+    <None Include="wwwroot\dist\Web\vendor.js" />
+    <None Include="wwwroot\dist\Web\vendor.js.map" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
@@ -145,7 +81,7 @@
   <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
     <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
-    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build -- --prod" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build --prod" />
     <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:ssr -- --prod" Condition=" '$(BuildServerSideRenderer)' == 'true' " />
 
     <!-- Include the newly-built files in the publish output -->
@@ -158,5 +94,21 @@
       </ResolvedFileToPublish>
     </ItemGroup>
   </Target>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptJSXEmit>Preserve</TypeScriptJSXEmit>
+    <TypeScriptModuleKind />
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+  </PropertyGroup>
 
 </Project>
