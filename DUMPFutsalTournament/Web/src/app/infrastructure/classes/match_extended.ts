@@ -6,5 +6,4 @@ export class MatchExtended {
 	homeGoals: number;
 	matchType: number;
 	timeOfMatch: Date;
-	shouldBeStarted: boolean;
 }

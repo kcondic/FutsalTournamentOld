@@ -35,10 +35,10 @@
 		<div *ngFor="let match of matchStage.matches">
 			{{match.timeOfMatch | date: 'dd.MM.yyyy HH:mm'}} ||||||
 			<span [ngClass]="match.homeGoals > match.awayGoals ? 'bold' : ''">{{match.homeName}}</span>
-			{{match.matchId && match.shouldBeStarted ? match.homeGoals : ''}}
+			{{match.matchId ? match.homeGoals : ''}}
 			-
 			<span [ngClass]="match.homeGoals < match.awayGoals ? 'bold' : ''">{{match.awayName}}</span>
-			{{match.matchId && match.shouldBeStarted ? match.awayGoals : ''}}
+			{{match.matchId ? match.awayGoals : ''}}
 		</div>
 	</div>
 
