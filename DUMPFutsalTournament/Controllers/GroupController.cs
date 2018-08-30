@@ -61,7 +61,7 @@ namespace DUMPFutsalTournament.Controllers
         [HttpGet("standings")]
         public IActionResult GetAllGroupStandings()
         {
-            return Ok(_groupRepository.GetExtendedGroups());
+            return Ok(_groupRepository.GetAllGroupsWithAdditionalData());
         }
     }
 }

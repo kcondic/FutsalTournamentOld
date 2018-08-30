@@ -34,32 +34,35 @@ namespace DUMPFutsalTournament.Domain.Implementations
                 .ToList()
                 .Select(group =>
                 {
-                    var g = new ExtendedGroup();
-                    g.Name = group.Name;
-                    g.GroupId = group.GroupId;
-
-                    g.Teams = group.Teams.Select(t =>
+                    var g = new ExtendedGroup
                     {
-                        return new GroupTeam()
+                        Name = group.Name,
+                        GroupId = group.GroupId,
+                        Size = group.Size,
+                        Teams = group.Teams.Select(t =>
                         {
-                            TeamId = t.TeamId,
-                            TeamName = t.Name,
-                            GoalsScored = t.HomeMatches.Sum(m => m.HomeGoals ?? 0) + t.AwayMatches.Sum(m => m.AwayGoals ?? 0),
-                            GoalsTaken = t.HomeMatches.Sum(m => m.AwayGoals ?? 0) + t.AwayMatches.Sum(m => m.HomeGoals ?? 0),
-                            MatchesPlayed = t.HomeMatches.Count(m => m.AwayGoals.HasValue && m.HomeGoals.HasValue) + t.AwayMatches.Count(m => m.AwayGoals.HasValue && m.HomeGoals.HasValue),
-                            Points = t.HomeMatches.Where(m => m.AwayGoals.HasValue && m.HomeGoals.HasValue).Sum(m =>
+                            return new GroupTeam()
                             {
-                                if (m.AwayGoals == m.HomeGoals) return 1;
-                                else if (m.AwayGoals > m.HomeGoals) return 0;
-                                else return 3;
-                            }) + t.AwayMatches.Where(m => m.AwayGoals.HasValue && m.HomeGoals.HasValue).Sum(m =>
-                            {
-                                if (m.AwayGoals == m.HomeGoals) return 1;
-                                else if (m.AwayGoals > m.HomeGoals) return 3;
-                                else return 0;
-                            })
-                        };
-                    }).ToList();
+                                TeamId = t.TeamId,
+                                TeamName = t.Name,
+                                GoalsScored =
+                                    t.HomeMatches.Sum(m => m.HomeGoals ?? 0) + t.AwayMatches.Sum(m => m.AwayGoals ?? 0),
+                                GoalsTaken =
+                                    t.HomeMatches.Sum(m => m.AwayGoals ?? 0) + t.AwayMatches.Sum(m => m.HomeGoals ?? 0),
+                                MatchesPlayed =
+                                    t.HomeMatches.Count(m => m.AwayGoals.HasValue && m.HomeGoals.HasValue) +
+                                    t.AwayMatches.Count(m => m.AwayGoals.HasValue && m.HomeGoals.HasValue),
+                                Points = t.HomeMatches.Where(m => m.AwayGoals.HasValue && m.HomeGoals.HasValue).Sum(m => m.AwayGoals == m.HomeGoals ? (int)MatchPoints.Draw : m.AwayGoals > m.HomeGoals ? (int)MatchPoints.Lose : (int)MatchPoints.Win) 
+                                + t.AwayMatches.Where(m => m.AwayGoals.HasValue && m.HomeGoals.HasValue).Sum(m => m.AwayGoals == m.HomeGoals ? (int)MatchPoints.Draw : m.AwayGoals > m.HomeGoals ? (int)MatchPoints.Win : (int)MatchPoints.Lose)
+                            };
+                        })
+                        .OrderByDescending(t => t.Points)
+                        .ThenByDescending(t => t.GoalsScored - t.GoalsTaken)
+                        .ThenByDescending(t => t.GoalsScored)
+                        .ThenBy(t => t.TeamName)
+                        .ToList()
+                    };
+
                     return g;
                 })
                 .ToList();
@@ -188,6 +191,7 @@ namespace DUMPFutsalTournament.Domain.Implementations
     {
         public int GroupId { get; set; }
         public string Name { get; set; }
+        public int Size { get; set; }
 
         public List<GroupTeam> Teams { get; set; }
     }

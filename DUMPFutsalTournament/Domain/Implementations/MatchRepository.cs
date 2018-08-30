@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DUMPFutsalTournament.Data;
 using DUMPFutsalTournament.Data.Entities;
+using DUMPFutsalTournament.Data.Enums;
 using DUMPFutsalTournament.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -151,5 +152,61 @@ namespace DUMPFutsalTournament.Domain.Implementations
             matchToUpdate.AwayGoals = updatedMatch.AwayGoals;
             _context.SaveChanges();
         }
+
+        public List<MatchExtended> GetMatchesForBrackets()
+        {
+            var matches = _context.Matches
+                .Include(match => match.AwayTeam)
+                .Include(match => match.HomeTeam)
+                .Where(match => match.MatchType == MatchType.Final || match.MatchType == MatchType.ThirdPlace ||
+                                match.MatchType == MatchType.SemiFinal || match.MatchType == MatchType.QuarterFinal)
+                .ToList()
+                .Select(match => new MatchExtended()
+                {
+                    MatchType = match.MatchType,
+                    AwayName = match.AwayTeam.Name,
+                    HomeName = match.HomeTeam.Name,
+                    AwayGoals = match.AwayGoals ?? 0,
+                    HomeGoals = match.HomeGoals ?? 0,
+                    MatchId = match.MatchId,
+                    TimeOfMatch = match.TimeOfMatch,
+                    ShouldBeStarted = DateTime.Now > match.TimeOfMatch
+                }).ToList();
+
+            var placeholderMatches = GetMatches();
+            var matchExtendeds = matches.Concat(placeholderMatches.OrderByDescending(m => m.TimeOfMatch).Take(placeholderMatches.Count - matches.Count)).OrderByDescending(m => m.TimeOfMatch).ToList();
+            return matchExtendeds;
+        }
+
+        private List<MatchExtended> GetMatches()
+        {
+            var matchesThatShouldBePlayed = new List<MatchExtended>() {
+                new MatchExtended() { HomeName = "1. čevrtfinalist", AwayName = "2. četvrtfinalist", MatchType = MatchType.QuarterFinal, TimeOfMatch = new DateTime(2018, 09, 07, 21, 15, 00), MatchId = null, ShouldBeStarted = false},
+                new MatchExtended() { HomeName = "3. čevrtfinalist", AwayName = "4. četvrtfinalist", MatchType = MatchType.QuarterFinal, TimeOfMatch = new DateTime(2018, 09, 07, 22, 15, 00), MatchId = null, ShouldBeStarted = false},
+                new MatchExtended() { HomeName = "5. čevrtfinalist", AwayName = "6. četvrtfinalist", MatchType = MatchType.QuarterFinal, TimeOfMatch = new DateTime(2018, 09, 08, 19, 15, 00), MatchId = null, ShouldBeStarted = false},
+                new MatchExtended() { HomeName = "7. čevrtfinalist", AwayName = "8. četvrtfinalist", MatchType = MatchType.QuarterFinal, TimeOfMatch = new DateTime(2018, 09, 08, 20, 15, 00), MatchId = null, ShouldBeStarted = false},
+                new MatchExtended() { HomeName = "1. polufinalist", AwayName = "2. polufinalist", MatchType = MatchType.SemiFinal, TimeOfMatch = new DateTime(2018, 09, 08, 21, 15, 00), MatchId = null, ShouldBeStarted = false},
+                new MatchExtended() { HomeName = "3. polufinalist", AwayName = "4. polufinalist", MatchType = MatchType.SemiFinal, TimeOfMatch = new DateTime(2018, 09, 09, 19, 15, 00), MatchId = null, ShouldBeStarted = false},
+                new MatchExtended() { HomeName = "1. gubitnik polufinala", AwayName = "2. gubitnik polufinala", MatchType = MatchType.ThirdPlace, TimeOfMatch = new DateTime(2018, 09, 09, 21, 15, 00), MatchId = null, ShouldBeStarted = false},
+                new MatchExtended() { HomeName = "1. finalist", AwayName = "2. finalist", MatchType = MatchType.Final, TimeOfMatch = new DateTime(2018, 09, 09, 22, 15, 00), MatchId = null, ShouldBeStarted = false}
+            };
+            return matchesThatShouldBePlayed;
+        }
+    }
+
+    public class MatchExtended
+    {
+        public int? MatchId { get; set; }
+        public string HomeName { get; set; }
+        public string AwayName { get; set; }
+
+        public int HomeGoals { get; set; }
+        public int AwayGoals { get; set; }
+
+        public MatchType MatchType { get; set; }
+
+        public bool ShouldBeStarted { get; set; }
+
+        public DateTime TimeOfMatch { get; set; }
     }
 }

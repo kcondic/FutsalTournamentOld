@@ -13,6 +13,6 @@ namespace DUMPFutsalTournament.Domain.Interfaces
         void AddGroup(Group group);
         void EditGroup(Group editedGroup);
         void DeleteGroup(int groupId);
-        List<ExtendedGroup> GetExtendedGroups();
+        List<ExtendedGroup> GetAllGroupsWithAdditionalData();
     }
 }
