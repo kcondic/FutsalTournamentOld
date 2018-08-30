@@ -9,10 +9,9 @@ namespace DUMPFutsalTournament.Domain.Interfaces
     {
         List<Group> GetAllGroups();
         Group GetSpecificGroup(int groupId);
-        List<GroupStanding> GetCalculatedGroupStandings(int groupId);
+        List<ExtendedGroup> GetCalculatedGroupStandings();
         void AddGroup(Group group);
         void EditGroup(Group editedGroup);
         void DeleteGroup(int groupId);
-        List<ExtendedGroup> GetAllGroupsWithAdditionalData();
     }
 }

@@ -1,5 +1,5 @@
 import { MatchExtended } from './match_extended';
-import { MatchType } from './match_type';
+import { MatchType } from '../enums/matchtype';
 
 export class MatchStage {
 	constructor(title: string, matchType: MatchType, matches: MatchExtended[]){

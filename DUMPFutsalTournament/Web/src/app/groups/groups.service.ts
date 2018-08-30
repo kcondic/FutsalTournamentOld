@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { GroupExtended } from './classes/group_extended';
-import { MatchExtended } from './classes/match_extended';
+import { GroupExtended } from '../infrastructure/classes/group_extended';
+import { MatchExtended } from '../infrastructure/classes/match_extended';
 
 @Injectable()
 export class GroupsService {

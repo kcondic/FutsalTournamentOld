@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { GroupsService } from './groups.service'
-import { GroupExtended } from './classes/group_extended';
-import { TeamPosition } from './classes/team_position';
+import { GroupExtended } from '../infrastructure/classes/group_extended';
+import { TeamPosition } from '../infrastructure/classes/team_position';
 import { GroupedObservable } from 'rxjs';
-import { MatchExtended } from './classes/match_extended';
-import { MatchType } from './classes/match_type';
-import { MatchStage } from './classes/match_stage';
+import { MatchExtended } from '../infrastructure/classes/match_extended';
+import { MatchType } from '../infrastructure/enums/matchtype';
+import { MatchStage } from '../infrastructure/classes/match_stage';
 
 @Component({
 	templateUrl: './groups.component.html'

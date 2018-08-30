@@ -24,7 +24,7 @@ namespace DUMPFutsalTournament.Domain.Implementations
                 .ToList();
         }
 
-        public List<ExtendedGroup> GetAllGroupsWithAdditionalData()
+        public List<ExtendedGroup> GetCalculatedGroupStandings()
         {
             return _context.Groups
                 .Include(group => group.Teams)
@@ -34,7 +34,7 @@ namespace DUMPFutsalTournament.Domain.Implementations
                 .ToList()
                 .Select(group =>
                 {
-                    var g = new ExtendedGroup
+                    var extendedGroup = new ExtendedGroup
                     {
                         Name = group.Name,
                         GroupId = group.GroupId,
@@ -62,8 +62,7 @@ namespace DUMPFutsalTournament.Domain.Implementations
                         .ThenBy(t => t.TeamName)
                         .ToList()
                     };
-
-                    return g;
+                    return extendedGroup;
                 })
                 .ToList();
         }
@@ -74,67 +73,7 @@ namespace DUMPFutsalTournament.Domain.Implementations
                 .Include(group => group.Teams)
                 .SingleOrDefault(group => group.GroupId == groupId);
         }
-
-        public List<GroupStanding> GetCalculatedGroupStandings(int groupId)
-        {
-            var calculatedGroupStandings = new List<GroupStanding>();
-            var groupTeams = _context.Teams
-                .Include(team => team.Group)
-                .Where(team => team.Group.GroupId == groupId);
-
-            foreach (var team in groupTeams)
-            {
-                var points = 0;
-                var goalsScored = 0;
-                var goalsConceded = 0;
-                var teamGroupMatches = _context.Matches
-                    .Include(match => match.HomeTeam)
-                    .Include(match => match.AwayTeam)
-                    .Where(match =>
-                            match.MatchType == MatchType.Group &&
-                            (match.HomeTeam.TeamId == team.TeamId || match.AwayTeam.TeamId == team.TeamId));
-
-                foreach (var match in teamGroupMatches)
-                {
-                    if (match.HomeGoals == match.AwayGoals)
-                    {
-                        points += 1;
-                        goalsScored += match.HomeGoals ?? 0;
-                        goalsConceded += match.AwayGoals ?? 0;
-                    }
-                    else if (match.HomeTeam.TeamId == team.TeamId)
-                    {
-                        if (match.HomeGoals > match.AwayGoals)
-                            points += 3;
-                        goalsScored += match.HomeGoals ?? 0;
-                        goalsConceded += match.AwayGoals ?? 0;
-                    }
-                    else
-                    {
-                        if (match.AwayGoals > match.HomeGoals)
-                            points += 3;
-                        goalsScored += match.AwayGoals ?? 0;
-                        goalsConceded += match.HomeGoals ?? 0;
-                    }
-                }
-
-                calculatedGroupStandings.Add(new GroupStanding
-                {
-                    Team = team,
-                    NumberOfGames = teamGroupMatches.Count(),
-                    Points = points,
-                    GoalsScored = goalsScored,
-                    GoalsConceded = goalsConceded
-                });
-            }
-
-            return calculatedGroupStandings
-                .OrderByDescending(standing => standing.Points)
-                .ThenByDescending(standing => standing.GoalsScored - standing.GoalsConceded)
-                .ThenByDescending(standing => standing.GoalsScored)
-                .ThenBy(standing => standing.Team.Name)
-                .ToList();
-        }
+       
 
         public void AddGroup(Group group)
         {
@@ -174,25 +113,5 @@ namespace DUMPFutsalTournament.Domain.Implementations
             _context.Groups.Remove(groupToDelete);
             _context.SaveChanges();
         }
-    }
-
-    public class GroupTeam
-    {
-        public int TeamId { get; set; }
-        public string TeamName { get; set; }
-
-        public int MatchesPlayed { get; set; }
-        public int GoalsScored { get; set; }
-        public int GoalsTaken { get; set; }
-        public int Points { get; set; }
-    }
-
-    public class ExtendedGroup
-    {
-        public int GroupId { get; set; }
-        public string Name { get; set; }
-        public int Size { get; set; }
-
-        public List<GroupTeam> Teams { get; set; }
     }
 }
