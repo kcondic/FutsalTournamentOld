@@ -6,9 +6,9 @@ import { AuthService } from './auth.service';
 @Component({
 	template: `
     <h2>LOGIN</h2>
-    <form (ngSubmit)="login()">
-	    <input type="text" [(ngModel)]="username" name="username" />
-	    <input type="password" [(ngModel)]="password" name="password" />
+    <form class="form flex column" (ngSubmit)="login()">
+	    <input type="text" placeholder="Korisničko ime" [(ngModel)]="username" name="username" />
+	    <input type="password" placeholder="Lozinka" [(ngModel)]="password" name="password" />
 	    <button type="submit">Login</button>
     </form>`
 })
