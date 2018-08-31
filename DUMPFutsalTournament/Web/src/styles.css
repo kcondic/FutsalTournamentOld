@@ -516,6 +516,20 @@ a:hover {
 	border-right: 1px solid lightgray;
 }
 
+.team {
+	border-radius: 5px;
+}
+
+.team-name {
+	font-weight: 500;
+	margin-bottom: 10px;
+}
+
+.team-name,
+.team-phase {
+	display: inline-block;
+}
+
 .team-list a {
 	color: black;
 }
@@ -602,5 +616,8 @@ a:hover {
 	}
 	.dump-logo + h1 {
 		font-size: 24px;
+	}
+	.top-scorer {
+		padding: 0 20px;
 	}
 }
