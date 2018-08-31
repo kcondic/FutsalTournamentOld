@@ -76,7 +76,9 @@ export class ActiveMatchManageComponent implements OnInit {
 		this.newEventType = type;
 	}
 
-	addMatchEvent(player: Player, isForHomeTeam: boolean) {
+	 addMatchEvent(player: Player, isForHomeTeam: boolean) {
+		if (isForHomeTeam && this.newEventType == MatchEventType.OwnGoal)
+			   isForHomeTeam = false;
 		const newMatchEvent = new MatchEvent(Object.assign({}, this.activeMatch), player,
 							this.newEventType, isForHomeTeam, this.minutes + 1);
 		newMatchEvent.match.homeTeam = null;
