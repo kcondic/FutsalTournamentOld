@@ -8,11 +8,11 @@
 				Status: {{getLastMatchTypeTranslation()}}
 			</div>
 			<div class="team-players">
-				<div *ngFor="let player of team.players">
-					<div class="player flex">
-						<span class="player-name-age">
-							{{player.firstName}} {{player.lastName}}, dob: {{getPlayerAge(player.dateOfBirth)}}
-						</span>
+				<div class="player flex column" *ngFor="let player of team.players">
+					<span class="player-name-age">
+						{{player.firstName}} {{player.lastName}}, dob: {{getPlayerAge(player.dateOfBirth)}}
+					</span>
+					<span class="player-events">
 						<span class="player-event-count" *ngFor="let event of getTotalMatchEvents(player.matchEvents)">
 							<span [ngClass]="[event.nameOfClass | lowercase, 'icon no-pointer player-event']" *ngIf="event.number">
 								<span class="player-event-number">
@@ -20,7 +20,7 @@
 								</span>
 							</span>
 						</span>
-					</div>
+					</span>
 				</div>
 			</div>
 			<div class="team-matches" *ngFor="let match of teamMatches">

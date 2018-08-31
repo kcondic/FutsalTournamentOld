@@ -160,14 +160,15 @@ a:hover {
 .player-event {
 	position: relative;
 	margin-bottom: 5px;
+	margin-right: 10px;
 }
 
 .player-event-number {
 	position: absolute;
-	right: 10px;
-	background-color: white;
-	padding: 0 2px;
-	border-radius: 50px;
+	right: -6px;
+	top: -8px;
+	background-color: lightgoldenrodyellow;
+	padding: 0 1px;
 }
 
 .form input {
@@ -400,4 +401,22 @@ a:hover {
 
 .team-players .player {
 	margin-right: auto;
+	position: relative;
+}
+
+.team-players .player .player-event-count {
+	margin-top: 5px;
+}
+
+.team-players .player .player-event-count .player-events {
+	position: absolute;
+	bottom: -5px;
+}
+
+.player-events {
+	text-align: right;
+}
+
+.team-matches {
+	width: 100%;
 }
