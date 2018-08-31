@@ -1,6 +1,6 @@
 <div *ngIf="hasLoaded; else ldsring">
 	<div class="popup">
-		<div class="popup-content flex column center">
+		<div class="popup-content flex column">
 			<form (ngSubmit)="save()" class="add-edit flex column center">
 				<span class="player-first-name">Ime: <input type="text" [(ngModel)]="player.firstName" name="first-name"/></span>
 				<span class="player-last-name">Prezime: <input type="text" [(ngModel)]="player.lastName" name="last-name"/></span>

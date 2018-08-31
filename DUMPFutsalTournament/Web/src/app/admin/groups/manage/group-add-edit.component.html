@@ -1,6 +1,6 @@
 <div *ngIf="hasLoaded; else ldsring">
 	<div class="popup">
-		<div class="popup-content flex column center">
+		<div class="popup-content flex column">
 			<form (ngSubmit)="save()" class="add-edit">
 				<div class="group-name">Ime: <input type="text" [(ngModel)]="group.name" name="group-name"/></div>
 				<div class="group-size">Veličina: <input type="number" [(ngModel)]="group.size" name="group-size"/></div>
