@@ -2,6 +2,8 @@
 using System.Linq;
 using DUMPFutsalTournament.Data;
 using DUMPFutsalTournament.Data.Entities;
+using DUMPFutsalTournament.Data.Enums;
+using DUMPFutsalTournament.Domain.HelperClasses;
 using DUMPFutsalTournament.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -72,6 +74,21 @@ namespace DUMPFutsalTournament.Domain.Implementations
         {
             var team = _context.Teams.AsNoTracking().Include(t => t.Players).Single(t => t.TeamId == teamId);     
             return team.Players.Count;
+        }
+
+        public List<TopScorer> GetTopScorers()
+        {
+            return _context.Players.Include(player => player.MatchEvents)
+                .Select(player => new TopScorer
+                    {
+                        Player = player,
+                        Goals = player.MatchEvents.Count(ev =>
+                            ev.EventType == MatchEventType.Goal || ev.EventType == MatchEventType.PenaltyGoal)
+                    })
+                .ToList()
+                .OrderByDescending(pl => pl.Goals)
+                .Take(10)
+                .ToList();
         }
     }
 }

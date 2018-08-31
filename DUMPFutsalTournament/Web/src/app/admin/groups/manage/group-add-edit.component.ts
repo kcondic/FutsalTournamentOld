@@ -13,6 +13,7 @@ export class GroupAddEditComponent implements OnInit {
 	isEdit: boolean = false;
 	group: Group;
 	teams: Team[];
+	hasLoaded: boolean = false;
 
 	constructor(private route: ActivatedRoute, private service: AdminService,
 		private closePopup: ClosePopupService) { }
@@ -21,12 +22,16 @@ export class GroupAddEditComponent implements OnInit {
 		this.route.queryParams.subscribe(params => this.groupId = params['id']);
 		if (this.groupId) {
 			this.service.getGroup(this.groupId)
-				.subscribe(groupData => this.group = groupData);
+				 .subscribe(groupData => {
+					this.group = groupData;
+					this.hasLoaded = true;
+				});
 			this.isEdit = true;
 		}
 		else {
 			this.group = new Group();
 			this.group.teams = [];
+			this.hasLoaded = true;
 		}
 		this.service.getAllGrouplessTeams().subscribe(teamData => this.teams = teamData);
 	}

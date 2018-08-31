@@ -12,13 +12,15 @@ export class MatchActiveComponent implements OnInit {
 	minute: number = 0;
 	second: number = 0;
 	source = interval(1000);
+	hasLoaded: boolean = false;
 
 	constructor(private service: MatchService) { }
 
 	 ngOnInit() {
 		this.getActiveMatch();
 		this.source.subscribe(() => {
-		  this.getActiveMatch();
+			this.getActiveMatch();
+			this.hasLoaded = true;  
 		});
 	 }
 

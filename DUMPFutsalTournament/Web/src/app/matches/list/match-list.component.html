@@ -1,16 +1,24 @@
-<div class="match-list">
-	<div class="match" *ngFor="let match of matches">
-		<a [routerLink]="[{ outlets: { popup: [match.matchId] } }]">
-			<span class="match-title">
-				{{match.homeTeam.name}} - {{match.awayTeam.name}}
-			</span>
-			<span class="match-time">
-				{{match.timeOfMatch | date: 'dd.MM.yyyy HH:mm'}}
-			</span>
-			<span *ngIf="match.timeOfMatch < now">
-				{{match.homeGoals}} : {{match.awayGoals}}
-			</span>
-			<span *ngIf="match.isActive">U tijeku</span>
-		</a>
+<div class="match-list" *ngIf="hasLoaded; else ldsring">
+	<div *ngFor="let date of getMatchDates()">
+		<span class="matches-date margin-bottom">{{date}}</span>
+		<div class="match-container flex">
+			<div class="element" *ngFor="let match of getMatchesForDate(date)">
+				<a [routerLink]="[{ outlets: { popup: [match.matchId] } }]">
+					<div class="match-goals" *ngIf="match.homeGoals !== null && match.awayGoals !== null">
+						{{match.homeGoals}} : {{match.awayGoals}}
+					</div>
+					<div class="match-teams">
+						{{match.homeTeam.name}} - {{match.awayTeam.name}}
+					</div>
+					<div class="match-type">
+						{{getMatchTypeTranslation(match.matchType)}}, {{match.timeOfMatch | date: 'HH:mm'}}
+					</div>
+					<span class="match-in-progress" *ngIf="match.isActive">U tijeku</span>
+				</a>
+			</div>
+		</div>
 	</div>
 </div>
+<ng-template #ldsring>
+	<div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+</ng-template>

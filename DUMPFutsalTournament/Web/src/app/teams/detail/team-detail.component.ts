@@ -15,6 +15,7 @@ export class TeamDetailComponent implements OnInit {
 	teamId: number;
 	team: Team;
 	teamMatches: Match[];
+	hasLoaded: boolean = false;
 
 	 constructor(private route: ActivatedRoute, private service: TeamService, private closePopup: ClosePopupService,
 		 private matchTypeTranslation: MatchTypeTranslationService) { }
@@ -22,9 +23,14 @@ export class TeamDetailComponent implements OnInit {
 	ngOnInit() {
 		this.teamId = this.route.snapshot.params['id'];
 		this.service.getTeam(this.teamId)
-			 .subscribe(teamData => this.team = teamData);
-		 this.service.getTeamMatches(this.teamId)
-			 .subscribe(matchData => this.teamMatches = matchData);
+			 .subscribe(teamData => {
+				this.team = teamData;
+				this.service.getTeamMatches(this.teamId)
+					 .subscribe(matchData => {
+						this.teamMatches = matchData;
+						this.hasLoaded = true;
+					});
+			});
 	}
 
 	getPlayerAge(dateOfBirth: Date): any {

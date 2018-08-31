@@ -1,4 +1,4 @@
-<div *ngIf="player">
+<div *ngIf="hasLoaded; else ldsring">
 	<form (ngSubmit)="save()" class="add-edit">
 		<span class="player-first-name">Ime: <input type="text" [(ngModel)]="player.firstName" name="first-name"/></span>
 		<span class="player-last-name">Prezime: <input type="text" [(ngModel)]="player.lastName" name="last-name"/></span>
@@ -11,3 +11,6 @@
 		<button type="submit">Spremi</button>
 	</form>
 </div>
+<ng-template #ldsring>
+	<div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+</ng-template>

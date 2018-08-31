@@ -1,4 +1,4 @@
-<div *ngIf="group">
+<div *ngIf="hasLoaded; else ldsring">
 	<form (ngSubmit)="save()" class="add-edit">
 		<span class="group-name">Ime: <input type="text" [(ngModel)]="group.name" name="group-name"/></span>
 		<span class="group-size">Veličina: <input type="number" [(ngModel)]="group.size" name="group-size"/></span>
@@ -16,3 +16,6 @@
 		<button type="submit">Spremi</button>
 	</form>
 </div>
+<ng-template #ldsring>
+	<div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+</ng-template>

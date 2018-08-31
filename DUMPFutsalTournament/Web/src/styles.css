@@ -8,24 +8,33 @@ html {
 }
 
 body {
-	height: 100%;
+	min-height: 100%;
 	margin: 0;
 	display: flex;
-	align-items: center;
 	justify-content: center;
-	text-align: center;
+}
+
+span {
+	display: inline-block;
+}
+
+table {
+	border-collapse: collapse;
 }
 
 a {
 	text-decoration: none;
 	cursor: pointer;
+	color: white;
+	opacity: 0.8;
+}
+
+a:hover {
+	opacity: 1;
 }
 
 .nav a {
-	color: white;
-	text-decoration: none;
 	text-transform: uppercase;
-	opacity: 0.8;
 	padding-bottom: 10px;
 	border-bottom: 3px solid transparent;
 }
@@ -53,6 +62,10 @@ a {
 
 .margin-top {
 	margin-top: 10px;
+}
+
+.margin-bottom {
+	margin-bottom: 10px;
 }
 
 .separator {
@@ -90,6 +103,10 @@ a {
 .center {
 	align-items: center;
 	justify-content: center;
+}
+
+.left {
+	margin-left: auto;
 }
 
 .goal {
@@ -140,15 +157,18 @@ a {
 	background-image: url('./assets/trash.png');
 }
 
-/* TODO: Ulipšaj prikaz broja na ikoni */
 .player-event {
-	text-align: center;
+	position: relative;
+	margin-bottom: 5px;
+	margin-right: 10px;
 }
 
 .player-event-number {
-	background-color: white;
-	padding: 0 2px;
-	border-radius: 50px;
+	position: absolute;
+	right: -6px;
+	top: -8px;
+	background-color: lightgoldenrodyellow;
+	padding: 0 1px;
 }
 
 .form input {
@@ -162,4 +182,241 @@ a {
 .admin-nav .logout {
 	position: absolute;
 	right: 20px;
+}
+
+.lds-ring {
+	display: inline-block;
+	position: absolute;
+
+	width: 64px;
+	height: 64px;
+}
+
+.lds-ring div {
+	box-sizing: border-box;
+	display: block;
+	position: absolute;
+	width: 51px;
+	height: 51px;
+	margin: 6px;
+	border: 6px solid #fff;
+	border-radius: 50%;
+	animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+	border-color: #000 transparent transparent transparent;
+}
+
+.lds-ring div:nth-child(1) {
+	animation-delay: -0.45s;
+}
+
+.lds-ring div:nth-child(2) {
+	animation-delay: -0.3s;
+}
+
+.lds-ring div:nth-child(3) {
+	animation-delay: -0.15s;
+}
+
+@keyframes lds-ring {
+	0% {
+		transform: rotate(0);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.main {
+	margin-top: 100px;
+}
+
+.title {
+	font-size: 30px;
+}
+
+.element {
+	margin-bottom: 20px;
+	border-bottom: 1px solid lightgray;
+	border-right: 1px solid lightgray;
+	padding-left: 20px;
+	padding-bottom: 20px;
+}
+
+.element a {
+	color: black;
+}
+
+.match-list .matches-date {
+	font-size: 24px;
+}
+
+.match-container {
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.match-container .element {
+	flex-basis: 20%;
+}
+
+.match-container .match-goals {
+	font-size: 24px;
+}
+
+.popup {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.4);
+}
+
+.popup-content {
+	font-size: 18px;
+	padding: 20px 40px;
+	background-color: white;
+	border-radius: 5px;
+}
+
+.home-event, .away-event {
+	align-items: center;
+	margin-bottom: 3px;
+}
+
+.home-event {
+	margin-right: auto;
+}
+
+.home-event .event-player {
+	margin-left: 2px;
+}
+
+.home-event .event-minute {
+	margin-left: 2px;
+}
+
+.away-event {
+	flex-direction: row-reverse;
+	margin-left: auto;
+}
+
+.away-event .event-player {
+	margin-right: 2px;
+}
+
+.away-event .event-minute {
+	margin-right: 2px;
+}
+
+.close-button {
+	font-size: 14px;
+	cursor: pointer;
+	margin-top: 10px;
+	margin-left: auto;
+	background-color: white;
+	border: none;
+	border-radius: 5px;
+	color: lightcoral;
+	padding: 5px;
+}
+
+.close-button:hover {
+	background-color: #e8e8ee;
+}
+
+.match-score {
+	font-size: 24px;
+}
+
+.match-active {
+	text-align: center;
+	margin-top: 60%;
+	font-size: 24px;
+}
+
+.match-active .match-score {
+	font-size: 40px;
+}
+
+.match-active .home-event,
+.match-active .away-event {
+	font-size: 18px;
+}
+
+.groups-and-elimination {
+	text-align: center;
+}
+
+.group-chooser {
+	flex-wrap: nowrap;
+	display: inline-block;
+	width: 50%;
+}
+
+.group-chooser a {
+	color: black;
+	background-color: #e8e8ee;
+	padding: 2px 5px;
+	border-radius: 5px;
+}
+
+.table-team-name {
+	width: 150px;
+}
+
+.table-header {
+	border-bottom: 1px solid #e8e8ee;
+}
+
+.top-scorer {
+	text-align: left;
+	margin-top: 30px;
+}
+
+.team-list {
+	flex-wrap: wrap;
+}
+
+.team-list .team {
+	flex-basis: 30%;
+	padding: 50px;
+	margin-bottom: 20px;
+	border-bottom: 1px solid lightgray;
+	border-right: 1px solid lightgray;
+}
+
+.team-list a {
+	color: black;
+}
+
+.team-players,
+.team-matches {
+	margin-top: 20px;
+}
+
+.team-players .player {
+	margin-right: auto;
+	position: relative;
+}
+
+.team-players .player .player-event-count {
+	margin-top: 5px;
+}
+
+.team-players .player .player-event-count .player-events {
+	position: absolute;
+	bottom: -5px;
+}
+
+.player-events {
+	text-align: right;
+}
+
+.team-matches {
+	width: 100%;
 }

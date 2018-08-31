@@ -67,6 +67,7 @@
     <None Remove="Web\src\app\close-popup.service.ts" />
     <None Remove="Web\src\app\common\match-type-translation.service.ts" />
     <None Remove="Web\src\app\groups\groups.module.ts" />
+    <None Remove="Web\src\app\infrastructure\classes\topscorer.ts" />
     <None Remove="Web\src\app\infrastructure\classes\User.ts" />
     <None Remove="Web\src\app\infrastructure\enums\matcheventtype.ts" />
     <None Remove="Web\src\app\infrastructure\enums\matchtype.ts" />
@@ -109,6 +110,7 @@
     <TypeScriptCompile Include="Web\src\app\common\close-popup.service.ts" />
     <TypeScriptCompile Include="Web\src\app\common\match-type-translation.service.ts" />
     <TypeScriptCompile Include="Web\src\app\groups\groups.module.ts" />
+    <TypeScriptCompile Include="Web\src\app\infrastructure\classes\topscorer.ts" />
     <TypeScriptCompile Include="Web\src\app\infrastructure\classes\user.ts" />
     <TypeScriptCompile Include="Web\src\app\infrastructure\enums\matcheventtype.ts" />
     <TypeScriptCompile Include="Web\src\app\infrastructure\enums\matchtype.ts" />
@@ -130,6 +132,10 @@
     <TypeScriptCompile Include="Web\src\app\teams\teams-routing.module.ts" />
     <TypeScriptCompile Include="Web\src\app\teams\team.service.ts" />
     <TypeScriptCompile Include="Web\src\app\teams\teams.module.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

@@ -1,5 +1,5 @@
 <admin-navigation></admin-navigation>
-<div class="group-manage">
+<div class="group-manage" *ngIf="hasLoaded; else ldsring">
 	<a class="icon add" [routerLink]="[{ outlets: { popup: ['manage'] } }]"></a>
 	<div class="group" *ngFor="let group of groups">
 		{{group.name}}
@@ -10,3 +10,6 @@
 		<a class="icon trash" (click)="delete(group.groupId)"></a>
 	</div>
 </div>
+<ng-template #ldsring>
+	<div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+</ng-template>

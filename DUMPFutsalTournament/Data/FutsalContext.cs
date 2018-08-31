@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using DUMPFutsalTournament.Data.Entities;
-using DUMPFutsalTournament.Data.Enums;
+﻿using DUMPFutsalTournament.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace DUMPFutsalTournament.Data

@@ -1,28 +1,62 @@
-<div class="details" *ngIf="(match || localMatch) as match; else nomatch">
-	<div class="match-title">
-		{{match.homeTeam.name}} - {{match.awayTeam.name}}
+<div *ngIf="hasLoaded; else ldsring">
+	<div class="popup" *ngIf="isLocal && match; else nomatch">
+		<div class="popup-content flex column center">
+			<div class="match-title">
+				{{match.homeTeam.name}} - {{match.awayTeam.name}}
+			</div>
+			<div class="match-time">
+				{{match.timeOfMatch | date: 'dd.MM.yyyy HH:mm'}}
+			</div>
+			<div class="match-phase">
+				{{getMatchTypeTranslation(match.matchType)}}
+			</div>
+			<div class="match-score" *ngIf="match.homeGoals !== null && match.awayGoals !== null">
+				{{match.homeGoals}} : {{match.awayGoals}}
+			</div>
+			<div class="match-penalties" *ngIf="getPenaltiesString().length">(p{{getPenaltiesString()}})</div>
+			<div *ngFor="let event of getSortedMatchEvents()" [ngClass]="[event.isForHomeTeam ? 'home-event' : 'away-event', 'flex']">
+				<span [ngClass]="[getMatchEventTypeClass(event.eventType) | lowercase, 'icon no-pointer']"></span>
+				<span class="event-minute">{{event.eventMinute}}'</span>
+				<span *ngIf="event.player" class="event-player">{{event.player.lastName}}</span>
+			</div>
+			<button class="close-button" (click)="close()" *ngIf="isLocal">
+				Zatvori
+			</button>
+			<ng-template #nomatch>
+				<span>
+					Utakmica ne postoji.
+				</span>
+			</ng-template>
+		</div>
 	</div>
-	<div class="match-time">
-		{{match.timeOfMatch | date: 'dd.MM.yyyy HH:mm'}}
-	</div>
-	<div class="match-phase">
-		{{getMatchTypeTranslation(match.matchType)}}
-	</div>
-	<div class="match-score" *ngIf="match.homeGoals !== null && match.awayGoals !== null">
-		{{match.homeGoals}} : {{match.awayGoals}}
-	</div>
-	<div class="match-penalties" *ngIf="getPenaltiesString().length">(p{{getPenaltiesString()}})</div>
-	<div *ngFor="let event of getSortedMatchEvents()" [ngClass]="event.isForHomeTeam ? 'home-event' : 'away-event'">
-		<span [ngClass]="[getMatchEventTypeClass(event.eventType) | lowercase, 'icon no-pointer']"></span>
-		<span *ngIf="event.player" class="event-player">{{event.player.lastName}}</span>
-		<span class="event-minute">{{event.eventMinute}}'</span>
+	<div *ngIf="!isLocal && match; else nomatch">
+		<div class="flex column center">
+			<div class="match-title">
+				{{match.homeTeam.name}} - {{match.awayTeam.name}}
+			</div>
+			<div class="match-time">
+				{{match.timeOfMatch | date: 'dd.MM.yyyy HH:mm'}}
+			</div>
+			<div class="match-phase">
+				{{getMatchTypeTranslation(match.matchType)}}
+			</div>
+			<div class="match-score" *ngIf="match.homeGoals !== null && match.awayGoals !== null">
+				{{match.homeGoals}} : {{match.awayGoals}}
+			</div>
+			<div class="match-penalties" *ngIf="getPenaltiesString().length">(p{{getPenaltiesString()}})</div>
+			<div *ngFor="let event of getSortedMatchEvents()" [ngClass]="[event.isForHomeTeam ? 'home-event' : 'away-event', 'flex']">
+				<span [ngClass]="[getMatchEventTypeClass(event.eventType) | lowercase, 'icon no-pointer']"></span>
+				<span class="event-minute">{{event.eventMinute}}'</span>
+				<span *ngIf="event.player" class="event-player">{{event.player.lastName}}</span>
+			</div>
+		</div>
+		<ng-template #nomatch>
+			<span>
+				Utakmica ne postoji.
+			</span>
+		</ng-template>
 	</div>
 </div>
-<ng-template #nomatch>
-	<span>
-		Utakmica ne postoji.
-	</span>
+<ng-template #ldsring>
+	<div class="lds-ring"><div></div><div></div><div></div><div></div></div>
 </ng-template>
-<button class="close-button" (click)="close()" *ngIf="isLocal">
-	Zatvori
-</button>

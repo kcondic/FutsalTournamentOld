@@ -1,4 +1,4 @@
-<div *ngIf="match">
+<div *ngIf="hasLoaded; else ldsring">
 	<form (ngSubmit)="save()" class="add-edit">
 		<span class="match-home-team">
 			Domaća ekipa:
@@ -28,3 +28,6 @@
 		<button type="submit">Spremi</button>
 	</form>
 </div>
+<ng-template #ldsring>
+	<div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+</ng-template>

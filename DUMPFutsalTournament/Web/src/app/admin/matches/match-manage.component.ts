@@ -8,6 +8,7 @@ import { Match } from '../../infrastructure/classes/match';
 })
 export class MatchManageComponent implements OnInit {
 	matches: Match[];
+	hasLoaded: boolean = false;
 
 	constructor(private router: Router, private service: AdminService) {
 		router.events.subscribe((val) => {
@@ -22,7 +23,10 @@ export class MatchManageComponent implements OnInit {
 
 	getMatches() {
 		this.service.getAllMatches()
-			.subscribe(matchData => this.matches = matchData);
+			 .subscribe(matchData => {
+				this.matches = matchData;
+				this.hasLoaded = true;
+			});
 	}
 
 	 activate(id: number) {

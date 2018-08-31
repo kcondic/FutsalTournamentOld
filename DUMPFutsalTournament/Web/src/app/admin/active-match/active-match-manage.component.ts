@@ -24,13 +24,17 @@ export class ActiveMatchManageComponent implements OnInit {
 	matchEventTypeKeys: string[];
 	isAddEvent: boolean = false;
 	newEventType: MatchEventType;
+	hasLoaded: boolean = false;
 
 	 constructor(private router: Router, private service: AdminService,
 		 private matchTypeTranslation: MatchTypeTranslationService, private adminLiveMatchService: AdminLiveMatchService) { }
 
 	ngOnInit() {
 		this.service.getActiveMatch()
-			.subscribe(matchData => this.activeMatch = matchData);
+			 .subscribe(matchData => {
+				this.activeMatch = matchData;
+				this.hasLoaded = true;
+			});
 		this.source.subscribe(() => {
 			if (!this.stopWatchStopped)
 				this.addSecond();

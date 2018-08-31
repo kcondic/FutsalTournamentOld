@@ -3,9 +3,11 @@
 	<div class="separator">|</div>
 	<a routerLink="/matches" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Utakmice</a>
 	<div class="separator">|</div>
-	<a routerLink="/groups" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Skupine</a>
+	<a routerLink="/groups" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Turnir</a>
 	<div class="separator">|</div>
 	<a routerLink="/teams" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Ekipe</a>
 </div>
-<router-outlet></router-outlet>
-<router-outlet name="popup"></router-outlet>
+<div class="main">
+	<router-outlet></router-outlet>
+	<router-outlet name="popup"></router-outlet>
+</div>

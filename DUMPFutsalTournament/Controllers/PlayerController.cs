@@ -59,5 +59,11 @@ namespace DUMPFutsalTournament.Controllers
             _playerRepository.DeletePlayer(playerId);
             return Ok(null);
         }
+
+        [HttpGet("top-scorer")]
+        public IActionResult GetTopScorers()
+        {
+            return Ok(_playerRepository.GetTopScorers());
+        }
     }
 }

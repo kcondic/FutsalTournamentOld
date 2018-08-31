@@ -4,6 +4,7 @@ import { GroupWithStandings } from '../../infrastructure/classes/groupwithstandi
 import { Match } from '../../infrastructure/classes/match';
 import { MatchType } from '../../infrastructure/enums/matchtype';
 import { MatchTypeTranslationService } from '../../common/match-type-translation.service';
+import { TopScorer } from '../../infrastructure/classes/topscorer';
 
 @Component({
 	templateUrl: './groups.component.html'
@@ -14,7 +15,8 @@ export class GroupsComponent implements OnInit {
 	eliminationMatches: Match[];
 	matchTypes = MatchType;
 	matchTypeKeys: string[];
-	hasLoaded: boolean = false;
+	 hasLoaded: boolean = false;
+	topScorers: TopScorer[];
 
 	 constructor(private service: GroupsService, private matchTypeTranslation: MatchTypeTranslationService) {  }
 
@@ -29,7 +31,8 @@ export class GroupsComponent implements OnInit {
 						 this.hasLoaded = true;
 					 });
 			  });
-		 this.matchTypeKeys = Object.keys(this.matchTypes).filter(f => !isNaN(Number(f)) && parseInt(f) !== 0);
+		 this.service.getTopScorers().subscribe(topScorers => this.topScorers = topScorers);
+		 this.matchTypeKeys = Object.keys(this.matchTypes).filter(f => !isNaN(Number(f)) && f !== MatchType[MatchType.Group] && f !== MatchType[MatchType.Revial]);
 	}
 
 	selectGroup (id: number) : void {
