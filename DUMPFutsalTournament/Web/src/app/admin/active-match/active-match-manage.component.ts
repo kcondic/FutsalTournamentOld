@@ -7,7 +7,7 @@ import { MatchEvent } from '../../infrastructure/classes/matchevent';
 import { MatchType } from '../../infrastructure/enums/matchtype';
 import { MatchEventType } from '../../infrastructure/enums/matcheventtype';
 import { MatchTypeTranslationService } from '../../common/match-type-translation.service';
-import { SocketService } from '../../common/socket.service';
+import { AdminLiveMatchService} from '../admin.live.match.service';
 import { HostListener } from '@angular/core';
 import { interval } from 'rxjs';
 
@@ -26,7 +26,7 @@ export class ActiveMatchManageComponent implements OnInit {
 	newEventType: MatchEventType;
 
 	 constructor(private router: Router, private service: AdminService,
-		 private matchTypeTranslation: MatchTypeTranslationService, private socketService: SocketService) { }
+		 private matchTypeTranslation: MatchTypeTranslationService, private adminLiveMatchService: AdminLiveMatchService) { }
 
 	ngOnInit() {
 		this.service.getActiveMatch()
@@ -35,6 +35,10 @@ export class ActiveMatchManageComponent implements OnInit {
 			if (!this.stopWatchStopped)
 				this.addSecond();
 		});
+
+		this.adminLiveMatchService.getCurrentActiveTime()
+		.subscribe(time => { console.log(time); this.seconds = time.second; this.minutes = time.minute;})
+
 		this.matchEventTypeKeys = Object.keys(this.matchEventTypes).filter(f => !isNaN(Number(f)));
 	 }
 
@@ -46,17 +50,13 @@ export class ActiveMatchManageComponent implements OnInit {
 	}
 
 	addSecond() {
-		 if (this.seconds >= 59) {
-			 this.socketService.sendSecond(this.seconds);
-			 this.seconds = 0;
-			 this.socketService.sendMinute(this.minutes);
-			 this.minutes++;
-		 }
-		 else
-		 {
-			 this.socketService.sendSecond(this.seconds);
-			 this.seconds++;
-		 }
+		this.seconds++;
+		this.adminLiveMatchService.updateMatchSecond()
+		.subscribe(x => {});
+		if (this.seconds >= 60) {
+			this.seconds = 0;
+			this.minutes++;
+		}
 	}
 
 	deactivate() {
@@ -95,7 +95,6 @@ export class ActiveMatchManageComponent implements OnInit {
 				this.service.updateMatchGoals(this.activeMatch).subscribe();
 			}
 		 });
-	     this.socketService.sendMatch(this.activeMatch);
 		this.stopWatchStopped = false;
 		this.isAddEvent = false;
 	}
@@ -128,7 +127,6 @@ export class ActiveMatchManageComponent implements OnInit {
 			});
 		 else
 			this.stopWatchStopped = false;
-		 this.socketService.sendMatch(this.activeMatch);
 	}
 
 	cancelEventAdd() {
