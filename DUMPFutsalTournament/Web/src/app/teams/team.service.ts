@@ -6,8 +6,8 @@ import { Match } from '../infrastructure/classes/match';
 
 @Injectable()
 export class TeamService {
-	private teamsUrl = 'http://dump-turnir.com/api/teams';
-	private teamMatchesUrl = 'http://dump-turnir.com/api/matches/team';
+	private teamsUrl = 'api/teams';
+	private teamMatchesUrl = 'api/matches/team';
 
 	constructor(private http: HttpClient) { }
 

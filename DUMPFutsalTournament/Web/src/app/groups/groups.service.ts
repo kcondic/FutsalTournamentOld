@@ -7,9 +7,9 @@ import { TopScorer } from '../infrastructure/classes/topscorer';
 
 @Injectable()
 export class GroupsService {
-	private groupsUrl = 'http://dump-turnir.com/api/groups';
-	private matchesUrl = 'http://dump-turnir.com/api/matches';
-	private playersUrl = 'http://dump-turnir.com/api/players';
+	private groupsUrl = 'api/groups';
+	private matchesUrl = 'api/matches';
+	private playersUrl = 'api/players';
 	constructor(private http: HttpClient) { }
 
 	getAllGroupsWithStandings(): Observable<GroupWithStandings[]> { return this.http.get<GroupWithStandings[]>(`${this.groupsUrl}/standings`); }

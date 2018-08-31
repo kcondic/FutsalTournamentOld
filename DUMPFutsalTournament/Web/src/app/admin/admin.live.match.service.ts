@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class AdminLiveMatchService {
-	private matchesUrl = 'http://dump-turnir.com/api/live-match';
+	private matchesUrl = '/api/live-match';
 
 	constructor(private http: HttpClient) { }
 
