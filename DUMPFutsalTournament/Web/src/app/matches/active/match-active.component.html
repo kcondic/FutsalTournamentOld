@@ -1,4 +1,4 @@
-<div class="match-active">
+<div class="match-active" *ngIf="hasLoaded; else ldsring">
 	<div *ngIf="match;else logo">
 		<h3>U tijeku</h3>
 		<div class="timer">{{minute | number:'2.0-0'}}:{{second | number:'2.0-0'}}</div>
@@ -9,3 +9,6 @@
 		<h1>Malonogometni turnir</h1>
 	</ng-template>
 </div>
+<ng-template #ldsring>
+	<div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+</ng-template>

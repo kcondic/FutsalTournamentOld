@@ -13,6 +13,7 @@ export class PlayerAddEditComponent implements OnInit {
 	isEdit: boolean = false;
 	player: Player;
 	teams: Team[];
+	hasLoaded: boolean = false;
 
 	 constructor(private route: ActivatedRoute, private service: AdminService,
 		 private closePopup: ClosePopupService) { }
@@ -21,13 +22,17 @@ export class PlayerAddEditComponent implements OnInit {
 		this.route.queryParams.subscribe(params => this.playerId = params['id']);
 		  if (this.playerId) {
 			  this.service.getPlayer(this.playerId)
-				  .subscribe(playerData => this.player = playerData);
+				   .subscribe(playerData => {
+					  this.player = playerData;
+					  this.hasLoaded = true;
+				  });
 			  this.isEdit = true;
 		  }
 		  else
 		  {
 			  this.player = new Player();
 			  this.player.team = null;
+			  this.hasLoaded = true;
 		  }
 		 this.service.getAllTeams().subscribe(teamData => this.teams = teamData);
 	 }

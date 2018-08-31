@@ -8,6 +8,7 @@ import { Player } from '../../infrastructure/classes/player';
 })
 export class PlayerManageComponent implements OnInit {
 	players: Player[];
+	hasLoaded: boolean = false;
 
 	constructor(private router: Router, private service: AdminService) {
 		router.events.subscribe((val) => {
@@ -22,7 +23,10 @@ export class PlayerManageComponent implements OnInit {
 
 	 getPlayers() {
 		 this.service.getAllPlayers()
-			 .subscribe(playerData => this.players = playerData);
+			  .subscribe(playerData => {
+				 this.players = playerData;
+				 this.hasLoaded = true;
+			 });
 	 }
 
 	 delete(id: number) {

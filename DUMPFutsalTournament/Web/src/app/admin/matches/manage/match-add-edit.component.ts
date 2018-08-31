@@ -21,6 +21,7 @@ export class MatchAddEditComponent implements OnInit {
 	matchTypeKeys: string[];
 	hour: number;
 	minute: number;
+	hasLoaded: boolean = false;
 
 	constructor(private route: ActivatedRoute, private service: AdminService, private closePopup: ClosePopupService,
 				private matchTypeTranslation: MatchTypeTranslationService) { }
@@ -34,6 +35,7 @@ export class MatchAddEditComponent implements OnInit {
 					this.hour = new Date(this.match.timeOfMatch).getHours();
 					this.minute = new Date(this.match.timeOfMatch).getMinutes();
 					this.getAndInitializeTeams();
+					this.hasLoaded = true;
 				});
 			this.isEdit = true;
 		}
@@ -41,7 +43,8 @@ export class MatchAddEditComponent implements OnInit {
 			this.match = new Match();
 			this.hour = 20;
 			this.minute = 0;
-		     this.getAndInitializeTeams();
+			this.getAndInitializeTeams();
+			this.hasLoaded = true;
 		}
 		this.matchTypeKeys = Object.keys(this.matchTypes).filter(f => !isNaN(Number(f)));
 	}

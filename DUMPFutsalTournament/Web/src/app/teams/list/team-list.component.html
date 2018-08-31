@@ -1,4 +1,4 @@
-<div class="team-list">
+<div class="team-list flex center" *ngIf="hasLoaded;else ldsring">
 	<div class="team" *ngFor="let team of teams">
 		<a [routerLink]="[{ outlets: { popup: [team.teamId] } }]">
 			<span class="team-name">
@@ -7,3 +7,6 @@
 		</a>
 	</div>
 </div>
+<ng-template #ldsring>
+	<div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+</ng-template>

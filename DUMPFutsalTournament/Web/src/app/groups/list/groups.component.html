@@ -1,15 +1,15 @@
-<div class="groups-and-elimination" *ngIf="hasLoaded">
+<div class="groups-and-elimination" *ngIf="hasLoaded; else ldsring">
 	<div class="group-tables">
 		<div>
-			<div *ngFor="let groupWithStanding of groupsWithStandings">
-				<button (click)="selectGroup(groupWithStanding.group.groupId)">{{groupWithStanding.group.name}}</button>
+			<div class="group-chooser flex center" *ngFor="let groupWithStanding of groupsWithStandings">
+				<a (click)="selectGroup(groupWithStanding.group.groupId)">{{groupWithStanding.group.name}}</a>
 			</div>
-		</div>	
-		<table>
-			<tr>
+		</div>
+		<table class="margin-top">
+			<tr class="table-header">
 				<th>Pozicija</th>
-				<th>Ime ekipe</th>
-				<th>Broj utakmica</th> 
+				<th class="table-team-name">Ime ekipe</th>
+				<th>UT</th>
 				<th>G+</th>
 				<th>G-</th>
 				<th>GR</th>
@@ -17,29 +17,22 @@
 			</tr>
 			<tr *ngFor="let groupStanding of currentGroup.groupStandings; let i = index">
 				<td>{{i + 1}}.</td>
-				<td><strong>{{groupStanding.team.name}}</strong></td>
-				<td>{{groupStanding.matchesPlayed}}</td> 
-				<td>{{groupStanding.goalsScored}}</td> 
-				<td>{{groupStanding.goalsConceded}}</td> 
-				<td>{{groupStanding.goalsScored - groupStanding.goalsConceded}}</td> 
-				<td><strong>{{groupStanding.points}}</strong></td> 
+				<td class="table-team-name"><strong>{{groupStanding.team.name}}</strong></td>
+				<td>{{groupStanding.matchesPlayed}}</td>
+				<td>{{groupStanding.goalsScored}}</td>
+				<td>{{groupStanding.goalsConceded}}</td>
+				<td>{{groupStanding.goalsScored - groupStanding.goalsConceded}}</td>
+				<td><strong>{{groupStanding.points}}</strong></td>
 			</tr>
-   		</table>
+		</table>
 	</div>
-	<div class="elimination-brackets">
-		<div *ngFor="let type of matchTypeKeys">
-			{{getMatchTypeTranslation(+type)}}
-			<div *ngFor="let match of getPhaseMatches(type)">
-				<a [routerLink]="[{ outlets: { popup: ['matches', match.matchId] } }]">
-					<span [style.bold]="match.homeGoals > match.awayGoals">
-						{{match.homeName}} {{match.homeGoals}}
-					</span>
-					-
-					<span [style.bold]="match.homeGoals < match.awayGoals">
-						{{match.awayName}} {{match.awayGoals}}
-					</span>
-				</a>
-			</div>
+	<div class="top-scorer" *ngIf="topScorers">
+		Najbolji strijelci
+		<div *ngFor="let scorer of topScorers">
+			{{scorer.player.firstName}} {{scorer.player.lastName}} {{scorer.goals}}
 		</div>
 	</div>
 </div>
+<ng-template #ldsring>
+	<div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+</ng-template>

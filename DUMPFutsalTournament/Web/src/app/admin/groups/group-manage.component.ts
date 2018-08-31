@@ -8,6 +8,7 @@ import { Group } from '../../infrastructure/classes/group';
 })
 export class GroupManageComponent implements OnInit {
 	groups: Group[];
+	hasLoaded: boolean = false;
 
 	constructor(private router: Router, private service: AdminService) {
 		router.events.subscribe((val) => {
@@ -22,7 +23,10 @@ export class GroupManageComponent implements OnInit {
 
 	getGroups() {
 		this.service.getAllGroups()
-			.subscribe(groupData => this.groups = groupData);
+			 .subscribe(groupData => {
+				this.groups = groupData;
+				this.hasLoaded = true;
+			});
 	}
 
 	delete(id: number) {

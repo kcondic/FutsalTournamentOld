@@ -10,13 +10,15 @@ export class MatchActiveComponent implements OnInit {
 	match: Match;
 	minute: number = 0;
 	second: number = 0;
+	hasLoaded: boolean = false;
 
 	constructor(private service: MatchService, private socketService: SocketService) { }
 
 	 ngOnInit() {
 		  this.service.getActiveMatch().subscribe(activeMatch => {
-			  this.match = activeMatch;
-			  this.initIoConnection();
+			   this.match = activeMatch;
+			   this.hasLoaded = true;  
+			   this.initIoConnection();
 		  });
 	 }
 

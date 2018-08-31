@@ -8,6 +8,7 @@ import { Team } from '../../infrastructure/classes/team';
 })
 export class TeamManageComponent implements OnInit {
 	teams: Team[];
+	hasLoaded: boolean = false;
 
 	constructor(private router: Router, private service: AdminService) {
 		router.events.subscribe((val) => {
@@ -22,7 +23,10 @@ export class TeamManageComponent implements OnInit {
 
 	getTeams() {
 		this.service.getAllTeams()
-			.subscribe(teamData => this.teams = teamData);
+			 .subscribe(teamData => {
+				this.teams = teamData;
+				this.hasLoaded = true;
+			});
 	}
 
 	delete(id: number) {

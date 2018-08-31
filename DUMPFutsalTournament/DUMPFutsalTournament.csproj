@@ -68,6 +68,7 @@
     <None Remove="Web\src\app\common\match-type-translation.service.ts" />
     <None Remove="Web\src\app\common\socket.service.ts" />
     <None Remove="Web\src\app\groups\groups.module.ts" />
+    <None Remove="Web\src\app\infrastructure\classes\topscorer.ts" />
     <None Remove="Web\src\app\infrastructure\classes\User.ts" />
     <None Remove="Web\src\app\infrastructure\enums\matcheventtype.ts" />
     <None Remove="Web\src\app\infrastructure\enums\matchtype.ts" />
@@ -111,6 +112,7 @@
     <TypeScriptCompile Include="Web\src\app\common\match-type-translation.service.ts" />
     <TypeScriptCompile Include="Web\src\app\common\socket.service.ts" />
     <TypeScriptCompile Include="Web\src\app\groups\groups.module.ts" />
+    <TypeScriptCompile Include="Web\src\app\infrastructure\classes\topscorer.ts" />
     <TypeScriptCompile Include="Web\src\app\infrastructure\classes\user.ts" />
     <TypeScriptCompile Include="Web\src\app\infrastructure\enums\matcheventtype.ts" />
     <TypeScriptCompile Include="Web\src\app\infrastructure\enums\matchtype.ts" />

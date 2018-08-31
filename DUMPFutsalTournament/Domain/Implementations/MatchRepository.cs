@@ -4,7 +4,6 @@ using System.Linq;
 using DUMPFutsalTournament.Data;
 using DUMPFutsalTournament.Data.Entities;
 using DUMPFutsalTournament.Data.Enums;
-using DUMPFutsalTournament.Domain.HelperClasses;
 using DUMPFutsalTournament.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,34 +1,42 @@
-<div class="details" *ngIf="team; else noteam">
-	<div class="team-name">
-		{{team.name}}
-	</div>
-	<div class="team-phase" *ngIf="teamMatches">
-		Status: {{getLastMatchTypeTranslation()}}
-	</div>
-	<div class="players" *ngFor="let player of team.players">
-		<span class="player-name">
-			{{player.firstName}} {{player.lastName}}
-		</span>
-		<span class="player-age">
-			Dob: {{getPlayerAge(player.dateOfBirth)}}
-		</span>
-		<span *ngFor="let event of getTotalMatchEvents(player.matchEvents)">
-			<span [ngClass]="[event.nameOfClass | lowercase, 'icon no-pointer player-event']" *ngIf="event.number">
-				<span class="player-event-number">
-					{{event.number}}
+<div *ngIf="hasLoaded;else ldsring">
+	<div class="popup" *ngIf="team; else noteam">
+		<div class="team popup-content flex column center">
+			<div class="team-name">
+				{{team.name}}
+			</div>
+			<div class="team-phase" *ngIf="teamMatches">
+				Status: {{getLastMatchTypeTranslation()}}
+			</div>
+			<div class="team-players">
+				<div *ngFor="let player of team.players">
+					<div class="player flex">
+						<span class="player-name-age">
+							{{player.firstName}} {{player.lastName}}, dob: {{getPlayerAge(player.dateOfBirth)}}
+						</span>
+						<span class="player-event-count" *ngFor="let event of getTotalMatchEvents(player.matchEvents)">
+							<span [ngClass]="[event.nameOfClass | lowercase, 'icon no-pointer player-event']" *ngIf="event.number">
+								<span class="player-event-number">
+									{{event.number}}
+								</span>
+							</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="team-matches" *ngFor="let match of teamMatches">
+				<match-detail [match]="match"></match-detail>
+			</div>
+			<ng-template #noteam>
+				<span>
+					Ekipa ne postoji.
 				</span>
-			</span>
-		</span>
-	</div>
-	<div class="matches" *ngFor="let match of teamMatches">
-		<match-detail [match]="match"></match-detail>
+			</ng-template>
+			<button class="close-button" (click)="close()">
+				Zatvori
+			</button>
+		</div>
 	</div>
 </div>
-<ng-template #noteam>
-	<span>
-		Ekipa ne postoji.
-	</span>
+<ng-template #ldsring>
+	<div class="lds-ring"><div></div><div></div><div></div><div></div></div>
 </ng-template>
-<button class="close-button" (click)="close()">
-	Zatvori
-</button>

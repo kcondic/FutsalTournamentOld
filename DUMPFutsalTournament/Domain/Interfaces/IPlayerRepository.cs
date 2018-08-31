@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DUMPFutsalTournament.Data.Entities;
+using DUMPFutsalTournament.Domain.HelperClasses;
 
 namespace DUMPFutsalTournament.Domain.Interfaces
 {
@@ -10,5 +11,6 @@ namespace DUMPFutsalTournament.Domain.Interfaces
         bool AddPlayer(Player player);
         bool EditPlayer(Player editedPlayer);
         void DeletePlayer(int playerId);
+        List<TopScorer> GetTopScorers();
     }
 }

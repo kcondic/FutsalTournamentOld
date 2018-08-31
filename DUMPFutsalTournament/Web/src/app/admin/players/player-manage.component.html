@@ -1,5 +1,5 @@
 <admin-navigation></admin-navigation>
-<div class="player-manage">
+<div class="player-manage" *ngIf="hasLoaded; else ldsring">
 	<a class="icon add" [routerLink]="[{ outlets: { popup: ['manage'] } }]"></a>
 	<div class="player" *ngFor="let player of players">
 		{{player.firstName}} {{player.lastName}} <span *ngIf="player.dateOfBirth;else unknowndate">{{player.dateOfBirth | date: 'dd.MM.yyyy'}}</span>
@@ -14,3 +14,6 @@
 		<a class="icon trash" (click)="delete(player.playerId)"></a>
 	</div>
 </div>
+<ng-template #ldsring>
+	<div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+</ng-template>

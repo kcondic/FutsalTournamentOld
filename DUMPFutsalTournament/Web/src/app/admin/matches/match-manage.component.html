@@ -1,5 +1,5 @@
 <admin-navigation></admin-navigation>
-<div class="match-manage">
+<div class="match-manage" *ngIf="hasLoaded; else ldsring">
 	<a class="icon add" [routerLink]="[{ outlets: { popup: ['manage'] } }]"></a>
 	<div class="match" *ngFor="let match of matches">
 		{{match.homeTeam.name}} - {{match.awayTeam.name}} {{match.timeOfMatch | date:'dd.MM.yyyy HH:mm'}}
@@ -10,3 +10,6 @@
 		</span>
 	</div>
 </div>
+<ng-template #ldsring>
+	<div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+</ng-template>
