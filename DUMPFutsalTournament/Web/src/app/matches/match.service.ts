@@ -12,5 +12,8 @@ export class MatchService {
 
 	getActiveMatch(): Observable<Match> { return this.http.get<Match>(`${this.matchesUrl}/active`); }
 
+	getActiveMatchUser(): Observable<Match> { return this.http.get<Match>(`${this.matchesUrl}/active-user`); }
+
+
 	getMatch(id: number): Observable<Match> { return this.http.get<Match>(`${this.matchesUrl}/${id}`); }
 }

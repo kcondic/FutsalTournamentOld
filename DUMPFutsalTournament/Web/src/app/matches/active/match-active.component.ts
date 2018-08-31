@@ -23,7 +23,7 @@ export class MatchActiveComponent implements OnInit {
 	 }
 
 	 getActiveMatch() : void {
-		this.service.getActiveMatch().subscribe(activeMatch => {
+		 this.service.getActiveMatchUser().subscribe(activeMatch => {
 			this.match = activeMatch;
 			this.hasLoaded = true;
 			if (this.match) {
