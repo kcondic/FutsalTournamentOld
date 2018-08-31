@@ -79,7 +79,7 @@ namespace DUMPFutsalTournament.Domain.Implementations
             var matchToActivate = _context.Matches.Find(matchId);
 
             if (matchToActivate == null || matchToActivate.HomeGoals != null || 
-                matchToActivate.AwayGoals != null || matchToActivate.TimeOfMatch < DateTime.Now - TimeSpan.FromMinutes(60))
+                matchToActivate.AwayGoals != null)
                 return;
 
             if (currentlyActiveMatch != null)

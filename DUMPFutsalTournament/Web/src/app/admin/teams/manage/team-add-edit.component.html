@@ -10,6 +10,7 @@
 							{{player.firstName}} {{player.lastName}}
 						</div>
 					</div>
+					<hr/>
 					Ostali igrači:
 					<div class="player" *ngFor="let player of players" (click)="addPlayer(player.playerId)">
 						{{player.firstName}} {{player.lastName}}

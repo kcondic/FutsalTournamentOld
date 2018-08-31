@@ -1,6 +1,6 @@
 <admin-navigation></admin-navigation>
 <div *ngIf="hasLoaded; else ldsring">
-	<div *ngIf="activeMatch;else noactivematch">
+	<div class="match-manage flex column center" *ngIf="activeMatch;else noactivematch">
 		<span class="timer">
 			<input type="number" [(ngModel)]="minutes" />:
 			<input type="number" [(ngModel)]="seconds" />
@@ -23,11 +23,12 @@
 			<span class="event-minute">{{event.eventMinute}}'</span>
 			<span class="icon trash" (click)="removeMatchEvent(event.matchEventId)"></span>
 		</div>
-		<span [ngClass]="[getMatchEventTypeClass(type) | lowercase, 'icon']" *ngFor="let type of matchEventTypeKeys" (click)="showAddMatchEventPopup(type)"></span>
-		<a (click)="deactivate()">Deaktiviraj utakmicu</a>
+		<div class="match-event-actions">
+			<span [ngClass]="[getMatchEventTypeClass(type) | lowercase, 'icon']" *ngFor="let type of matchEventTypeKeys" (click)="showAddMatchEventPopup(type)"></span>
+		</div>
 		<div [hidden]="!isAddEvent">
 			Tko je subjekt događaja?
-			<div class="flex">
+			<div class="player-subjects flex">
 				<div class="home-players flex column">
 					Domaći igrači
 					<div *ngFor="let player of activeMatch.homeTeam.players" (click)="addMatchEvent(player, true)">
@@ -47,8 +48,11 @@
 					</div>
 				</div>
 			</div>
-			<a class="close-button" (click)="cancelEventAdd()">Odustani</a>
+			<div class="right">
+				<a class="close-button" (click)="cancelEventAdd()">Odustani</a>
+			</div>
 		</div>
+		<a class="deactivate-link" (click)="deactivate()">Deaktiviraj utakmicu</a>
 	</div>
 	<ng-template #noactivematch>
 		Trenutno nema aktivne utakmice.

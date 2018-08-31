@@ -31,6 +31,7 @@ export class GroupAddEditComponent implements OnInit {
 		else {
 			this.group = new Group();
 			this.group.teams = [];
+			this.group.size = 4;
 			this.hasLoaded = true;
 		}
 		this.service.getAllGrouplessTeams().subscribe(teamData => this.teams = teamData);

@@ -1,15 +1,21 @@
 <div *ngIf="hasLoaded; else ldsring">
-	<form (ngSubmit)="save()" class="add-edit">
-		<span class="player-first-name">Ime: <input type="text" [(ngModel)]="player.firstName" name="first-name"/></span>
-		<span class="player-last-name">Prezime: <input type="text" [(ngModel)]="player.lastName" name="last-name"/></span>
-		<span class="player-dob">Datum rođenja: <input type="date" [ngModel]="player.dateOfBirth | date:'yyyy-MM-dd'" (ngModelChange)="player.dateOfBirth=$event" name="date-of-birth"/></span>
-		<select class="player-team" name="team-select" [(ngModel)]="player.team">
-			<option [ngValue]="null">-</option>
-			<option *ngFor="let team of teams" [ngValue]="team" name="team-select-option">{{team.name}}</option>
-		</select>
-		<button class="close-button" (click)="close()">Zatvori</button>
-		<button class="submit" type="submit">Spremi</button>
-	</form>
+	<div class="popup">
+		<div class="popup-content flex column center">
+			<form (ngSubmit)="save()" class="add-edit flex column center">
+				<span class="player-first-name">Ime: <input type="text" [(ngModel)]="player.firstName" name="first-name"/></span>
+				<span class="player-last-name">Prezime: <input type="text" [(ngModel)]="player.lastName" name="last-name"/></span>
+				<span class="player-dob">Datum rođenja: <input type="date" [ngModel]="player.dateOfBirth | date:'yyyy-MM-dd'" (ngModelChange)="player.dateOfBirth=$event" name="date-of-birth"/></span>
+				<select class="player-team" name="team-select" [(ngModel)]="player.team">
+					<option [ngValue]="null">-</option>
+					<option *ngFor="let team of teams" [ngValue]="team" name="team-select-option">{{team.name}}</option>
+				</select>
+				<div>
+					<button class="close-button" (click)="close()">Zatvori</button>
+					<button class="submit" type="submit">Spremi</button>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>
 <ng-template #ldsring>
 	<div class="lds-ring"><div></div><div></div><div></div><div></div></div>

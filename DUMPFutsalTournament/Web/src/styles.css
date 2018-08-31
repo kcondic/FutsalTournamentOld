@@ -430,3 +430,28 @@ a:hover {
 .right {
 	text-align: right;
 }
+
+.align-end {
+	align-items: flex-end;
+}
+
+.match-time-input {
+	width: 50px;
+}
+
+.match-manage {
+	padding-top: 100px;
+}
+
+.deactivate-link {
+	margin-top: 20px;
+	color: black;
+}
+
+.match-manage .match-event-actions span {
+	margin-right: 10px;
+}
+
+.match-manage .player-subjects .home-players {
+	margin-right: 10px;
+}
