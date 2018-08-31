@@ -1,8 +1,3 @@
-/* You can add global styles to this file, and also import other style files */
-* {
-	font-family: 'Open Sans', "Segoe UI Semibold", "Segoe UI", Arial, Tahoma, sans-serif;
-}
-
 html {
 	height: 100%;
 	width: 100%;
@@ -13,6 +8,9 @@ body {
 	margin: 0;
 	display: flex;
 	justify-content: center;
+	text-rendering: optimizeLegibility;
+	font-family: 'Open Sans', 'Segoe UI Semibold', 'Segoe UI', Arial, Tahoma,
+		sans-serif;
 }
 
 span {
@@ -38,9 +36,11 @@ a:hover {
 	text-transform: uppercase;
 	padding-bottom: 10px;
 	border-bottom: 3px solid transparent;
+	transition: border-bottom 200ms ease-in-out;
 }
 
-.nav a:hover, .nav a.active {
+.nav a:hover,
+.nav a.active {
 	opacity: 1;
 	border-bottom: 3px solid white;
 }
@@ -52,7 +52,87 @@ a:hover {
 	left: 0;
 	width: 100%;
 	background-color: #111111;
+	transition: all 200ms ease-in-out;
 	box-sizing: border-box;
+}
+
+.toggle-navigation-container {
+	position: absolute;
+	top: 30px;
+	right: 50px;
+	height: 25px;
+	width: 30px;
+	cursor: pointer;
+}
+
+.toggle-navigation {
+	position: absolute;
+	visibility: hidden;
+	opacity: 0;
+	top: 50%;
+	width: 30px;
+	height: 2px;
+	background-color: lightgrey;
+	cursor: pointer;
+	transition: all 200ms ease-in-out;
+}
+
+.toggle-navigation::before,
+.toggle-navigation::after {
+	position: absolute;
+	content: '';
+	height: 30px;
+	width: 2px;
+	background-color: lightgrey;
+	left: 14px;
+	transform: rotate(90deg);
+	transition: all 200ms ease-in-out;
+}
+
+.toggle-navigation::before {
+	top: -21px;
+}
+
+.toggle-navigation::after {
+	top: -7px;
+}
+
+.toggle-navigation-container.toggled .toggle-navigation {
+	transform: rotate(45deg);
+}
+
+.toggle-navigation-container.toggled .toggle-navigation::before,
+.toggle-navigation-container.toggled .toggle-navigation::after {
+	transform: rotate(0deg);
+	top: -14px;
+}
+
+@media (max-width: 500px) {
+	.nav {
+		flex-direction: column;
+		padding-bottom: 10px;
+		height: 90px;
+	}
+	.nav.expanded {
+		height: 400px;
+	}
+	.nav a {
+		padding: 25px;
+		visibility: hidden;
+		opacity: 0;
+		transition: all 200ms ease-in-out;
+	}
+	.nav.expanded a {
+		visibility: visible;
+		opacity: 1;;
+	}
+	.separator {
+		display: none;
+	}
+	.toggle-navigation {
+		visibility: visible;
+		opacity: 1;
+	}
 }
 
 .admin-nav {
@@ -192,6 +272,13 @@ a:hover {
 	left: 47.5%;
 	width: 64px;
 	height: 64px;
+	transition: all 200ms ease-in-out;
+}
+
+@media (max-width: 500px) {
+	.nav.expanded + .main ng-component .lds-ring {
+		top: 50%;
+	}
 }
 
 .lds-ring div {
@@ -275,7 +362,7 @@ a:hover {
 	top: 0;
 	width: 100%;
 	height: 100%;
-	background-color: rgba(0,0,0,0.4);
+	background-color: rgba(0, 0, 0, 0.4);
 }
 
 .popup-content {
@@ -285,7 +372,8 @@ a:hover {
 	border-radius: 5px;
 }
 
-.home-event, .away-event {
+.home-event,
+.away-event {
 	align-items: center;
 	margin-bottom: 3px;
 }
@@ -315,7 +403,8 @@ a:hover {
 	margin-right: 2px;
 }
 
-.close-button, .submit {
+.close-button,
+.submit {
 	font-size: 14px;
 	cursor: pointer;
 	margin-top: 10px;
@@ -327,7 +416,8 @@ a:hover {
 	padding: 5px;
 }
 
-.close-button:hover, .submit:hover {
+.close-button:hover,
+.submit:hover {
 	background-color: #e8e8ee;
 }
 
