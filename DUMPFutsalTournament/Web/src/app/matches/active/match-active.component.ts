@@ -27,7 +27,6 @@ export class MatchActiveComponent implements OnInit {
 			this.match = activeMatch;
 			this.hasLoaded = true;
 			if (this.match) {
-				console.log('test');
 				this.second = this.match.second;
 				this.minute = this.match.minute;
 			} else {

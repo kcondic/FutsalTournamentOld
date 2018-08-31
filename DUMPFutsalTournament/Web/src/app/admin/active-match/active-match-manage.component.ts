@@ -42,7 +42,7 @@ export class ActiveMatchManageComponent implements OnInit {
 		});
 
 		this.adminLiveMatchService.getCurrentActiveTime()
-		.subscribe(time => { console.log(time); this.seconds = time.second; this.minutes = time.minute;})
+		.subscribe(time => { this.seconds = time.second; this.minutes = time.minute;})
 
 		this.matchEventTypeKeys = Object.keys(this.matchEventTypes).filter(f => !isNaN(Number(f)));
 	 }
@@ -89,8 +89,6 @@ export class ActiveMatchManageComponent implements OnInit {
 	}
 
 	 addMatchEvent(player: Player, isForHomeTeam: boolean) {
-		if (isForHomeTeam && this.newEventType == MatchEventType.OwnGoal)
-			   isForHomeTeam = false;
 		const newMatchEvent = new MatchEvent(Object.assign({}, this.activeMatch), player,
 							this.newEventType, isForHomeTeam, this.minutes + 1);
 		newMatchEvent.match.homeTeam = null;

@@ -23,7 +23,8 @@ export class GroupsComponent implements OnInit {
 	ngOnInit() {
 		 this.service.getAllGroupsWithStandings()
 			 .subscribe(allGroups => {
-				 this.groupsWithStandings = allGroups;
+				 this.groupsWithStandings =
+					 allGroups.sort((group1, group2) => group1.group.name < group2.group.name ? 1 : -1);
 				 this.selectGroup(this.groupsWithStandings[0].group.groupId);
 				 this.service.getEliminationMatches()
 					 .subscribe(allMatches => {
