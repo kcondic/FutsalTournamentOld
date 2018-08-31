@@ -25,6 +25,7 @@ export class ActiveMatchManageComponent implements OnInit {
 	isAddEvent: boolean = false;
 	newEventType: MatchEventType;
 	hasLoaded: boolean = false;
+	isChanging: boolean = false;
 
 	 constructor(private router: Router, private service: AdminService,
 		 private matchTypeTranslation: MatchTypeTranslationService, private adminLiveMatchService: AdminLiveMatchService) { }
@@ -54,13 +55,24 @@ export class ActiveMatchManageComponent implements OnInit {
 	}
 
 	addSecond() {
-		this.seconds++;
-		this.adminLiveMatchService.updateMatchSecond()
-		.subscribe(x => {});
-		if (this.seconds >= 60) {
-			this.seconds = 0;
-			this.minutes++;
+		if(this.minutes < 30) {
+			this.seconds++;
+			this.adminLiveMatchService.updateMatchSecond()
+			.subscribe(x => {});
+			if (this.seconds >= 60) {
+				this.seconds = 0;
+				this.minutes++;
+			}
+		} else {
+			this.stopWatchStopped = true;
 		}
+	}
+
+	setTime(){
+		this.isChanging = true
+		this.stopWatchStopped = true;
+		this.adminLiveMatchService.setTime(this.minutes, this.seconds)
+		.subscribe(response => { this.isChanging = false; });
 	}
 
 	deactivate() {
