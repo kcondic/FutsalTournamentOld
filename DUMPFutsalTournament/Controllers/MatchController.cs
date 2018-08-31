@@ -1,4 +1,6 @@
 using DUMPFutsalTournament.Data.Entities;
+using DUMPFutsalTournament.Domain.HelperClasses;
+using DUMPFutsalTournament.Domain.Implementations;
 using DUMPFutsalTournament.Domain.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +14,7 @@ namespace DUMPFutsalTournament.Controllers
         {
             _matchRepository = matchRepository;
         }
+
         private readonly IMatchRepository _matchRepository;
 
         [HttpGet]
@@ -29,7 +32,8 @@ namespace DUMPFutsalTournament.Controllers
         [HttpGet("active")]
         public IActionResult GetActiveMatch()
         {
-            return Ok(_matchRepository.GetActiveMatch());
+            var extendedMatch = new MatchWithTime(_matchRepository.GetActiveMatch(), LiveMatchService.CurrentActiveMatchMinute, LiveMatchService.CurrentActiveMatchSecond);
+            return Ok(extendedMatch);
         }
 
         [HttpGet("{matchId}")]
@@ -56,6 +60,8 @@ namespace DUMPFutsalTournament.Controllers
         [HttpPost("activate")]
         public IActionResult SetActiveMatch([FromBody]int matchId)
         {
+            LiveMatchService.CurrentActiveMatchMinute = 0;
+            LiveMatchService.CurrentActiveMatchSecond = 0;
             _matchRepository.SetActiveMatch(matchId);
             return Ok(null);
         }
@@ -64,6 +70,9 @@ namespace DUMPFutsalTournament.Controllers
         [HttpPost("deactivate")]
         public IActionResult DeactivateMatch()
         {
+            LiveMatchService.CurrentActiveMatchMinute = 0;
+            LiveMatchService.CurrentActiveMatchSecond = 0;
+
             _matchRepository.DeactivateMatch();
             return Ok(null);
         }

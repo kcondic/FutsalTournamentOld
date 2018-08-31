@@ -11,6 +11,7 @@ import { MatchManageComponent } from './matches/match-manage.component';
 import { MatchAddEditComponent } from './matches/manage/match-add-edit.component';
 import { ActiveMatchManageComponent } from './active-match/active-match-manage.component';
 import { AdminService } from './admin.service';
+import { AdminLiveMatchService } from './admin.live.match.service';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminNavigationComponent } from './navigation/admin-navigation.component';
 
@@ -32,6 +33,6 @@ import { AdminNavigationComponent } from './navigation/admin-navigation.componen
 		MatchAddEditComponent,
 		ActiveMatchManageComponent
 	],
-	providers: [ AdminService ]
+	providers: [ AdminService, AdminLiveMatchService ]
 })
 export class AdminModule { }
