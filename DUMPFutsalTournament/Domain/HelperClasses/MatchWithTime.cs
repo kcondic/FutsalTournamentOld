@@ -6,9 +6,9 @@ namespace DUMPFutsalTournament.Domain.HelperClasses
     {
         public MatchWithTime(Match match, int minute, int second)
         {
-            AwayGoals = match.AwayGoals;
+            AwayGoals = match.AwayGoals ?? 0;
             AwayTeam = match.AwayTeam;
-            HomeGoals = match.HomeGoals;
+            HomeGoals = match.HomeGoals ?? 0;
             HomeTeam = match.HomeTeam;
             IsActive = match.IsActive;
             MatchEvents = match.MatchEvents;

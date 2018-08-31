@@ -32,6 +32,9 @@ namespace DUMPFutsalTournament.Controllers
         [HttpGet("active")]
         public IActionResult GetActiveMatch()
         {
+            var activeMatch = _matchRepository.GetActiveMatch();
+            if (activeMatch == null)
+                return Ok(null);
             var extendedMatch = new MatchWithTime(_matchRepository.GetActiveMatch(), LiveMatchService.CurrentActiveMatchMinute, LiveMatchService.CurrentActiveMatchSecond);
             return Ok(extendedMatch);
         }

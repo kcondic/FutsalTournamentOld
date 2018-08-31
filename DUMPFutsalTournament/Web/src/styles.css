@@ -5,6 +5,7 @@
 
 html {
 	height: 100%;
+	width: 100%;
 }
 
 body {
@@ -314,7 +315,7 @@ a:hover {
 	margin-right: 2px;
 }
 
-.close-button {
+.close-button, .submit {
 	font-size: 14px;
 	cursor: pointer;
 	margin-top: 10px;
@@ -326,8 +327,12 @@ a:hover {
 	padding: 5px;
 }
 
-.close-button:hover {
+.close-button:hover, .submit:hover {
 	background-color: #e8e8ee;
+}
+
+.submit {
+	color: #90ee90;
 }
 
 .match-score {
@@ -420,4 +425,8 @@ a:hover {
 
 .team-matches {
 	width: 100%;
+}
+
+.right {
+	text-align: right;
 }

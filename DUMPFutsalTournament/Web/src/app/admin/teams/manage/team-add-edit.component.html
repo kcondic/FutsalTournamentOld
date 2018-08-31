@@ -1,21 +1,27 @@
 <div *ngIf="hasLoaded; else ldsring">
-	<form (ngSubmit)="save()" class="add-edit">
-		<span class="team-name">Ime: <input type="text" [(ngModel)]="team.name" name="team-name" /></span>
-		<div class="team-players">
-			<div *ngIf="team.players.length">
-				Igrači:
-				<div class="player" *ngFor="let player of team.players" (click)="removePlayer(player.playerId)">
-					{{player.firstName}} {{player.lastName}}
+	<div class="popup">
+		<div class="popup-content flex column center">
+			<form (ngSubmit)="save()" class="add-edit">
+				<span class="team-name">Ime: <input type="text" [(ngModel)]="team.name" name="team-name"/></span>
+				<div class="team-players">
+					<div *ngIf="team.players.length">
+						Igrači:
+						<div class="player" *ngFor="let player of team.players" (click)="removePlayer(player.playerId)">
+							{{player.firstName}} {{player.lastName}}
+						</div>
+					</div>
+					Ostali igrači:
+					<div class="player" *ngFor="let player of players" (click)="addPlayer(player.playerId)">
+						{{player.firstName}} {{player.lastName}}
+					</div>
 				</div>
-			</div>
-			Ostali igrači:
-			<div class="player" *ngFor="let player of players" (click)="addPlayer(player.playerId)">
-				{{player.firstName}} {{player.lastName}}
-			</div>
+				<div class="right">
+					<button class="close-button" (click)="close()">Zatvori</button>
+					<button class="submit" type="submit">Spremi</button>
+				</div>
+			</form>
 		</div>
-		<button class="close-button" (click)="close()">Zatvori</button>
-		<button type="submit">Spremi</button>
-	</form>
+	</div>
 </div>
 <ng-template #ldsring>
 	<div class="lds-ring"><div></div><div></div><div></div><div></div></div>
