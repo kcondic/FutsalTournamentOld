@@ -9,6 +9,7 @@ namespace DUMPFutsalTournament.Controllers
     [Route("api/live-match")]
     public class LiveMatchController : Controller
     {
+        [Authorize]
         [HttpGet("update-second")]
         public IActionResult UpdateSecond()
         {
@@ -28,7 +29,17 @@ namespace DUMPFutsalTournament.Controllers
         [HttpGet("get-time")]
         public IActionResult GetMinute()
         {
-            return Ok(new { minute = LiveMatchService.CurrentActiveMatchMinute, second = LiveMatchService.CurrentActiveMatchSecond});
+            return Ok(new { minute = LiveMatchService.CurrentActiveMatchMinute, second = LiveMatchService.CurrentActiveMatchSecond });
+        }
+
+
+        [Authorize]
+        [HttpGet("set-time")]
+        public IActionResult SetTime(int minutes, int seconds)
+        {
+            LiveMatchService.CurrentActiveMatchMinute = minutes;
+            LiveMatchService.CurrentActiveMatchSecond = seconds;
+            return Ok();
         }
     }
 }

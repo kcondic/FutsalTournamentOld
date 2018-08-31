@@ -36,15 +36,8 @@
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
-    <Compile Remove="wwwroot\**" />
     <Content Remove="$(SpaRoot)**" />
-    <Content Remove="wwwroot\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Remove="wwwroot\**" />
-    <None Remove="wwwroot\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -52,6 +45,11 @@
     <Compile Remove="Migrations\20180824111715_AddUserTable.Designer.cs" />
     <Compile Remove="Migrations\20180829141143_SeedingGroupData.cs" />
     <Compile Remove="Migrations\20180829141143_SeedingGroupData.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\favi.ico" />
+    <Content Remove="wwwroot\favicon.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -95,6 +93,11 @@
     <None Remove="Web\src\app\teams\team.service.ts" />
     <None Remove="Web\src\app\teams\teams-routing.module.ts" />
     <None Remove="Web\src\app\teams\teams.module.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\favi.ico" />
+    <None Include="wwwroot\favicon.ico" />
   </ItemGroup>
 
   <ItemGroup>

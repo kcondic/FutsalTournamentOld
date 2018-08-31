@@ -12,4 +12,6 @@ export class AdminLiveMatchService {
 	 updateMatchSecond(): any { return this.http.get(this.matchesUrl + '/update-second'); }
 
 	 getCurrentActiveTime() : any { return this.http.get(this.matchesUrl + '/get-time'); }
+
+	 setTime(minutes, seconds) : any { return this.http.get(`${this.matchesUrl}/set-time?minutes=${minutes}&seconds=${seconds}`)}
 }
