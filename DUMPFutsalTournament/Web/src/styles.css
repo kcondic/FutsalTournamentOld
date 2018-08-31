@@ -47,6 +47,7 @@ a:hover {
 
 .nav {
 	position: fixed;
+	z-index: 2;
 	padding-top: 10px;
 	top: 0;
 	left: 0;
@@ -58,7 +59,7 @@ a:hover {
 
 .toggle-navigation-container {
 	position: absolute;
-	top: 30px;
+	top: 15px;
 	right: 50px;
 	height: 25px;
 	width: 30px;
@@ -111,7 +112,7 @@ a:hover {
 	.nav {
 		flex-direction: column;
 		padding-bottom: 10px;
-		height: 90px;
+		height: 55px;
 	}
 	.nav.expanded {
 		height: 400px;
@@ -124,7 +125,7 @@ a:hover {
 	}
 	.nav.expanded a {
 		visibility: visible;
-		opacity: 1;;
+		opacity: 1;
 	}
 	.separator {
 		display: none;
@@ -474,7 +475,16 @@ a:hover {
 
 .top-scorer {
 	text-align: left;
-	margin-top: 30px;
+	margin-top: 50px;
+}
+
+.top-scorer span {
+	font-size: 24px;
+	margin-bottom: 10px;
+}
+
+.top-scorer div {
+	margin-left: 10px;
 }
 
 .team-list {

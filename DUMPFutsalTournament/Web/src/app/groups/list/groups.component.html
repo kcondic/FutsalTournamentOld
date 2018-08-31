@@ -27,7 +27,7 @@
 		</table>
 	</div>
 	<div class="top-scorer" *ngIf="topScorers">
-		Najbolji strijelci
+		<span>Najbolji strijelci</span>
 		<div *ngFor="let scorer of topScorers">
 			{{scorer.player.firstName}} {{scorer.player.lastName}} {{scorer.goals}}
 		</div>
