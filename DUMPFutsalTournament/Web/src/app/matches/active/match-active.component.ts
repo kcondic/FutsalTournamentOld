@@ -26,8 +26,14 @@ export class MatchActiveComponent implements OnInit {
 		this.service.getActiveMatch().subscribe(activeMatch => {
 			this.match = activeMatch;
 			this.hasLoaded = true;
-			this.second = this.match.second;
-			this.minute = this.match.minute;
+			if (this.match) {
+				console.log('test');
+				this.second = this.match.second;
+				this.minute = this.match.minute;
+			} else {
+				this.second = 0;
+				this.minute = 0;
+			}
 		});
 	 }
 }
