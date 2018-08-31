@@ -42,7 +42,7 @@ export class MatchDetailComponent implements OnInit {
 	}
 
 	getPenaltiesString(): string {
-		if (this.match.matchType === MatchType.Group || this.match.homeGoals !== this.match.awayGoals)
+		if (this.match.matchType === MatchType.Group || this.match.homeGoals == null || this.match.awayGoals == null || this.match.homeGoals !== this.match.awayGoals)
 			 return '';
 		const homePenaltiesCount = this.match.matchEvents
 			  .filter(matchEvent => matchEvent.eventType === MatchEventType.ShootoutGoal && matchEvent.isForHomeTeam).length;

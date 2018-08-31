@@ -1,10 +1,10 @@
 <div *ngIf="hasLoaded;else ldsring">
 	<div class="popup" *ngIf="team; else noteam">
-		<div class="team popup-content flex column center">
-			<div class="team-name">
+		<div class="team popup-content flex column">
+			<div class="team-name flex center">
 				{{team.name}}
 			</div>
-			<div class="team-phase" *ngIf="teamMatches">
+			<div class="team-phase flex center" *ngIf="teamMatches">
 				Status: {{getLastMatchTypeTranslation()}}
 			</div>
 			<div class="team-players">

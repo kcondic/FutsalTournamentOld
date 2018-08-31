@@ -283,6 +283,8 @@ a:hover {
 	padding: 20px 40px;
 	background-color: white;
 	border-radius: 5px;
+	max-height: 50%;
+	overflow-y: scroll;
 }
 
 .home-event, .away-event {
@@ -319,6 +321,7 @@ a:hover {
 	font-size: 14px;
 	cursor: pointer;
 	margin-top: 10px;
+	margin-bottom: 10px;
 	margin-left: auto;
 	background-color: white;
 	border: none;
@@ -361,7 +364,6 @@ a:hover {
 .group-chooser {
 	flex-wrap: nowrap;
 	display: inline-block;
-	width: 50%;
 }
 
 .group-chooser a {
@@ -369,6 +371,7 @@ a:hover {
 	background-color: #e8e8ee;
 	padding: 2px 5px;
 	border-radius: 5px;
+	margin-right: 5px;
 }
 
 .table-team-name {
