@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class AdminLiveMatchService {
-	private matchesUrl = 'api/live-match';
+	private matchesUrl = 'http://dump-turnir.com/api/live-match';
 
 	constructor(private http: HttpClient) { }
 

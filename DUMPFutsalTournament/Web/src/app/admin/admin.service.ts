@@ -9,10 +9,10 @@ import { MatchEvent } from '../infrastructure/classes/matchevent';
 
 @Injectable()
 export class AdminService {
-	private playersUrl = 'api/players';
-	private teamsUrl = 'api/teams';
-	private groupsUrl = 'api/groups';
-	private matchesUrl = 'api/matches';
+	private playersUrl = 'http://dump-turnir.com/api/players';
+	private teamsUrl = 'http://dump-turnir.com/api/teams';
+	private groupsUrl = 'http://dump-turnir.com/api/groups';
+	private matchesUrl = 'http://dump-turnir.com/api/matches';
 
 	constructor(private http: HttpClient) { }
 

@@ -9,7 +9,7 @@ export class AuthService {
 	constructor(private http: HttpClient, private jwtHelper: JwtHelperService) { }
 
 	 login(user: User): Observable<string> {
-		  return this.http.post('api/login', user, { responseType: 'text' });
+		  return this.http.post('http://dump-turnir.com/api/login', user, { responseType: 'text' });
 	 }
 
 	 isAuthenticated(): boolean {
