@@ -270,15 +270,16 @@ a:hover {
 	display: inline-block;
 	position: absolute;
 	top: 30%;
-	left: 47.5%;
+	left: 50%;
 	width: 64px;
 	height: 64px;
 	transition: all 200ms ease-in-out;
+	transform: translateX(-50%);
 }
 
 @media (max-width: 500px) {
 	.nav.expanded + .main ng-component .lds-ring {
-		top: 50%;
+		top: 60%;
 	}
 }
 
@@ -336,6 +337,16 @@ a:hover {
 	color: black;
 }
 
+@media (max-width: 500px) {
+	.match-teams {
+		padding: 10px 0;
+	}
+
+	.match-list {
+		padding: 0 50px;
+	}
+}
+
 .match-list .matches-date {
 	font-size: 24px;
 }
@@ -347,6 +358,12 @@ a:hover {
 
 .match-container .element {
 	flex-basis: 20%;
+}
+
+@media (max-width: 500px) {
+	.match-container .element {
+		flex-basis: 30%;
+	}
 }
 
 .match-container .match-goals {
@@ -499,6 +516,20 @@ a:hover {
 	border-right: 1px solid lightgray;
 }
 
+.team {
+	border-radius: 5px;
+}
+
+.team-name {
+	font-weight: 500;
+	margin-bottom: 10px;
+}
+
+.team-name,
+.team-phase {
+	display: inline-block;
+}
+
 .team-list a {
 	color: black;
 }
@@ -557,4 +588,36 @@ a:hover {
 
 .match-manage .player-subjects .home-players {
 	margin-right: 10px;
+}
+
+.dump-logo {
+	width: 90%;
+	max-width: 1200px;
+}
+
+@media (max-width: 500px) {
+	.match-detail {
+		margin-top: 20px;
+	}
+	.home-event {
+		padding: 5px 0;
+	}
+	.match-score {
+		margin: 15px 0;
+	}
+	.match-active {
+		margin-top: 100px;
+	}
+	.match-active div h3 {
+		margin: 0;
+	}
+	.match-time {
+		padding: 10px 0;
+	}
+	.dump-logo + h1 {
+		font-size: 24px;
+	}
+	.top-scorer {
+		padding: 0 20px;
+	}
 }
