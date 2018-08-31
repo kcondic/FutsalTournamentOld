@@ -187,7 +187,8 @@ a:hover {
 .lds-ring {
 	display: inline-block;
 	position: absolute;
-
+	top: 30%;
+	left: 47.5%;
 	width: 64px;
 	height: 64px;
 }

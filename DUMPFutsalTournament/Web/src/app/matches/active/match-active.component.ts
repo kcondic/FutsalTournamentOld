@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatchService } from '../match.service';
 import { Match } from '../../infrastructure/classes/match';
-import { SocketService } from '../../common/socket.service';
 import { interval } from 'rxjs';
 
 @Component({
@@ -20,13 +19,13 @@ export class MatchActiveComponent implements OnInit {
 		this.getActiveMatch();
 		this.source.subscribe(() => {
 			this.getActiveMatch();
-			this.hasLoaded = true;  
 		});
 	 }
 
 	 getActiveMatch() : void {
 		this.service.getActiveMatch().subscribe(activeMatch => {
 			this.match = activeMatch;
+			this.hasLoaded = true;
 			this.second = this.match.second;
 			this.minute = this.match.minute;
 		});

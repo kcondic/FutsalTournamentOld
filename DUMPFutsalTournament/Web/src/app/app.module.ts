@@ -10,10 +10,6 @@ import { LoginComponent } from './common/login.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { ClosePopupService } from './common/close-popup.service';
 import { MatchTypeTranslationService } from './common/match-type-translation.service';
-import { SocketService } from './common/socket.service';
-import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
-
-const config: SocketIoConfig = { url: 'http://localhost:50005' };
 
 @NgModule({
   declarations: [
@@ -33,10 +29,9 @@ const config: SocketIoConfig = { url: 'http://localhost:50005' };
 				  return localStorage.getItem('token');
 			  }
 		 }
-	}),
-	SocketIoModule.forRoot(config)
+	})
   ],
-  providers: [ ClosePopupService, MatchTypeTranslationService, SocketService ],
+  providers: [ ClosePopupService, MatchTypeTranslationService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
