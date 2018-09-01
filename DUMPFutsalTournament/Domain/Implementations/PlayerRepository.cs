@@ -49,7 +49,7 @@ namespace DUMPFutsalTournament.Domain.Implementations
             var playerToEdit = _context.Players.Find(editedPlayer.PlayerId);
             if (playerToEdit == null || editedPlayer.LastName == null)
                 return false;
-            if (editedPlayer.Team != null && GetTeamPlayerCount(editedPlayer.Team.TeamId) >= 12)
+            if (editedPlayer.Team != null && GetTeamPlayerCount(editedPlayer.Team.TeamId) > 12)
                 return false;
             if (editedPlayer.Team != null)
                 _context.Teams.Attach(editedPlayer.Team);

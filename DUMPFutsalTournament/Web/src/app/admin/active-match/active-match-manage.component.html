@@ -20,7 +20,7 @@
 		</div>
 		<div *ngFor="let event of activeMatch.matchEvents" [ngClass]="event.isForHomeTeam ? 'home-event' : 'away-event'">
 			<span [ngClass]="[getMatchEventTypeClass(event.eventType) | lowercase, 'icon']"></span>
-			<span *ngIf="event.player" class="event-player">{{event.player.lastName}}</span>
+			<span *ngIf="event.player" class="event-player">{{event.player.lastName}} {{event.player.firstName | slice:0:1 }}.</span>
 			<span class="event-minute">{{event.eventMinute}}'</span>
 			<span class="icon trash" (click)="removeMatchEvent(event.matchEventId)"></span>
 		</div>

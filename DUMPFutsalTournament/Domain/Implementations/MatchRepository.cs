@@ -125,10 +125,15 @@ namespace DUMPFutsalTournament.Domain.Implementations
 
         public void AddMatchEvent(MatchEvent matchEvent)
         {
-            if(matchEvent.Player != null)
-                _context.Players.Attach(matchEvent.Player);
-            _context.Matches.Attach(matchEvent.Match);
-            _context.MatchEvents.Add(matchEvent);
+            var newMatchEvent = new MatchEvent
+            {
+                EventMinute = matchEvent.EventMinute,
+                IsForHomeTeam = matchEvent.IsForHomeTeam,
+                MatchId = matchEvent.Match.MatchId,
+                PlayerId = matchEvent.Player?.PlayerId,
+                EventType = matchEvent.EventType
+            };
+            _context.MatchEvents.Add(newMatchEvent);
             _context.SaveChanges();
         }
 

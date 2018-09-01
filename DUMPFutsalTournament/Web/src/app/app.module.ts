@@ -11,27 +11,29 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { ClosePopupService } from './common/close-popup.service';
 import { MatchTypeTranslationService } from './common/match-type-translation.service';
 
+export function jwtTokenGetter() {
+	return localStorage.getItem('token');
+}
+
 @NgModule({
-  declarations: [
-	AppComponent,
-	PageNotFoundComponent,
-	LoginComponent
-  ],
-  imports: [
-	BrowserModule,
-	FormsModule,
-	HttpClientModule,
-	LoginRoutingModule,
-	AppRoutingModule,
-	JwtModule.forRoot({
-		 config: {
-			  tokenGetter: () => {
-				  return localStorage.getItem('token');
-			  }
-		 }
-	})
-  ],
-  providers: [ ClosePopupService, MatchTypeTranslationService ],
-  bootstrap: [ AppComponent ]
+	declarations: [
+		AppComponent,
+		PageNotFoundComponent,
+		LoginComponent
+	],
+	imports: [
+		BrowserModule,
+		FormsModule,
+		HttpClientModule,
+		LoginRoutingModule,
+		AppRoutingModule,
+		JwtModule.forRoot({
+			config: {
+				tokenGetter: jwtTokenGetter			
+			}
+		})
+	],
+	providers: [ClosePopupService, MatchTypeTranslationService],
+	bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -42,7 +42,10 @@ export class ActiveMatchManageComponent implements OnInit {
 		});
 
 		this.adminLiveMatchService.getCurrentActiveTime()
-		.subscribe(time => { this.seconds = time.second; this.minutes = time.minute;})
+			.subscribe(time => {
+				this.seconds = time.second;
+				this.minutes = time.minute;
+			});
 
 		this.matchEventTypeKeys = Object.keys(this.matchEventTypes).filter(f => !isNaN(Number(f)));
 	 }
@@ -89,6 +92,10 @@ export class ActiveMatchManageComponent implements OnInit {
 	}
 
 	 addMatchEvent(player: Player, isForHomeTeam: boolean) {
+		if (isForHomeTeam && +this.newEventType === MatchEventType.OwnGoal)
+			 isForHomeTeam = false;
+		else if (!isForHomeTeam && +this.newEventType === MatchEventType.OwnGoal)
+			   isForHomeTeam = true;
 		const newMatchEvent = new MatchEvent(Object.assign({}, this.activeMatch), player,
 							this.newEventType, isForHomeTeam, this.minutes + 1);
 		newMatchEvent.match.homeTeam = null;
@@ -96,20 +103,16 @@ export class ActiveMatchManageComponent implements OnInit {
 		newMatchEvent.match.matchEvents = null;
 		 this.service.addMatchEvent(newMatchEvent).subscribe(() => {
 			this.activeMatch.matchEvents.push(newMatchEvent);
-			if (+newMatchEvent.eventType === MatchEventType.Goal || +newMatchEvent.eventType === MatchEventType.PenaltyGoal) {
+			  if (+newMatchEvent.eventType === MatchEventType.Goal ||
+				 +newMatchEvent.eventType === MatchEventType.PenaltyGoal ||
+				 +newMatchEvent.eventType === MatchEventType.OwnGoal)
+			  {
 				if (isForHomeTeam)
 					this.activeMatch.homeGoals++;
 				else
 					  this.activeMatch.awayGoals++;
 				this.service.updateMatchGoals(this.activeMatch).subscribe();
-			}
-			else if (+newMatchEvent.eventType === MatchEventType.OwnGoal) {
-				if (isForHomeTeam)
-					this.activeMatch.awayGoals++;
-				else
-					this.activeMatch.homeGoals++;
-				this.service.updateMatchGoals(this.activeMatch).subscribe();
-			}
+			  }  
 		 });
 		this.stopWatchStopped = false;
 		this.isAddEvent = false;
@@ -125,18 +128,13 @@ export class ActiveMatchManageComponent implements OnInit {
 
 				if (removeIndex !== -1)
 					  this.activeMatch.matchEvents.splice(removeIndex, 1);
-				if (+eventType === MatchEventType.Goal || +eventType === MatchEventType.PenaltyGoal) {
+				 if (+eventType === MatchEventType.Goal ||
+					+eventType === MatchEventType.PenaltyGoal ||
+					+eventType === MatchEventType.OwnGoal) {
 					if (isForHomeTeam)
 						this.activeMatch.homeGoals--;
 					else
 						this.activeMatch.awayGoals--;
-					this.service.updateMatchGoals(this.activeMatch).subscribe();
-				}
-				else if (+eventType === MatchEventType.OwnGoal) {
-					if (isForHomeTeam)
-						this.activeMatch.awayGoals--;
-					else
-						this.activeMatch.homeGoals--;
 					this.service.updateMatchGoals(this.activeMatch).subscribe();
 				}
 				this.stopWatchStopped = false;
