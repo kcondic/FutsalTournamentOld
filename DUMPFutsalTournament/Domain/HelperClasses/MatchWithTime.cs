@@ -4,7 +4,7 @@ namespace DUMPFutsalTournament.Domain.HelperClasses
 {
     public class MatchWithTime : Match
     {
-        public MatchWithTime(Match match, int minute, int second)
+        public MatchWithTime(Match match, int minute)
         {
             AwayGoals = match.AwayGoals ?? 0;
             AwayTeam = match.AwayTeam;
@@ -16,9 +16,7 @@ namespace DUMPFutsalTournament.Domain.HelperClasses
             MatchType = match.MatchType;
             MatchId = match.MatchId;
             Minute = minute;
-            Second = second;
         }
         public int Minute { get; set; }
-        public int Second { get; set; }
     }
 }

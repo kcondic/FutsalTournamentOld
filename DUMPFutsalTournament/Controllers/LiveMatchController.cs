@@ -10,26 +10,20 @@ namespace DUMPFutsalTournament.Controllers
     public class LiveMatchController : Controller
     {
         [Authorize]
-        [HttpGet("update-second")]
-        public IActionResult UpdateSecond()
+        [HttpGet("update-minute")]
+        public IActionResult UpdateMinute()
         {
             if (LiveMatchService.CurrentActiveMatchMinute >= 30)
                 return BadRequest();
 
-            LiveMatchService.CurrentActiveMatchSecond++;
-            if (LiveMatchService.CurrentActiveMatchSecond >= 60)
-            {
-                LiveMatchService.CurrentActiveMatchSecond = 0;
-                LiveMatchService.CurrentActiveMatchMinute++;
-            }
-
-            return Ok();
+            LiveMatchService.CurrentActiveMatchMinute++;
+            return Ok(null);
         }
 
         [HttpGet("get-time")]
         public IActionResult GetMinute()
         {
-            return Ok(new { minute = LiveMatchService.CurrentActiveMatchMinute, second = LiveMatchService.CurrentActiveMatchSecond });
+            return Ok(LiveMatchService.CurrentActiveMatchMinute);
         }
 
 
@@ -38,8 +32,7 @@ namespace DUMPFutsalTournament.Controllers
         public IActionResult SetTime(int minutes, int seconds)
         {
             LiveMatchService.CurrentActiveMatchMinute = minutes;
-            LiveMatchService.CurrentActiveMatchSecond = seconds;
-            return Ok();
+            return Ok(null);
         }
     }
 }

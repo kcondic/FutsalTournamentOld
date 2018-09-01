@@ -28,13 +28,25 @@ namespace DUMPFutsalTournament.Domain.Implementations
 
         public Match GetActiveMatch()
         {
-            return _context.Matches
+            var activeMatch = _context.Matches
                 .Include(match => match.HomeTeam)
                 .ThenInclude(homeTeam => homeTeam.Players)
                 .Include(match => match.AwayTeam)
                 .ThenInclude(awayTeam => awayTeam.Players)
                 .Include(match => match.MatchEvents)
                 .SingleOrDefault(match => match.IsActive);
+
+            if (activeMatch == null)
+                return null;
+
+            foreach (var ev in activeMatch.MatchEvents)
+            {
+                ev.Match = null;
+                ev.Player.Team = null;
+                ev.Player.MatchEvents = null;
+            }
+
+            return activeMatch;
         }
 
         public Match GetSpecificMatch(int matchId)

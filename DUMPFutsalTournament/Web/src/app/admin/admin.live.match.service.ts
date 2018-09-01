@@ -8,9 +8,9 @@ export class AdminLiveMatchService {
 	constructor(private http: HttpClient) { }
 
 	// Players
-	 updateMatchSecond(): any { return this.http.get(this.matchesUrl + '/update-second'); }
+	 updateMatchMinute(): any { return this.http.get(this.matchesUrl + '/update-minute'); }
 
 	 getCurrentActiveTime() : any { return this.http.get(this.matchesUrl + '/get-time'); }
 
-	 setTime(minutes, seconds) : any { return this.http.get(`${this.matchesUrl}/set-time?minutes=${minutes}&seconds=${seconds}`)}
+	 setTime(minutes) : any { return this.http.get(`${this.matchesUrl}/set-time?minutes=${minutes}`); }
 }

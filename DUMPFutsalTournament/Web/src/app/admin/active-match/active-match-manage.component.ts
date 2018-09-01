@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AdminService } from '../admin.service';
 import { Match } from '../../infrastructure/classes/match';
@@ -9,7 +9,7 @@ import { MatchEventType } from '../../infrastructure/enums/matcheventtype';
 import { MatchTypeTranslationService } from '../../common/match-type-translation.service';
 import { AdminLiveMatchService} from '../admin.live.match.service';
 import { HostListener } from '@angular/core';
-import { interval } from 'rxjs';
+import { interval, Subscription } from 'rxjs';
 
 @Component({
 	templateUrl: './active-match-manage.component.html'
@@ -25,9 +25,9 @@ export class ActiveMatchManageComponent implements OnInit {
 	isAddEvent: boolean = false;
 	newEventType: MatchEventType;
 	hasLoaded: boolean = false;
-	isChanging: boolean = false;
+	timeSubscription: Subscription;
 
-	 constructor(private router: Router, private service: AdminService,
+	constructor(private router: Router, private service: AdminService,
 		 private matchTypeTranslation: MatchTypeTranslationService, private adminLiveMatchService: AdminLiveMatchService) { }
 
 	ngOnInit() {
@@ -36,18 +36,20 @@ export class ActiveMatchManageComponent implements OnInit {
 				this.activeMatch = matchData;
 				this.hasLoaded = true;
 			});
-		this.source.subscribe(() => {
+		this.timeSubscription = this.source.subscribe(() => {
 			if (!this.stopWatchStopped)
 				this.addSecond();
 		});
-
 		this.adminLiveMatchService.getCurrentActiveTime()
-			.subscribe(time => {
-				this.seconds = time.second;
-				this.minutes = time.minute;
+			 .subscribe(time => {
+				this.minutes = time;
 			});
 
 		this.matchEventTypeKeys = Object.keys(this.matchEventTypes).filter(f => !isNaN(Number(f)));
+	 }
+
+	 ngOnDestroy() {
+		 this.timeSubscription.unsubscribe();
 	 }
 
 
@@ -60,22 +62,21 @@ export class ActiveMatchManageComponent implements OnInit {
 	addSecond() {
 		if(this.minutes < 30) {
 			this.seconds++;
-			this.adminLiveMatchService.updateMatchSecond()
-			.subscribe(x => {});
 			if (this.seconds >= 60) {
 				this.seconds = 0;
 				this.minutes++;
+				this.adminLiveMatchService
+				    .updateMatchMinute()
+				    .subscribe();
 			}
 		} else {
 			this.stopWatchStopped = true;
 		}
 	}
 
-	setTime(){
-		this.isChanging = true
+	 setTime() {
 		this.stopWatchStopped = true;
-		this.adminLiveMatchService.setTime(this.minutes, this.seconds)
-		.subscribe(response => { this.isChanging = false; });
+		this.adminLiveMatchService.setTime(this.minutes).subscribe();
 	}
 
 	deactivate() {

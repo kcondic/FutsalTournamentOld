@@ -18,8 +18,8 @@ export class MatchDetailComponent implements OnInit {
 	hasLoaded: boolean = false;
 
 	constructor(private route: ActivatedRoute,
-		  private service: MatchService, private closePopup: ClosePopupService,
-			private matchTypeTranslation: MatchTypeTranslationService) { }
+		       private service: MatchService, private closePopup: ClosePopupService,
+			  private matchTypeTranslation: MatchTypeTranslationService) { }
 
 	ngOnInit() {
 		if (!this.match)

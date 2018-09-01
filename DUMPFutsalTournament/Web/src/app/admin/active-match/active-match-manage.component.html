@@ -2,9 +2,8 @@
 <div *ngIf="hasLoaded; else ldsring">
 	<div class="match-manage flex column center" *ngIf="activeMatch;else noactivematch">
 		<span class="timer">
-			<input type="number" [(ngModel)]="minutes" (ngModelChange)="setTime($event)" [attr.disabled]="disabled"/>
-			<input type="number" [(ngModel)]="seconds" (ngModelChange)="setTime($event)" [attr.disabled]="disabled"/>
-			<!-- <button [hidden]="!stopWatchStopped" (click)="setTime()">Set time on server</button> -->
+			<input type="number" [(ngModel)]="minutes" (ngModelChange)="setTime($event)"/>
+			<input type="number" [(ngModel)]="seconds" (ngModelChange)="setTime($event)"/>
 		</span>
 		<div class="match-title">
 			{{activeMatch.homeTeam.name}} - {{activeMatch.awayTeam.name}}

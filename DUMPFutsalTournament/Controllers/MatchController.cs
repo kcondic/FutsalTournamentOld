@@ -35,7 +35,7 @@ namespace DUMPFutsalTournament.Controllers
             var activeMatch = _matchRepository.GetActiveMatch();
             if (activeMatch == null)
                 return Ok(null);
-            var extendedMatch = new MatchWithTime(_matchRepository.GetActiveMatch(), LiveMatchService.CurrentActiveMatchMinute, LiveMatchService.CurrentActiveMatchSecond);
+            var extendedMatch = new MatchWithTime(_matchRepository.GetActiveMatch(), LiveMatchService.CurrentActiveMatchMinute);
             return Ok(extendedMatch);
         }
 
@@ -64,7 +64,6 @@ namespace DUMPFutsalTournament.Controllers
         public IActionResult SetActiveMatch([FromBody]int matchId)
         {
             LiveMatchService.CurrentActiveMatchMinute = 0;
-            LiveMatchService.CurrentActiveMatchSecond = 0;
             _matchRepository.SetActiveMatch(matchId);
             return Ok(null);
         }
@@ -74,8 +73,6 @@ namespace DUMPFutsalTournament.Controllers
         public IActionResult DeactivateMatch()
         {
             LiveMatchService.CurrentActiveMatchMinute = 0;
-            LiveMatchService.CurrentActiveMatchSecond = 0;
-
             _matchRepository.DeactivateMatch();
             return Ok(null);
         }

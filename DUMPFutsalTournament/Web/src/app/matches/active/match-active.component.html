@@ -1,7 +1,7 @@
 <div class="match-active" *ngIf="hasLoaded; else ldsring">
 	<div *ngIf="match;else logo">
 		<h3>U tijeku</h3>
-		<div class="timer">{{minute | number:'2.0-0'}}:{{second | number:'2.0-0'}}</div>
+		<div class="timer">{{minute+1}}'</div>
 		<match-detail [match]="match"></match-detail>
 	</div>
 	<ng-template #logo>

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatchService } from '../match.service';
 import { Match } from '../../infrastructure/classes/match';
-import { interval } from 'rxjs';
+import { interval, Subscription } from 'rxjs';
 
 @Component({
 	templateUrl: './match-active.component.html'
@@ -9,17 +9,21 @@ import { interval } from 'rxjs';
 export class MatchActiveComponent implements OnInit {
 	match: Match;
 	minute: number = 0;
-	second: number = 0;
-	source = interval(1000);
+	source = interval(10000);
 	hasLoaded: boolean = false;
+	timeSubscription: Subscription;
 
 	constructor(private service: MatchService) { }
 
 	 ngOnInit() {
 		this.getActiveMatch();
-		this.source.subscribe(() => {
+		this.timeSubscription = this.source.subscribe(() => {
 			this.getActiveMatch();
 		});
+	 }
+
+	 ngOnDestroy() {
+		 this.timeSubscription.unsubscribe();
 	 }
 
 	 getActiveMatch() : void {
@@ -27,11 +31,7 @@ export class MatchActiveComponent implements OnInit {
 			this.match = activeMatch;
 			this.hasLoaded = true;
 			if (this.match) {
-				this.second = this.match.second;
 				this.minute = this.match.minute;
-			} else {
-				this.second = 0;
-				this.minute = 0;
 			}
 		});
 	 }
