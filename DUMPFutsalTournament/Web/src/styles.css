@@ -13,6 +13,12 @@ body {
 		sans-serif;
 }
 
+@media (max-width: 500px) {
+	body {
+		padding: 10px;
+	}
+}
+
 span {
 	display: inline-block;
 }
