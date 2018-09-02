@@ -643,3 +643,8 @@ a:hover {
 .away-event {
 	display: inline-block;
 }
+
+.timer,
+.timer input {
+	font-size: 20px;
+}

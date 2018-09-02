@@ -55,8 +55,10 @@ export class ActiveMatchManageComponent implements OnInit {
 
 	@HostListener('document:keypress', ['$event'])
 	handleKeyboardEvent(event: KeyboardEvent) {
-		 if (event.key === ' ')
-			  this.stopWatchStopped = !this.stopWatchStopped;
+		 if (event.key === ' ') {
+		     event.preventDefault();
+			this.toggleStopWatch();
+		 }
 	}
 
 	addSecond() {
@@ -74,9 +76,13 @@ export class ActiveMatchManageComponent implements OnInit {
 		}
 	}
 
-	 setTime() {
+	setTime() {
 		this.stopWatchStopped = true;
 		this.adminLiveMatchService.setTime(this.minutes).subscribe();
+	}
+
+	toggleStopWatch() {
+		this.stopWatchStopped = !this.stopWatchStopped;
 	}
 
 	deactivate() {

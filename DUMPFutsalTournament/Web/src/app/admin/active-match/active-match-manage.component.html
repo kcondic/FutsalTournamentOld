@@ -5,6 +5,7 @@
 			<input type="number" [(ngModel)]="minutes" (ngModelChange)="setTime($event)"/>
 			<input type="number" [(ngModel)]="seconds" (ngModelChange)="setTime($event)"/>
 		</span>
+		<button class="timer" (click)="toggleStopWatch()">VRIJEME</button>
 		<div class="match-title">
 			{{activeMatch.homeTeam.name}} - {{activeMatch.awayTeam.name}}
 		</div>
