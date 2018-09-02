@@ -10,22 +10,16 @@ export class AppComponent {
 	toggleNavigation() {
 		const navigation = document.getElementById('nav');
 		const toggleNav = document.getElementById('toggle-nav');
-		const width = window.innerWidth
-			|| document.documentElement.clientWidth
-			|| document.body.clientWidth;
 
-		 if (width <= 500)
-		 {
-			  if (toggleNav.className.includes('toggled'))
-			  {
-				 this.renderer.removeClass(toggleNav, 'toggled');
-				 this.renderer.removeClass(navigation, 'expanded');
-			  }
-			  else
-			  {
-				 this.renderer.addClass(toggleNav, 'toggled');
-				 this.renderer.addClass(navigation, 'expanded');
-			  }
-		 }
+		if (toggleNav.className.includes('toggled'))
+		{
+			this.renderer.removeClass(toggleNav, 'toggled');
+			this.renderer.removeClass(navigation, 'expanded');
+		}
+		else
+		{
+			this.renderer.addClass(toggleNav, 'toggled');
+			this.renderer.addClass(navigation, 'expanded');
+		}
 	}
 }
