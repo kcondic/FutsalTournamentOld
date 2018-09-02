@@ -4,13 +4,13 @@
 			<form (ngSubmit)="save()" class="add-edit flex column">
 				<span class="match-home-team">
 					Domaća ekipa:
-					<select [disabled]="isEdit" class="match-home-team" name="home-team-select" [(ngModel)]="match.homeTeam">
+					<select [disabled]="isEdit" class="match-home-team" name="home-team-select" [(ngModel)]="match.homeTeam" [compareWith]="identicalTeams" >
 						<option *ngFor="let team of homeTeams" [ngValue]="team" name="home-team-select-option" (click)="updateAwayTeams()">{{team.name}}</option>
 					</select>
 				</span>
 				<span class="match-away-team">
 					Gostujuća ekipa:
-					<select [disabled]="isEdit" class="match-away-team" name="away-team-select" [(ngModel)]="match.awayTeam">
+					<select [disabled]="isEdit" class="match-away-team" name="away-team-select" [(ngModel)]="match.awayTeam" [compareWith]="identicalTeams">
 						<option *ngFor="let team of awayTeams" [ngValue]="team" name="away-team-select-option" (click)="updateHomeTeams()">{{team.name}}</option>
 					</select>
 				</span>

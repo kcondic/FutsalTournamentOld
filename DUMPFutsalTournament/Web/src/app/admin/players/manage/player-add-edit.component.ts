@@ -51,4 +51,8 @@ export class PlayerAddEditComponent implements OnInit {
 		 else
 		  this.service.addPlayer(this.player).subscribe(() => this.close(), () => this.showError());
 	 }
+
+	 identicalTeams(team1: Team, team2: Team): boolean {
+		 return team1 && team2 && team1.teamId === team2.teamId;
+	 }
 }

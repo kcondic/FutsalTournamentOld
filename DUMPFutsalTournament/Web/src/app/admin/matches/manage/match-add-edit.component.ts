@@ -28,6 +28,7 @@ export class MatchAddEditComponent implements OnInit {
 
 	 ngOnInit() {
 		this.route.queryParams.subscribe(params => this.matchId = params['id']);
+		this.matchTypeKeys = Object.keys(this.matchTypes).filter(f => !isNaN(Number(f)));
 		if (this.matchId) {
 			this.service.getMatch(this.matchId)
 				 .subscribe(matchData => {
@@ -35,7 +36,6 @@ export class MatchAddEditComponent implements OnInit {
 					this.hour = new Date(this.match.timeOfMatch).getHours();
 					this.minute = new Date(this.match.timeOfMatch).getMinutes();
 					this.getAndInitializeTeams();
-					this.hasLoaded = true;
 				});
 			this.isEdit = true;
 		}
@@ -44,10 +44,9 @@ export class MatchAddEditComponent implements OnInit {
 			this.hour = 20;
 			this.minute = 0;
 			this.getAndInitializeTeams();
-			this.hasLoaded = true;
+			this.match.matchType = MatchType.Group;
 		}
-		this.matchTypeKeys = Object.keys(this.matchTypes).filter(f => !isNaN(Number(f)));
-	}
+	 }
 
 	getMatchTypeTranslation(matchTypeEnumValue: MatchType): string {
 		return this.matchTypeTranslation.getMatchTypeTranslation(matchTypeEnumValue);
@@ -55,11 +54,15 @@ export class MatchAddEditComponent implements OnInit {
 
 	getAndInitializeTeams() {
 		this.service.getAllTeams().subscribe(teamData => {
-			this.teams = teamData;
-			this.match.homeTeam = this.teams[0];
-			this.match.awayTeam = this.teams[1];
+			 this.teams = teamData;
+			 if (this.match.homeTeam == null || this.match.awayTeam == null)
+			 {
+				 this.match.homeTeam = this.teams[0];
+				 this.match.awayTeam = this.teams[1];
+			 }
 			this.updateHomeTeams();
 			this.updateAwayTeams();
+			this.hasLoaded = true;
 		});
 	}
 
@@ -75,7 +78,7 @@ export class MatchAddEditComponent implements OnInit {
 		this.closePopup.close(this.route.parent);
 	}
 
-	save() {
+	 save() {
 		const dateOfMatch = new Date(this.match.timeOfMatch);
 		this.match.timeOfMatch = new Date(dateOfMatch.getFullYear(), dateOfMatch.getMonth(), 
 									dateOfMatch.getDate(), this.hour, this.minute);
@@ -83,5 +86,9 @@ export class MatchAddEditComponent implements OnInit {
 			this.service.editMatch(this.match).subscribe(() => this.close());
 		else
 			this.service.addMatch(this.match).subscribe(() => this.close());
+	}
+
+	 identicalTeams(team1: Team, team2: Team): boolean {
+		return team1 && team2 && team1.teamId === team2.teamId;
 	}
 }

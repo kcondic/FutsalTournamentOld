@@ -80,7 +80,8 @@ namespace DUMPFutsalTournament.Domain.Implementations
                 return;
             _context.Teams.Attach(match.HomeTeam);
             _context.Teams.Attach(match.AwayTeam);
-            match.TimeOfMatch = match.TimeOfMatch.ToLocalTime();
+            var croatianTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central European Standard Time");
+            match.TimeOfMatch = TimeZoneInfo.ConvertTimeFromUtc(match.TimeOfMatch, croatianTimeZone);
             _context.Matches.Add(match);
             _context.SaveChanges();
         }
@@ -119,7 +120,8 @@ namespace DUMPFutsalTournament.Domain.Implementations
             var matchToEdit = _context.Matches.Find(editedMatch.MatchId);
             if (matchToEdit == null)
                 return;
-            matchToEdit.TimeOfMatch = editedMatch.TimeOfMatch.ToLocalTime();
+            var croatianTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central European Standard Time");
+            matchToEdit.TimeOfMatch = TimeZoneInfo.ConvertTimeFromUtc(editedMatch.TimeOfMatch, croatianTimeZone);
             _context.SaveChanges();
         }
 

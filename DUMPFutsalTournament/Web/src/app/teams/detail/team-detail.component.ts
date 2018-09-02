@@ -27,7 +27,7 @@ export class TeamDetailComponent implements OnInit {
 				this.team = teamData;
 				this.service.getTeamMatches(this.teamId)
 					 .subscribe(matchData => {
-						this.teamMatches = matchData;
+						this.teamMatches = matchData.sort((match1, match2) => match1.timeOfMatch < match2.timeOfMatch ? -1 : 1);
 						this.hasLoaded = true;
 					});
 			});

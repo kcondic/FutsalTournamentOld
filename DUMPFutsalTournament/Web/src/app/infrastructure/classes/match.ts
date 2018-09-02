@@ -12,7 +12,5 @@ export class Match {
 	matchType: MatchType;
 	matchEvents: MatchEvent[];
 	isActive: boolean;
-
 	minute: number;
-	second: number;
 }
