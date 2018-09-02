@@ -1,11 +1,11 @@
 <div class="nav flex center" id="nav">
-	<a routerLink="/matches/active" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Početna</a>
+	<a routerLink="/matches/active" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" (click)="toggleNavigation()">Početna</a>
 	<div class="separator">|</div>
-	<a routerLink="/matches" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Utakmice</a>
+	<a routerLink="/matches" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" (click)="toggleNavigation()">Utakmice</a>
 	<div class="separator">|</div>
-	<a routerLink="/groups" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Turnir</a>
+	<a routerLink="/groups" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" (click)="toggleNavigation()">Turnir</a>
 	<div class="separator">|</div>
-	<a routerLink="/teams" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Ekipe</a>
+	<a routerLink="/teams" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" (click)="toggleNavigation()">Ekipe</a>
 	<div class="toggle-navigation-container" id="toggle-nav" (click)="toggleNavigation()">
 		<div class="toggle-navigation"></div>
 	</div>
