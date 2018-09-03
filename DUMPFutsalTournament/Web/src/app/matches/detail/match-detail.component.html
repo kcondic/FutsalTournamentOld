@@ -14,10 +14,12 @@
 				{{match.homeGoals}} : {{match.awayGoals}}
 			</div>
 			<div class="match-penalties" *ngIf="getPenaltiesString().length">(p{{getPenaltiesString()}})</div>
-			<div *ngFor="let event of getSortedMatchEvents()" [ngClass]="[event.isForHomeTeam ? 'home-event' : 'away-event', 'flex']">
-				<span [ngClass]="[getMatchEventTypeClass(event.eventType) | lowercase, 'icon no-pointer']"></span>
-				<span class="event-minute">{{event.eventMinute}}'</span>
-				<span *ngIf="event.player" class="event-player">{{event.player.lastName}} {{event.player.firstName | slice:0:1 }}.</span>
+			<div class="match-events">
+				<div *ngFor="let event of getSortedMatchEvents()" [ngClass]="[event.isForHomeTeam ? 'home-event' : 'away-event', 'flex']">
+					<span [ngClass]="[getMatchEventTypeClass(event.eventType) | lowercase, 'icon no-pointer']"></span>
+					<span class="event-minute">{{event.eventMinute}}'</span>
+					<span *ngIf="event.player" class="event-player">{{event.player.lastName}} {{event.player.firstName | slice:0:1 }}.</span>
+				</div>
 			</div>
 			<button class="close-button" (click)="close()" *ngIf="isLocal">
 				Zatvori
