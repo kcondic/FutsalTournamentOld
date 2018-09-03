@@ -30,6 +30,7 @@
 				</span>
 			</ng-template>
 		</div>
+		<a class="close-popup" (click)="close()"></a>
 	</div>
 	<div *ngIf="!isLocal && match; else nomatch">
 		<div class="flex column center match-detail">

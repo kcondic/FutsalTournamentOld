@@ -2,9 +2,9 @@
 	<div class="popup">
 		<div class="popup-content flex column">
 			<form (ngSubmit)="save()" class="add-edit flex column center">
-				<span class="player-first-name">Ime: <input type="text" [(ngModel)]="player.firstName" name="first-name"/></span>
-				<span class="player-last-name">Prezime: <input type="text" [(ngModel)]="player.lastName" name="last-name"/></span>
-				<span class="player-dob">Datum rođenja: <input type="date" [ngModel]="player.dateOfBirth | date:'yyyy-MM-dd'" (ngModelChange)="player.dateOfBirth=$event" name="date-of-birth"/></span>
+				<span class="player-first-name">Ime: <input type="text" [(ngModel)]="player.firstName" name="first-name" /></span>
+				<span class="player-last-name">Prezime: <input type="text" [(ngModel)]="player.lastName" name="last-name" /></span>
+				<span class="player-dob">Datum rođenja: <input type="date" [ngModel]="player.dateOfBirth | date:'yyyy-MM-dd'" (ngModelChange)="player.dateOfBirth=$event" name="date-of-birth" /></span>
 				<select class="player-team" name="team-select" [compareWith]="identicalTeams" [(ngModel)]="player.team">
 					<option [ngValue]="null">-</option>
 					<option *ngFor="let team of teams" [ngValue]="team" name="team-select-option">{{team.name}}</option>
@@ -15,6 +15,7 @@
 				</div>
 			</form>
 		</div>
+		<a class="close-popup" (click)="close()"></a>
 	</div>
 </div>
 <ng-template #ldsring>

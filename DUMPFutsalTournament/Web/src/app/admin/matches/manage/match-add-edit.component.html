@@ -4,7 +4,7 @@
 			<form (ngSubmit)="save()" class="add-edit flex column">
 				<span class="match-home-team">
 					Domaća ekipa:
-					<select [disabled]="isEdit" class="match-home-team" name="home-team-select" [(ngModel)]="match.homeTeam" [compareWith]="identicalTeams" >
+					<select [disabled]="isEdit" class="match-home-team" name="home-team-select" [(ngModel)]="match.homeTeam" [compareWith]="identicalTeams">
 						<option *ngFor="let team of homeTeams" [ngValue]="team" name="home-team-select-option" (click)="updateAwayTeams()">{{team.name}}</option>
 					</select>
 				</span>
@@ -22,9 +22,9 @@
 				</span>
 				<span class="match-time">
 					Vrijeme:
-					<input type="date" [ngModel]="match.timeOfMatch | date:'yyyy-MM-dd'" (ngModelChange)="match.timeOfMatch=$event" name="time-of-match"/>
-					<input class="match-time-input" type="number" max="23" name="time-of-match-hour" [(ngModel)]="hour"/>
-					<input class="match-time-input" type="number" max="59" name="time-of-match-minute" [(ngModel)]="minute"/>
+					<input type="date" [ngModel]="match.timeOfMatch | date:'yyyy-MM-dd'" (ngModelChange)="match.timeOfMatch=$event" name="time-of-match" />
+					<input class="match-time-input" type="number" max="23" name="time-of-match-hour" [(ngModel)]="hour" />
+					<input class="match-time-input" type="number" max="59" name="time-of-match-minute" [(ngModel)]="minute" />
 				</span>
 				<div class="right">
 					<button class="close-button" (click)="close()">Zatvori</button>
@@ -32,6 +32,7 @@
 				</div>
 			</form>
 		</div>
+		<a class="close-popup" (click)="close()"></a>
 	</div>
 </div>
 <ng-template #ldsring>

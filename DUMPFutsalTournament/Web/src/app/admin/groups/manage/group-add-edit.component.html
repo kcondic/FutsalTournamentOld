@@ -2,14 +2,14 @@
 	<div class="popup">
 		<div class="popup-content flex column">
 			<form (ngSubmit)="save()" class="add-edit">
-				<div class="group-name">Ime: <input type="text" [(ngModel)]="group.name" name="group-name"/></div>
-				<div class="group-size">Veličina: <input type="number" [(ngModel)]="group.size" name="group-size"/></div>
+				<div class="group-name">Ime: <input type="text" [(ngModel)]="group.name" name="group-name" /></div>
+				<div class="group-size">Veličina: <input type="number" [(ngModel)]="group.size" name="group-size" /></div>
 				<div class="group-teams">
 					Timovi:
 					<div class="team" *ngFor="let team of group.teams" (click)="removeTeam(team.teamId)">
 						{{team.name}}
 					</div>
-					<hr/>
+					<hr />
 					Ostali timovi:
 					<div class="team" *ngFor="let team of teams" (click)="addTeam(team.teamId)">
 						{{team.name}}
@@ -21,6 +21,7 @@
 				</div>
 			</form>
 		</div>
+		<a class="close-popup" (click)="close()"></a>
 	</div>
 </div>
 <ng-template #ldsring>
