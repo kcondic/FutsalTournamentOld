@@ -33,9 +33,12 @@ export class ActiveMatchManageComponent implements OnInit {
 	ngOnInit() {
 		this.service.getActiveMatch()
 			 .subscribe(matchData => {
-				this.activeMatch = matchData;
-				this.activeMatch.homeTeam.players = this.activeMatch.homeTeam.players.sort((player1, player2) => player1.lastName < player2.lastName ? -1 : 1);
-				this.activeMatch.awayTeam.players = this.activeMatch.awayTeam.players.sort((player1, player2) => player1.lastName < player2.lastName ? -1 : 1);
+				  if (matchData !== null)
+				  {
+					  this.activeMatch = matchData;
+					  this.activeMatch.homeTeam.players = this.activeMatch.homeTeam.players.sort((player1, player2) => player1.lastName < player2.lastName ? -1 : 1);
+					  this.activeMatch.awayTeam.players = this.activeMatch.awayTeam.players.sort((player1, player2) => player1.lastName < player2.lastName ? -1 : 1);
+				  }
 				this.hasLoaded = true;
 			});
 		this.timeSubscription = this.source.subscribe(() => {
