@@ -94,12 +94,6 @@ namespace DUMPFutsalTournament
             app.UseWebSockets();
             app.UseAuthentication();
 
-            app.UseCors(builder => builder
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader()
-                .AllowCredentials());
-
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
