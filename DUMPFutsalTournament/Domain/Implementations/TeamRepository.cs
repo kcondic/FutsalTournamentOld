@@ -30,10 +30,25 @@ namespace DUMPFutsalTournament.Domain.Implementations
 
         public Team GetSpecificTeam(int teamId)
         {
-            return _context.Teams
+            var specificTeam = _context.Teams
                 .Include(team => team.Players)
                 .ThenInclude(player => player.MatchEvents)
                 .SingleOrDefault(team => team.TeamId == teamId);
+
+            if (specificTeam == null)
+                return null;
+
+            foreach (var player in specificTeam.Players)
+            {
+                player.Team = null;
+                foreach (var matchEvent in player.MatchEvents)
+                {
+                    matchEvent.Match = null;
+                    matchEvent.Player = null;
+                }
+            }
+
+            return specificTeam;
         }
 
         public void AddTeam(Team team)

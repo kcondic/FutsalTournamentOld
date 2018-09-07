@@ -19,11 +19,23 @@ namespace DUMPFutsalTournament.Domain.Implementations
 
         public List<Match> GetAllMatches()
         {
-            return _context.Matches
+            var matches = _context.Matches
                 .Include(match => match.HomeTeam)
                 .Include(match => match.AwayTeam)
                 .OrderBy(match => match.TimeOfMatch)
                 .ToList();
+            foreach (var match in matches)
+            {
+                match.HomeTeam.HomeMatches = null;
+                match.HomeTeam.AwayMatches = null;
+                match.HomeTeam.Players = null;
+
+                match.AwayTeam.HomeMatches = null;
+                match.AwayTeam.AwayMatches = null;
+                match.AwayTeam.Players = null;
+            }
+
+            return matches;
         }
 
         public Match GetActiveMatch()
@@ -42,8 +54,11 @@ namespace DUMPFutsalTournament.Domain.Implementations
             foreach (var ev in activeMatch.MatchEvents)
             {
                 ev.Match = null;
-                ev.Player.Team = null;
-                ev.Player.MatchEvents = null;
+                if (ev.Player != null)
+                {
+                    ev.Player.Team = null;
+                    ev.Player.MatchEvents = null;
+                }
             }
 
             return activeMatch;
@@ -51,18 +66,40 @@ namespace DUMPFutsalTournament.Domain.Implementations
 
         public Match GetSpecificMatch(int matchId)
         {
-            return _context.Matches
+            var specificMatch = _context.Matches
                 .Include(match => match.HomeTeam)
                 .Include(match => match.AwayTeam)
                 .Include(match => match.MatchEvents)
                 .ThenInclude(ev => ev.Player)
                 .ThenInclude(player => player.Team)
                 .SingleOrDefault(match => match.MatchId == matchId);
+
+            if (specificMatch == null)
+                return null;
+
+            foreach (var ev in specificMatch.MatchEvents)
+            {
+                ev.Match = null;
+                if (ev.Player != null)
+                {
+                    ev.Player.Team = null;
+                    ev.Player.MatchEvents = null;
+                }
+            }
+
+            specificMatch.HomeTeam.HomeMatches = null;
+            specificMatch.HomeTeam.AwayMatches = null;
+            specificMatch.HomeTeam.Players = null;
+            specificMatch.AwayTeam.HomeMatches = null;
+            specificMatch.AwayTeam.AwayMatches = null;
+            specificMatch.AwayTeam.Players = null;
+
+            return specificMatch;
         }
 
         public List<Match> GetMatchesForTeam(int teamId)
         {
-            return _context.Matches
+            var teamMatches = _context.Matches
                 .Include(match => match.HomeTeam)
                 .Include(match => match.AwayTeam)
                 .Include(match => match.MatchEvents)
@@ -71,6 +108,28 @@ namespace DUMPFutsalTournament.Domain.Implementations
                 .Where(match => 
                     match.HomeTeam.TeamId == teamId || match.AwayTeam.TeamId == teamId)
                 .ToList();
+
+            foreach (var match in teamMatches)
+            {
+                match.HomeTeam.HomeMatches = null;
+                match.HomeTeam.AwayMatches = null;
+                match.HomeTeam.Players = null;
+                match.AwayTeam.HomeMatches = null;
+                match.AwayTeam.AwayMatches = null;
+                match.AwayTeam.Players = null;
+
+                foreach (var ev in match.MatchEvents)
+                {
+                    ev.Match = null;
+                    if (ev.Player != null)
+                    {
+                        ev.Player.Team = null;
+                        ev.Player.MatchEvents = null;
+                    }
+                }
+            }
+
+            return teamMatches;
         }
 
         public void AddMatch(Match match)
@@ -170,15 +229,6 @@ namespace DUMPFutsalTournament.Domain.Implementations
             matchToUpdate.HomeGoals = updatedMatch.HomeGoals;
             matchToUpdate.AwayGoals = updatedMatch.AwayGoals;
             _context.SaveChanges();
-        }
-
-        public List<Match> GetEliminationMatches()
-        {
-            return _context.Matches
-                .Include(match => match.AwayTeam)
-                .Include(match => match.HomeTeam)
-                .Where(match => match.MatchType != MatchType.Group)
-                .ToList();
         }
     }
 }

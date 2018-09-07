@@ -26,7 +26,7 @@ namespace DUMPFutsalTournament.Domain.Implementations
 
         public List<GroupWithStandings> GetCalculatedGroupStandings()
         {
-            return _context.Groups
+            var groupsWithStandings = _context.Groups
                 .Include(group => group.Teams)
                     .ThenInclude(team => team.AwayMatches)
                 .Include(group => group.Teams)
@@ -62,6 +62,18 @@ namespace DUMPFutsalTournament.Domain.Implementations
                     return extendedGroup;
                 })
                 .ToList();
+
+            foreach (var groupStanding in groupsWithStandings)
+            {
+                groupStanding.Group.Teams = null;
+                foreach (var standing in groupStanding.GroupStandings)
+                {
+                    standing.Team.HomeMatches = null;
+                    standing.Team.AwayMatches = null;
+                    standing.Team.Players = null;
+                }
+            }
+            return groupsWithStandings;
         }
 
         public Group GetSpecificGroup(int groupId)

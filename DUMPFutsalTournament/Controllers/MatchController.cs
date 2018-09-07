@@ -23,12 +23,6 @@ namespace DUMPFutsalTournament.Controllers
             return Ok(_matchRepository.GetAllMatches());
         }
 
-        [HttpGet("elimination")]
-        public IActionResult GetEliminationMatches()
-        {
-            return Ok(_matchRepository.GetEliminationMatches());
-        }
-
         [HttpGet("active")]
         public IActionResult GetActiveMatch()
         {
