@@ -134,8 +134,7 @@ export class ActiveMatchManageComponent implements OnInit {
 		this.stopWatchStopped = true;
 		if(confirm('Želite li zaista izbrisati taj događaj?'))
 			this.service.deleteMatchEvent(id).subscribe(() => {
-				 let removeIndex = this.activeMatch.matchEvents.findIndex(matchEvent => matchEvent.matchEventId === id);
-				console.log(removeIndex);
+				let removeIndex = this.activeMatch.matchEvents.findIndex(matchEvent => matchEvent.matchEventId === id);
 				let eventType = this.activeMatch.matchEvents[removeIndex].eventType;
 				let isForHomeTeam = this.activeMatch.matchEvents[removeIndex].isForHomeTeam;
 
