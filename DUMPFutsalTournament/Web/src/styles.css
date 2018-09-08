@@ -588,20 +588,31 @@ a:hover {
 	width: 50px;
 }
 
-.match-manage {
+.match-manage,
+.active-match-manage {
 	padding-top: 100px;
+}
+
+.active-match-manage {
+	width: 50%;
+	margin: auto;
 }
 
 .deactivate-link {
 	margin-top: 20px;
+	margin-bottom: 50px;
 	color: black;
 }
 
-.match-manage .match-event-actions span {
+.active-match-manage .match-event-actions {
+	margin-top: 20px;
+}
+
+.active-match-manage .match-event-actions span {
 	margin-right: 10px;
 }
 
-.match-manage .player-subjects .home-players {
+.active-match-manage .player-subjects .home-players {
 	margin-right: 10px;
 }
 
@@ -648,7 +659,29 @@ a:hover {
 	margin: auto;
 }
 
+.match-title,
+.match-time,
+.match-phase {
+	font-size: 28px;
+}
+
+.match-score,
 .timer,
-.timer input {
-	font-size: 30px;
+.timer input[type=number] {
+	font-size: 96px;
+}
+
+.timer,
+.timer input[type="number"] {
+	text-align: center;
+}
+
+.timer input[type=number] {
+	width: 30%;
+	border: none;
+}
+
+.active-match-manage .home-event,
+.active-match-manage .away-event {
+	font-size: 24px;
 }
