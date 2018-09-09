@@ -16,7 +16,7 @@
 			{{getMatchTypeTranslation(activeMatch.matchType)}}
 		</div>
 		<div class="match-score">
-			{{activeMatch.homeGoals}}:{{activeMatch.awayGoals}}
+			{{activeMatch.homeGoals}} - {{activeMatch.awayGoals}}
 		</div>
 		<div *ngFor="let event of activeMatch.matchEvents" [ngClass]="event.isForHomeTeam ? 'home-event' : 'away-event'">
 			<span [ngClass]="[getMatchEventTypeClass(event.eventType) | lowercase, 'icon']"></span>

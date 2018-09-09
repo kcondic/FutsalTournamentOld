@@ -659,24 +659,24 @@ a:hover {
 	margin: auto;
 }
 
-.match-title,
-.match-time,
-.match-phase {
+.active-match-manage .match-title,
+.active-match-manage .match-time,
+.active-match-manage .match-phase {
 	font-size: 28px;
 }
 
-.match-score,
-.timer,
-.timer input[type=number] {
+.active-match-manage .match-score,
+.active-match-manage .timer,
+.active-match-manage .timer input[type=number] {
 	font-size: 96px;
 }
 
-.timer,
-.timer input[type="number"] {
+.active-match-manage .timer,
+.active-match-manage .timer input[type="number"] {
 	text-align: center;
 }
 
-.timer input[type=number] {
+.active-match-manage .timer input[type=number] {
 	width: 30%;
 	border: none;
 }
