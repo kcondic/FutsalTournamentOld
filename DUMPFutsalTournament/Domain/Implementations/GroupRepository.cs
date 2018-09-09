@@ -39,18 +39,18 @@ namespace DUMPFutsalTournament.Domain.Implementations
                         Group = group,
                         GroupStandings = group.Teams.Select(t =>
                         {
-                            return new GroupStanding()
+                            return new GroupStanding
                             {
                                 Team = t,
                                 GoalsScored =
-                                    t.HomeMatches.Sum(m => m.HomeGoals ?? 0) + t.AwayMatches.Sum(m => m.AwayGoals ?? 0),
+                                    t.HomeMatches.Where(m => m.MatchType == MatchType.Group).Sum(m => m.HomeGoals ?? 0) + t.AwayMatches.Where(m => m.MatchType == MatchType.Group).Sum(m => m.AwayGoals ?? 0),
                                 GoalsConceded =
-                                    t.HomeMatches.Sum(m => m.AwayGoals ?? 0) + t.AwayMatches.Sum(m => m.HomeGoals ?? 0),
+                                    t.HomeMatches.Where(m => m.MatchType == MatchType.Group).Sum(m => m.AwayGoals ?? 0) + t.AwayMatches.Where(m => m.MatchType == MatchType.Group).Sum(m => m.HomeGoals ?? 0),
                                 MatchesPlayed =
-                                    t.HomeMatches.Count(m => m.AwayGoals.HasValue && m.HomeGoals.HasValue) +
-                                    t.AwayMatches.Count(m => m.AwayGoals.HasValue && m.HomeGoals.HasValue),
-                                Points = t.HomeMatches.Where(m => m.AwayGoals.HasValue && m.HomeGoals.HasValue).Sum(m => m.AwayGoals == m.HomeGoals ? (int)MatchPoints.Draw : m.AwayGoals > m.HomeGoals ? (int)MatchPoints.Lose : (int)MatchPoints.Win) 
-                                + t.AwayMatches.Where(m => m.AwayGoals.HasValue && m.HomeGoals.HasValue).Sum(m => m.AwayGoals == m.HomeGoals ? (int)MatchPoints.Draw : m.AwayGoals > m.HomeGoals ? (int)MatchPoints.Win : (int)MatchPoints.Lose)
+                                    t.HomeMatches.Count(m => m.MatchType == MatchType.Group && m.AwayGoals.HasValue && m.HomeGoals.HasValue) +
+                                    t.AwayMatches.Count(m => m.MatchType == MatchType.Group && m.AwayGoals.HasValue && m.HomeGoals.HasValue),
+                                Points = t.HomeMatches.Where(m => m.MatchType == MatchType.Group && m.AwayGoals.HasValue && m.HomeGoals.HasValue).Sum(m => m.AwayGoals == m.HomeGoals ? (int)MatchPoints.Draw : m.AwayGoals > m.HomeGoals ? (int)MatchPoints.Lose : (int)MatchPoints.Win) 
+                                + t.AwayMatches.Where(m => m.MatchType == MatchType.Group && m.AwayGoals.HasValue && m.HomeGoals.HasValue).Sum(m => m.AwayGoals == m.HomeGoals ? (int)MatchPoints.Draw : m.AwayGoals > m.HomeGoals ? (int)MatchPoints.Win : (int)MatchPoints.Lose)
                             };
                         })
                         .OrderByDescending(t => t.Points)
