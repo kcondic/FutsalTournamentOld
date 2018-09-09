@@ -46,7 +46,7 @@
 			<div class="match-score" *ngIf="match.homeGoals !== null && match.awayGoals !== null">
 				{{match.homeGoals}} : {{match.awayGoals}}
 			</div>
-			<div class="match-penalties" *ngIf="getPenaltiesString().length">(p{{getPenaltiesString()}})</div>
+			<div class="match-penalties" *ngIf="getPenaltiesString().length">{{getPenaltiesString()}}</div>
 			<div *ngFor="let event of getSortedMatchEvents()" [ngClass]="[event.isForHomeTeam ? 'home-event' : 'away-event', 'flex']">
 				<span [ngClass]="[getMatchEventTypeClass(event.eventType) | lowercase, 'icon no-pointer']"></span>
 				<span class="event-minute">{{event.eventMinute}}'</span>
