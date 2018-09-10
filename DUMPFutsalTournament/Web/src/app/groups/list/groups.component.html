@@ -26,12 +26,23 @@
 			</tr>
 		</table>
 	</div>
-	<div class="top-scorer" *ngIf="topScorers">
-		<span>Najbolji strijelci</span>
-		<div *ngFor="let scorer of topScorers">
-			{{scorer.player.firstName}} {{scorer.player.lastName}} {{scorer.goals}}
-		</div>
-	</div>
+	<div class="top-scorers-title">Najbolji strijelci</div>
+	<table class="top-scorer-table" *ngIf="topScorers">
+		<tr class="table-header">
+			<th class="top-scorer-position">Pozicija</th>
+			<th>Ime</th>
+			<th>Prezime</th>
+			<th>Tim</th>
+			<th class="top-scorer-goals">Golovi</th>
+		</tr>
+		<tr class="top-scorer-item" *ngFor="let scorer of topScorers; let i = index">
+			<td class="top-scorer-position">{{i + 1}}.</td>
+			<td>{{scorer.player.firstName}}</td>
+			<td>{{scorer.player.lastName}}</td>
+			<td>{{scorer.player.team.name}} </td>
+			<td class="top-scorer-goals">{{scorer.goals}}</td>  
+		</tr>
+	</table>
 </div>
 <ng-template #ldsring>
 	<div class="lds-ring"><div></div><div></div><div></div><div></div></div>

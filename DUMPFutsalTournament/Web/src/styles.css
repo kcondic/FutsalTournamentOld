@@ -505,20 +505,6 @@ a:hover {
 	border-bottom: 1px solid #e8e8ee;
 }
 
-.top-scorer {
-	text-align: left;
-	margin-top: 50px;
-}
-
-.top-scorer span {
-	font-size: 24px;
-	margin-bottom: 10px;
-}
-
-.top-scorer div {
-	margin-left: 10px;
-}
-
 .team-list {
 	flex-wrap: wrap;
 }
@@ -621,33 +607,6 @@ a:hover {
 	max-width: 1200px;
 }
 
-@media (max-width: 500px) {
-	.match-detail {
-		margin-top: 20px;
-	}
-	.home-event {
-		padding: 5px 0;
-	}
-	.match-score {
-		margin: 15px 0;
-	}
-	.match-active {
-		margin-top: 100px;
-	}
-	.match-active div h3 {
-		margin: 0;
-	}
-	.match-time {
-		padding: 10px 0;
-	}
-	.dump-logo + h1 {
-		font-size: 24px;
-	}
-	.top-scorer {
-		padding: 0 20px;
-	}
-}
-
 .match-title {
 	min-width: 250px;
 	text-align: center;
@@ -684,4 +643,58 @@ a:hover {
 .active-match-manage .home-event,
 .active-match-manage .away-event {
 	font-size: 24px;
+}
+
+.top-scorers-title {
+	font-size: 24px;
+	margin: 50px 0 20px 0;
+}
+
+.top-scorer-table th,
+.top-scorer-table td {
+	width: 20%;
+}
+
+.top-scorer-table .top-scorer-position,
+.top-scorer-table .top-scorer-goals {
+	width: 5%;
+}
+
+.group-tables table {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.top-scorer-table {
+	width: 600px;
+}
+
+@media (max-width: 500px) {
+	.match-detail {
+		margin-top: 20px;
+	}
+	.home-event {
+		padding: 5px 0;
+	}
+	.match-score {
+		margin: 15px 0;
+	}
+	.match-active {
+		margin-top: 100px;
+	}
+	.match-active div h3 {
+		margin: 0;
+	}
+	.match-time {
+		padding: 10px 0;
+	}
+	.dump-logo + h1 {
+		font-size: 24px;
+	}
+	.top-scorer {
+		padding: 0 20px;
+	}
+	.top-scorer-table {
+		width: 100%;
+	}
 }

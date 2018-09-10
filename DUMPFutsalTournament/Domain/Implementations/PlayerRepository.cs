@@ -78,7 +78,10 @@ namespace DUMPFutsalTournament.Domain.Implementations
 
         public List<TopScorer> GetTopScorers()
         {
-            return _context.Players.Include(player => player.MatchEvents)
+            var topScorers = _context.Players
+                .Include(player => player.Team)
+                .Include(player => player.MatchEvents)
+                .Where(player => player.Team != null)
                 .Select(player => new TopScorer
                     {
                         Player = player,
@@ -89,6 +92,16 @@ namespace DUMPFutsalTournament.Domain.Implementations
                 .OrderByDescending(pl => pl.Goals)
                 .Take(10)
                 .ToList();
+
+            foreach (var scorer in topScorers)
+            {
+                scorer.Player.Team.Players = null;
+                scorer.Player.Team.HomeMatches = null;
+                scorer.Player.Team.AwayMatches = null;
+                scorer.Player.Team.Group = null;
+            }
+
+            return topScorers;
         }
     }
 }
