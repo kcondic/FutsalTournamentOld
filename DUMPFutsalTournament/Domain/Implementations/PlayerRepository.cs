@@ -99,6 +99,11 @@ namespace DUMPFutsalTournament.Domain.Implementations
                 scorer.Player.Team.HomeMatches = null;
                 scorer.Player.Team.AwayMatches = null;
                 scorer.Player.Team.Group = null;
+                foreach (var matchEvent in scorer.Player.MatchEvents)
+                {
+                    matchEvent.Match = null;
+                    matchEvent.Player = null;
+                }
             }
 
             return topScorers;
